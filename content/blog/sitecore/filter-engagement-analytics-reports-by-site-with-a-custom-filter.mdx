@@ -1,0 +1,66 @@
+---
+title: "Filter Engagement Analytics reports by site with a custom filter"
+slug: "filter-engagement-analytics-reports-by-site-with-a-custom-filter"
+date: "2013-02-15"
+categories:
+  - "sitecore"
+tags:
+  - "analytics"
+  - "digital-marketing-system"
+  - "reports"
+
+excerpt: By default Sitecore comes with a few default reports within the Engagement Analytics.
+---
+
+By default Sitecore comes with a few default reports within the Engagement Analytics. Depending on the report you can get insights about the website or its
+visitors. You can filter those reports with the standard filters like business classification, country and state.
+
+But did you know that adding your own filters is fairly easy. Let's say we have the following case:
+
+We have a standard Sitecore installation in which we define two seperate websites.
+
+![](/images/blog/customfilter-sites.png "customfilter-sites")
+
+To make this work we need to make a little configuration within Sitecore. I created a seperate configuration file and placed it in the App_Config\\\\Include
+folder. The configuration looks like this:
+
+![](/images/blog/customfilter-config.png "customfilter-config")
+
+Off course we need to add the same hostnames to the IIS configuration to let IIS resolve the urls with the correct site.
+
+### Setting up the filter
+
+Now we can go and setup a new filter. The default filters are located at "/sitecore/system/Marketing Center/Analytics Filters/Report Filters". This is where we
+are going to create the new filter by using the "/sitecore/templates/System/Analytics/Filter" template. You can create a new filter with the following
+information:
+
+![](/images/blog/customfilter-filtervalues.png "customfilter-filtervalues")
+
+The ColumnName field relates to the columnname in the database table. This filter is using the MultiSite column in the Visits table.
+
+After creating the filter we need to add some filter values. Since we have defined two sites, we can add two filter values. Therefore we are going to create
+items based upon the "/sitecore/templates/System/Analytics/Predefined Filter Value". In the value field you can add the name of the site which is given in the
+sites configuration.
+
+![](/images/blog/customfilter-sitevalue.png "customfilter-sitevalue")
+
+### Apply the filter
+
+The only thing left now is to apply the newly created filter on the report. For this example we are applying the filter on the Latest Visits report. To find out
+where we need to apply the filter, we first need to identify the datasource which is used by the report. If you open up the
+"/sitecore/system/Settings/Analytics/Reports/Reports/Recent Activity/Latest Visits" report you will find a field called Queries.
+
+[![](/images/blog/customfilter-queries.png "customfilter-queries")](http://markvanaalst.net/wp-content/uploads/2013/02/customfilter-queries.png)
+
+In this field there is a property DataSource with a value. That value identifies the datasource being used and refers to the item under the
+"/sitecore/system/Settings/Analytics/Reports SQL Queries" node.
+
+When you open the datasource item ("/sitecore/system/Settings/Analytics/Reports SQL Queries/Latest Visits") you can add your own filter to the Filters field.
+
+[![](/images/blog/customfilter-filters.png "customfilter-filters")](http://markvanaalst.net/wp-content/uploads/2013/02/customfilter-filters.png)
+
+### The result
+
+When you added the custom filter, you will get the extra filter option when you click on filter button in the Engagement Analytics Latest Visits report.
+
+![](/images/blog/customfilter-result.png "customfilter-result")

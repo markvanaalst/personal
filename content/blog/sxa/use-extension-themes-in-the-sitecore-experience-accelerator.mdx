@@ -1,0 +1,234 @@
+---
+title: "Use Extension Themes in the Sitecore Experience Accelerator"
+slug: "sxa-you-have-seen-it-read-about-it-and-now"
+date: "2019-05-06"
+categories:
+  - "sxa"
+tags:
+  - "extension-themes"
+  - "scaffolding"
+  - "sxa"
+image: /assets/images/posts/extension-theme.png
+excerpt: One of the things people love about SXA is it's flexibility. But did you know that themes are very flexible as well?
+---
+
+One of the things people love about SXA is it's flexibility. Flexible in the way you assemble a page, create your own components without code, or display
+content with rendering variants. I must admit that by using the
+[rendering variants](https://www.markvanaalst.com/blog/sitecore-experience-accelerator/the-power-of-the-variants/) I almost never have the urge to create my own
+components.
+
+But did you know that themes are very flexible as well? It appeared to me that often I see that the node “/sitecore/media library/Extension Themes” rarely has
+any child items. Meaning that few people use theme extensions to add functionality or styling to their theme.
+
+## What are Extension Themes
+
+Extension themes are exactly what the term implies. They provide additional functionality and styling to already existing themes. In fact, you can use
+everything available for themes as well. This allows you to make changes to the look and feel of your site(s) without making any modifications to the original
+theme.
+
+For example:
+
+- You can extend the default Basic2 and wireframe theme with additional styling or functionality
+- Attach the extension theme to your site to overwrite parts of your theme
+
+By using scaffolding you can apply extension themes to any site within SXA.
+
+## How do Extension Themes work
+
+For this example I am going to use Habitat Home, our demo environment hosted on [GitHub](https://github.com/Sitecore/Sitecore.HabitatHome.Platform), and add
+some functionality to the site
+
+The functionality that I am going to add will make sure that the navigation bar will remain on top of browser windows as soon as people start to scroll down.
+Since I am not maintaining the Habitat Home theme, and I would like to benefit from updates without needing to merge any changes, I will be using a theme
+extension.
+
+It is going to look like this:
+
+![](/images/blog/menu-change.png)
+
+Notice the difference in the top menu bar when the page is scrolled down
+
+You can see that the menu has changed as soon as we start to scroll down the page.
+
+When we look at the Habitat Home theme, we can see that it uses all the base themes that SXA provides by default. On the left you can also see that the
+Extension Themes node does not have any items (yet). As a matter of fact, this theme is not directly used with the current site. It uses the Habitat Home v2
+theme which inherits from the Habitat Home theme.
+
+![](/images/blog/hh-theme-details-1024x487.png)
+
+## Create a extension theme
+
+Let’s create our first Extension Theme. Right click on the “Extension Themes” node and insert a new theme extension. I am going to name it “Static top menu”.
+You can see that it creates the theme item, as well as four folders in which we can place our files.
+
+![](/images/blog/extension-theme.png)
+
+Now that we have create our Theme Extension we need to add some JavaScript and CSS that will make the navigation bar stick to the top of the page.
+
+Open up your favorite code editor and create a new file. For this example I will name my JS file static-top-menu.js.
+
+Here is the required JavaScript that will add a class called fixed-header to the element that has the class "static-top-nav".
+
+```javascript
+XA.component.header = (function ($) {
+  var api = {};
+
+  api.init = function () {
+    $(window).scroll(function () {
+      if ($(window).scrollTop() >= 1) {
+        // Set container to fixed
+        $(".static-top-nav").addClass("fixed-header");
+        // Change grid settings
+        $(".fixed-header .header-container-inner .component.column-splitter .col-xs-3")
+          .removeClass("col-xs-3")
+          .addClass("col-xs-2");
+        $(".fixed-header .header-container-inner .component.column-splitter .col-xs-9")
+          .removeClass("col-xs-9")
+          .addClass("col-xs-10");
+        // Hide mega-nav elements
+        $(".fixed-header .primary-nav-container .component.container.megadrop").removeClass("megadrop");
+        $(".fixed-header .primary-nav-container .component.navigation.navigation-title").removeClass("megadrop-nav");
+        $(".fixed-header .primary-nav-container .component.navigation.navigation-title").addClass(
+          "navigation-main navigation-main-horizontal"
+        );
+      } else {
+        // Reset all changes
+        $(".static-top-nav").removeClass("fixed-header");
+        $(".header-container-inner .component.column-splitter .col-xs-2").removeClass("col-xs-2").addClass("col-xs-3");
+        $(".header-container-inner .component.column-splitter .col-xs-10")
+          .removeClass("col-xs-10")
+          .addClass("col-xs-9");
+        $(".primary-nav-container .component.container").addClass("megadrop");
+        $(".primary-nav-container .component.navigation.navigation-title").addClass("megadrop-nav");
+        $(".primary-nav-container .component.navigation.navigation-title").removeClass(
+          "navigation-main navigation-main-horizontal"
+        );
+      }
+    });
+  };
+
+  return api;
+})(jQuery, document);
+
+XA.register("header", XA.component.header);
+```
+
+As you have seen in the JavaScript it requires an element with the class "static-top-nav". To make this available to the user I will create a custom style that
+the end-user will be able to select. More on that later.
+
+Now let’s add some CSS that will make the header stick on the page and at the same time makes some minor changes in the header itself.
+
+```css
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  margin: 0;
+}
+.fixed-header .navigation-main-horizontal {
+  margin: 0;
+}
+.fixed-header .navigation.navigation-main .rel-level1 {
+  float: left;
+  padding: 27px 10px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.fixed-header .navigation.navigation-main .rel-level1:hover,
+.fixed-header .navigation.navigation-main .rel-level1.active {
+  background: #747474;
+}
+.fixed-header .navigation.navigation-main .rel-level1:hover a,
+.fixed-header .navigation.navigation-main .rel-level1.active a {
+  color: #fff;
+  text-decoration: none;
+}
+.fixed-header .component.link,
+.fixed-header .component.language-selector,
+.fixed-header .component.search-box,
+.fixed-header .megadrop-secondary-content {
+  display: none;
+}
+```
+
+As you can see I am hiding some elements, and I restructured some of the navigation elements.
+
+Now we have taken all the steps needed to setup our menu.
+
+## Creating a module
+
+The next step is to make our extension theme available for the site(s). They way we do that is by creating a new module in SXA. Right click on the
+"/sitecore/system/Settings/Feature" node in the content editor and select Insert > Module.
+
+![](/images/blog/create-new-module.png)
+
+We are creating a new site module, meaning that we can add the module to any existing and new site. For this example I am going to use the scaffolding process
+to make sure all the required items are created to before the menu can be applied. I am not creating a new component in this module, therefore I won't be
+needing folder in all of the system areas.
+
+### Adding the style
+
+Once the folders are created I need to create a new branch template for my custom style. I will base this on the "/sitecore/templates/Foundation/Experience
+Accelerator/Presentation/Styles" template. Once created I am renaming that to a proper name "Static Top Menu" and will add the actual style as a child item as
+seen below.
+
+![](/images/blog/custom-style.png)
+
+### Scaffolding
+
+As said earlier, we will be using SXA's native scaffolding functionality to add this functionality to sites. The scaffolding process itself is defined in the
+settings node.  
+There you can add actions to the setup item. In this case I am going to add two actions; Add Site Item and Attach Theme Extension.
+
+![](/images/blog/scaffolding-add-site-item.png)
+
+Adding the custom style based on it's branch template to the "Styles" folder
+
+![](/images/blog/scaffolding-attach-theme-extension.png)
+
+Extend the Habitat Home v2 theme with our theme extension
+
+## Install your new module
+
+Now we have taken all the required steps to add our module to a new or existing site. Let's have a look at how we add this module to our existing site. Using
+the content editor we can add a new site module by right clicking on the site itself (Habitat Home), then go to Scripts > Add Site Module.
+
+![](/images/blog/add-site-module.png)
+
+A new dialog window appears with the option to add the "Static Top Menu" module. Click OK to install the module.
+
+Once installed there is one more thing to do to enable our new menu. Open the partial design "Header' in the Experience Editor and select the outer container.
+Click the paint bucket and a dialog will appear which will let you add some predefined styles.
+
+![](/images/blog/add-style.png)
+
+Scroll down until you see the Static Top Menu section and select Navigation Always visible
+
+Click OK and save the partial design. You have now added the required CSS class to the container in order to trigger the JavaScript file.
+
+As a result we now see our menu change as soon as we scroll the page:
+
+![](/images/blog/menu-scrolled-1024x679.png)
+
+## How does this actually works
+
+Whenever a page is requested SXA will detect all the modules installed. One of those modules is the one we just created; the Static Top Menu. By reading the
+module setup and the scaffolding process SXA now knows that this module provides a theme extension. By reading the scaffolding step it knows that whenever the
+theme Habitat Home v2 is used, it needs to load our extension theme afterwards. Therefore our assets, the stylesheet and JavaScript file, are loaded after the
+theme assets are loaded.
+
+So, as you can see extension themes can be very efficient when you want to make changes to your site without touching the selected theme.
+
+You can learn more about [Extension Themes](https://doc.sitecore.com/developers/sxa/18/sitecore-experience-accelerator/en/extend-a-theme.html) on the official
+[documentation site](https://doc.sitecore.com/developers/sxa/18/sitecore-experience-accelerator/)
+
+---
+
+#### Resources
+
+- The example and code used (including a Sitecore package for Habitat Home) can be found on
+  [GitHub](https://github.com/markvanaalst/Sitecore.HabitatHome.ExtensionTheme).
+- Habitat Home is the official Sitecore demo demonstrating the full Sitecore platform capabilities and is also available as open source on
+  [GitHub](https://github.com/Sitecore/Sitecore.HabitatHome.Platform).

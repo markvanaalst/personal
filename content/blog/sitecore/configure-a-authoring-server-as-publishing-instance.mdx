@@ -1,0 +1,55 @@
+---
+title: "Configure a authoring server as publishing instance"
+slug: "configure-a-authoring-server-as-publishing-instance"
+date: "2012-01-12"
+categories:
+  - "sitecore"
+tags:
+  - "authoring-server"
+  - "infrastructure"
+  - "publishing"
+  - "servers"
+excerpt: This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content authoring servers and publish it to the content delivery servers.
+---
+
+This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content
+authoring servers and publish it to the content delivery servers.
+
+In my example underneath we have an environment with multiple content management servers (CM) and multiple content delivery (CD) servers. Whenever a content
+editor publishes one or more items from the CM to the CD servers this will all run on that CM server. This can cause a slower work environment for the content
+editors.
+
+[![This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content authoring servers and publish it to the content delivery servers.](/images/blog/m-without-pi.png "CM Environment without a pulishing instance")](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-without-pi.png)
+
+In Sitecore 6.3 we introduced an option to configure a CM server as a publishing server. The only operations the publishing instance does are related to the
+publishing mechanism. So for performance reasons you can enable a CM server to be a (dedicated) publishing instance, and keep the CM servers solely for content
+editing. This will optimize the performance for the content authoring servers, so the content editor won’t have performance issues related to publishing.
+
+## How can you enable a publishing instance?
+
+The first thing to do is to configure the ScalabilitySettings.config file in the App_ConfigInclude folder. You need to rename the
+ScalabilitySettings.config.example to ScalabilitySettings.config. Otherwise the config file won’t override the settings in the web.config file.
+
+When you renamed the file you can edit the settings. A publishing instance is identified by the InstanceName. By default the InstanceName setting in the
+web.config if empty. Be aware that that same setting is also available in the ScalabilitySettings.config. It’s recommended that you change the value of the
+setting in the separate config file. This will override the web.config setting value.
+
+If the value is empty Sitecore will use the instance name by combining the (NetBIOS) machine name and the IIS Site name. So for the IIS Site ProjectA on the
+server CM1 the instance name would become CM1-ProjectA.
+
+You can check for the instance name in the Sitecore log file. There will be a log entry like: “5224 12:00:00 INFO Instance Name: CM1-Project1”.
+
+When you know the instance name of the publishing server you can look for the settings Publishing.PublishingInstance in the ScalabilitySettings.config file. In
+the value of the setting you enter the name of the configured publishing instance.
+
+[![In Sitecore 6.3 we introduced an option to configure a CM server as a publishing server. The only operations the publishing instance does are related to the publishing mechanism. So for performance reasons you can enable a CM server to be a (dedicated) publishing instance, and keep the CM servers solely for content editing. This will optimize the performance for the content authoring servers, so the content editor won’t have performance issues related to publishing.](/images/blog/m-with-pi.png "CM Environment with publishing instance")](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-with-pi.png)
+
+And now you have an environment like illustrated above. In this example we have two dedicated content management server and one separate publishing instance
+which handles all publishing operations.  At this moment the content management servers send their local events to the event queue in the remote instance which
+handles the events.
+
+In the ScalabilitySettings.config there is a setting “EnableEventQueues” which by default is true. This setting is required to be true to enable a publishing
+instance.
+
+Whenever you are going to configure an environment with techniques like this, make sure that you fully read the
+[Sitecore Scaling Guide](http://sdn.sitecore.net/upload/sitecore6/64/scaling_guide_sc63-64-a4.pdf) first. You can find it on the Sitecore Developers Network.

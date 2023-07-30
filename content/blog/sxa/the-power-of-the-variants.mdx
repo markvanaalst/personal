@@ -1,0 +1,122 @@
+---
+title: "The Power Of The Variants"
+slug: "sxa-you-have-seen-it-read-about-it-and-now"
+date: "2017-09-09"
+categories:
+  - "sxa"
+image: /assets/images/posts/Rendering-Variant-Promo-Structure.png
+excerpt: Rendering variants allow you to read fields and customize the html that is used to render the content.
+---
+
+Most of you know that with installing SXA you will get around 70 components out of the box to use on your website. But what is a bit unknown is the concept of
+rendering variants.
+
+**What are rendering variants?** Most of the components or renderings within SXA have a default visual representation. For example, the “Page Content” component
+simply shows the value from the content field of the current item. And that’s exactly where the rendering variants come in. Rendering variants allow you to read
+fields and customize the html that is used to render the content.
+
+Let’s take a look at the Promo component. The configuration for the default variant is located under
+“/sitecore/content/\[TENANT\]/\[SITE\]/Presentation/Rendering Variants/Promo/Default”. The default configuration looks like this:
+
+![Structure of the variant](/images/blog/Rendering-Variant-Promo-Structure.png)
+
+**Variant Definition** The item named Default is the rendering definition. This is the starting point for a rendering variant. Here you can define the following
+fields:
+
+<table>
+  <tbody>
+    <tr>
+      <td>Field used as link target</td>
+      <td>
+        Provide the field name of the target item. Use this link to override all links when the Is link, Is prefix link,
+        or Is suffix link check boxes are selected in the variant fields
+      </td>
+    </tr>
+    <tr>
+      <td>Allowed in templates</td>
+      <td>Specify the pages that the variant is available for. If blank, the variant is available for all pages.</td>
+    </tr>
+    <tr>
+      <td>Css Class</td>
+      <td>Specify the class name for the variant in the HTML</td>
+    </tr>
+    <tr>
+      <td>Item CSS class</td>
+      <td>
+        Specify the CSS class for list items. Typically for renderings that render lists like Navigation and Page List
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Variant Field** In the default Promo rendering variant you see items like promo Icon, promo text and promo link. All of these items are using the same
+template “Variant Field”. These items allow you to read field values from the current context item. Depending on the field type, SXA will render the
+corresponding field value. The most basic fields you want to configure in these items are the “Tag” and “Field name” fields. In the “Tag” field you can select
+the HTML element that is being used to render the field value. The “Field name” field is used to tell SXA which field of the current context item must be used.
+Besides the two fields mentioned you can use several other options:
+
+<table>
+  <tbody>
+    <tr>
+      <td>Prefix</td>
+      <td>Adds string value as a prefix.</td>
+    </tr>
+    <tr>
+      <td>Suffix</td>
+      <td>Adds string value as a suffix.</td>
+    </tr>
+    <tr>
+      <td>Is link</td>
+      <td>Select to have hyperlinks that wrap the field content.</td>
+    </tr>
+    <tr>
+      <td>Is prefix link</td>
+      <td>Select to wrap prefix in the same link, which you use for the field content.</td>
+    </tr>
+    <tr>
+      <td>Is suffix link</td>
+      <td>Select to wrap the suffix with a hyperlink.</td>
+    </tr>
+    <tr>
+      <td>Is download link</td>
+      <td>Select to have a hyperlink with a download attribute.</td>
+    </tr>
+    <tr>
+      <td>Css Class</td>
+      <td>Adds Css class to the tag.</td>
+    </tr>
+    <tr>
+      <td>Is editable</td>
+      <td>Select to edit rendered field.</td>
+    </tr>
+    <tr>
+      <td>Render if empty</td>
+      <td>Select to render empty element when the field is empty.</td>
+    </tr>
+  </tbody>
+</table>
+
+**Variant Section** Besides variant fields you can also use variant sections within you rendering variants. Sections are html elements in which you can wrap
+fields. They do not output any field value but simply render an opening and closing html tag. As a developer/user you can select which html element you would
+like to use and provide a CSS class. With these three sorts of elements, the default promo rendering variant is created. When you translate the rendering
+variant configuration to HTML it looks like this:
+
+![](/images/blog/promo-component-html.png)
+
+But where does the HTML originate from. To get a better understanding we can add custom css classes to all items in the variant configuration.
+
+![](/images/blog/component-html-custom-classes.png)
+
+As you can see every item in the variant configuration can output html the way you want it. You can choose your own tags and add your specific css classes. By
+using the rendering variants you can generate the component output anyway you like. But it doesn’t stop there. There is even more power hidden in the variants.
+We have only discussed the variant field and variant sections. But you can add other types to your variant as well. In the current version (SXA 1.3.1) you can
+add a total of nine different variant types:
+
+Variant Date This type displays date and time values in a custom format. This type is the same as a default variant field but has the addition of choosing your
+date/time format. Query Use the query field if you would like to display an array of items based on a Sitecore Query. This variant type enables you to do
+advanced lookups of items and show them in a list.
+
+Placeholder Insert a placeholder in your rendering variant if you want to embed other components inside. Reference Displays field from a referenced item on your
+context item. If you want to display a field from a referenced item, you can define this field in the PassThroughField. You can use this variant field for the
+following fields: LinkField (GeneralLink, DropLink), FileField (File), ImageField (Image), and ReferenceField (Droptree). Reference items can be nested. For
+example if you would like to show the authors information on an article page.

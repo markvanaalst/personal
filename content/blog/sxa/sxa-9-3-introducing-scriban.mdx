@@ -1,0 +1,89 @@
+---
+title: "SXA 9.3: Introducing Scriban"
+slug: "sxa-9-3-introducing-scriban"
+date: "2019-11-27"
+categories:
+  - "sxa"
+tags:
+  - "frontend"
+  - "rendering-variants"
+  - "scriban"
+  - "sxa-9-3"
+image: /assets/images/posts/scriban-vscode.png
+excerpt: One of the features of SXA 9.3 that I am most excited about is the introduction of Scriban.
+---
+
+One of the features of SXA 9.3 that I am most excited about is the introduction of Scriban. Scriban is the new templating language within SXA 9.3. So why a new
+templating language? One of the changes that Sitecore 9.3 is introducing is the removal of the current templating engine; NVelocity.
+
+The SXA development team needed an altnative and did their research in which they evaluated different templating engines. They concluded that Scriban is one of
+the fastest engines available and offers more flexibility compared to other templating engines.
+
+![](/images/blog/scriban-performance-1024x670.png)
+
+Performance metrics of the different template engines
+
+Apart from the performance Scriban can be very easily be extended. As a matter of fact, Sitecore MVP Gert Gullentops already
+[posted a great example](https://ggullentops.blogspot.com/2019/11/custom-sxa-scriban-extensions.html) of how you can create your own Scriban extensions.  
+As Gert mentions as well, the SXA team has already created numerous of extensions that you can easily use to create your own variant. You can use all the
+Sitecore functionality that you are used to when creating variants. Things like edit frames, placeholders, rules, page mode detection and much more.  
+Example; render a SXA placeholder and set it’s context to another item.
+
+```
+{{
+ i_product = i_page.RelatedProducts.target
+ sc_placeholder "relatedproducts" i_product
+}}
+```
+
+Aside from that there are a lot of Sitecore specific item extensions available which allow you to use all the common item and field properties.
+
+For example, you can easily render the children from an items as a list:
+
+```
+<ul>
+  {{ for i_child as i_datasource.children }}
+    <li><a href="{{ i_child.url }}">{{ i_child.Title }}</a></li>
+  {{ end }}
+</ul>
+```
+
+Apart from the Sitecore specific extensions Scriban offers a whole of standard functionality which is very well documented. You can more information on the
+[Scriban GitHub](https://github.com/lunet-io/scriban) page.
+
+## How does it actually work
+
+If you ever have worked with rendering variants then you will know that you essentially defining the html structure of components using Sitecore items. Within
+each variant field you have a lot of html elements that you can choose to use render the field value. By combing these fields you can create the whole HTML
+structure.  
+But now with Scriban, you have full control yourself on how you want the html to be structured. If you look at the example below you will notice that I am
+creating the same HTML, but using Scriban it is way faster to do so.
+
+![](/images/blog/scriban-definition-compare.png)
+
+So instead of creating items in Sitecore to define HTML I can now write html in a multi-line text field.
+
+## Creative Exchange Live support
+
+Obviously writing HTML in a multi-line text field in Sitecore is not the most ideal way of work. As a frontend developer you really don’t want to go work in a
+CMS and write your HTML somewhere inside an item in the content tree. For this specific scenario there is Creative Exchange Live support for Scriban.
+
+As you are probably aware of Creative Exchange Live (CEL) allows us to work on our theme using our filesystem. Using NPM and a Gulp task all the changes we make
+locally will be synchronized to Sitecore instantly. With SXA 9.3 we even made it more easier and customizable than ever before. But more on that in a separate
+blogpost. When you export your site using Creative Exchange you get a folder structure disk that holds all the required files for your theme. With SXA 9.3 you
+now get a new folder (at the same level as the media folder) called Scriban. This folder contains all the components that have rendering variants which use
+Scriban. All the Scriban templates will now be editable on disk. CEL will make sure all the changes will automatically be synchronized to your Sitecore
+instance.
+
+## Visual Studio Code
+
+And that’s not all. There is already a [Scriban extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=xoofx.scriban) which has
+been developed by the author of Scriban. Additionally, there will be a Sitecore Scriban extension available as well which will provide you with all the
+intellisense and documentation for Sitecore specific extensions.
+
+## My experiences
+
+I have been using SXA 9.3 with Scriban now for some time and personally I would prefer doing things the Scriban way. It provides you with more control over the
+HTML, more flexibility and the development process is much faster. But having that said, it is good to realize that Scriban is added as an additional way inside
+the rendering variants. You can very easily mix Scriban with traditional rendering variant fields. The question is not should I use Scriban instead of the
+traditional way, but rather how can I make the most effective use of rendering variants and include Scriban as one of your options.

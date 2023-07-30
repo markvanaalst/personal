@@ -1,0 +1,32 @@
+---
+title: "Restricting FieldEditor to specific template based items"
+slug: "restricting-fieldeditor-to-specific-template-based-items"
+date: "2010-02-17"
+categories:
+  - "sitecore"
+tags:
+  - "fieldeditor"
+  - "sitecore"
+excerpt: In Sitecore 6.2 it is possible to integrate FieldEditors. These are command which enables users edit item settings when they work in the page editor.
+---
+
+In Sitecore 6.2 it is possible to integrate FieldEditors. These are command which enables users edit item settings when they work in the page editor. Personally
+I think it is a great option when you want editors to only work within the Page Editor, and still let them edit settings. For the blog module that I created I
+implemented two FieldEditorCommands which let the user edit the blog and entry settings. When you use the default implementation as described in one of the
+cookbooks users can always click on the ribbon button regarding if the fields are on the currentitem. When those field don not exist on that item, they just get
+a empty popup. I decided to restrict the option only to items which are based on a certain template. You can do this the following way: You’ll need to override
+the Execute method in the your class (which overrides from Sitecore.Shell.Applications.WebEdit.Commands.FieldEditorCommand).
+
+Then you isolate the function Context.ClientPage.Start in for instance an if statement.
+
+Example:
+
+```csharp
+if (context.Items[].TemplateID == new ID(Settings.Default.EntryTemplateID)) {
+  Context.ClientPage.Start(this, "StartFieldEditor", args);
+} else {
+  Context.ClientPage.ClientResponse.Alert("Please select an entry first");
+}
+```
+
+If anyone else has a better way to get the same results please let me know.

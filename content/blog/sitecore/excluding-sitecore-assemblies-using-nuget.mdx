@@ -1,0 +1,129 @@
+---
+title: "Excluding Sitecore assemblies using NuGet"
+slug: "excluding-sitecore-assemblies-using-nuget"
+date: "2020-05-13"
+categories:
+  - "sitecore"
+tags:
+  - "development"
+  - "nuget"
+  - "sitecore"
+image: /assets/images/posts/nuget_assemblies.png
+excerpt: For some time now you can use NuGet to manage Sitecore dependencies in your Visual Studio projects.
+---
+
+For some time now you can use NuGet to manage Sitecore dependencies in your Visual Studio projects. But did you know that we now offer assembly list packages as
+well?
+
+These packages provide you with a list of default Sitecore assemblies being used by various versions. Using these packages you can validate or exclude the
+Sitecore-provided assemblies from your solution builds.
+
+At this moment we have assembly packages available for the following Sitecore roles/deployment targets:
+
+| Name                                                   | Sitecore Version | Description                                                             |
+| ------------------------------------------------------ | ---------------- | ----------------------------------------------------------------------- |
+| Sitecore.Assemblies.Platform                           | 9.0+             | All roles based on the main Sitecore platform (CM, CD, Reporting, etc). |
+| Sitecore.Assemblies.XConnect.Web                       | 9.0+             | The primary XConnect (Collection) role.                                 |
+| Sitecore.Assemblies.XConnect.IndexWorker               | 9.0+             | The XConnect search indexer role.                                       |
+| Sitecore.Assemblies.XConnect.MarketingAutomationEngine | 9.0+             | The XConnect Marketing Automation Engine processing role.               |
+| Sitecore.Assemblies.XConnect.ProcessingEngine          | 9.1+             | The Sitecore Cortex™ data processing role.                              |
+
+You can see for yourself which packages are available by running the following NuGet command:
+
+```bash
+nuget list Sitecore.Assemblies
+              -Source https://sitecore.myget.org/F/sc-packages/api/v3/index.json
+              -AllVersions
+```
+
+## What’s in the packages?
+
+The assembly list packages contain an MSBuild targets file which will be used by your Visual Studio project file whenever you reference the NuGet package. This
+file contains an ItemGroup called SitecoreAssemblies that lists all Sitecore-provided assemblies (including metadata) for the associated roles.
+
+```xml
+<SitecoreAssemblies Include="Sitecore.Kernel.dll">
+    <Name>Sitecore.Kernel.dll</Name>
+    <Version>13.0.0.0</Version>
+    <FileVersion>13.0.0.0</FileVersion>
+    <InfoVersion>13.0.0-r00729</InfoVersion>
+    <Source>Platform</Source>
+</SitecoreAssemblies>
+```
+
+## How to use
+
+In this example, I am using a standard Visual Studio Web Application project. It contains no custom code whatsoever other than the default files that come with
+the project template.
+
+In this example project, I am referencing the Sitecore.Kernel package including its dependencies using NuGet.
+
+![](/images/blog/nuget_kernel.png)
+
+As you can see apart from the Sitecore.Kernel assembly I am also including all of its dependencies.
+
+I have set up a new publish profile to publish my solution to a local folder on disk and ran the publish command. When I look at the output of that command in
+the folder where I did my publish to, my bin folder contains 53 files.
+
+All my dependencies have been copied to the bin folder of my publish target.
+
+![](/images/blog/nuget_publish-bin-default.png)
+
+Now, this makes sense since Visual Studio simply publishes all the required assemblies to run my application. But in our case, this is not required as those
+assemblies are already in the bin folder of our Sitecore instance. This behavior introduces a greater risk that we end up with inconsistency since we could
+potentially override assemblies with other versions.
+
+This is exactly where the assembly list cames into play. Going back to the NuGet package manager we can also search for the assembly list and reference it.
+
+![](/images/blog/nuget_assemblies.png)
+
+Your Visual Studio project is now referring the Sitecore.Assemblies.Platform.targets file which is stored in the
+“.\\packages\\Sitecore.Assemblies.Platform.9.3.0\\build” folder. The last thing to do is to create a “\*.wpp.targets” file in our project which adds some
+additional settings to all publish profiles in our project.
+
+We add an XML file to the root of our existing Visual Studio project and name It “ExcludeSitecoreAssemblies.wpp.targets”. In this file we copy the following XML
+based configuration:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ExcludeSitecoreAssemblies" AfterTargets="Compile">
+    <ItemGroup>
+      <ExcludeFromPackageFiles Include="@(SitecoreAssemblies -> 'bin\\%(Filename)%(Extension)')" />
+      <ExcludeFromPackageFiles Include="@(SitecoreAssemblies -> 'bin\\%(Filename).pdb')" />
+      <ExcludeFromPackageFiles Include="@(SitecoreAssemblies -> 'bin\\%(Filename).xml')" />
+    </ItemGroup>
+  </Target>
+</Project>
+```
+
+This configuration will make sure to exclude all files that are listed in the the referenced assembly list from deployment. So when we run a new publish command
+the number of assemblies in our bin folder will drastically be reduced, therefore reducing any risks of compromising existing assemblies.
+
+![](/images/blog/nuget_publish-bin-excluded.png)
+
+## Sitecore TDS Support
+
+If you are using [Sitecore TDS](https://www.teamdevelopmentforsitecore.com/) you will have the option to benefit from these assembly list packages since TDS
+version 6.0.0.14.
+
+TDS will automatically check the versions at build time if the package is installed in the TDS project. You will need to add the NuGet package to your TDS
+project and enable “Enable Assembly Validation” in your project properties.
+
+If any assemblies being deployed to Sitecore are different than the expected version, TDS will flag the assemblies with the incorrect version as build errors.
+
+## Web Publishing Pipeline
+
+As you can see these new NuGet packages are very easy to use. Reference the package and implement an additional step in the Web Publishing Pipeline (WPP).
+Therefore you can include these packages in any project that utilizes the WPP to deploy your solution whether you are using standard Visual Studio projects or
+run custom MSBuild processes.
+
+Charlie Turano shared an [example of a custom MSBuild](https://gist.github.com/cturano/9b81308e6f300aba6ea57a7514fc6333) that uses these packages to verify the
+assembly versions and to generate a build error when there is a mismatch.
+
+There is also support for using these packages if you are using the [Helix Publishing Pipeline](https://github.com/richardszalay/helix-publishing-pipeline)
+
+---
+
+This article has been originaly posted on
+[Sitecore Community](https://community.sitecore.net/technical_blogs/b/technical-marketing/posts/excluding-sitecore-assemblies-using-nuget-packages)

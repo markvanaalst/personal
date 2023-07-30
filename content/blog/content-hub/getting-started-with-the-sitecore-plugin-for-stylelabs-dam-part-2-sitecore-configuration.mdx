@@ -1,0 +1,67 @@
+---
+title: "Getting started with the Sitecore plugin for Stylelabs DAM: Part 2 – Sitecore Configuration"
+slug: "getting-started-with-the-sitecore-plugin-for-stylelabs-dam-part-2"
+date: "2019-03-05"
+categories:
+  - "content-hub"
+tags:
+  - "content-hub"
+  - "dam"
+  - "sitecore"
+  - "stylelabs"
+excerpt: In the first part we have configured OAuth and CORS in our Stylelabs environment so that we can use it within our Sitecore environment
+---
+
+In [the first part](https://www.markvanaalst.com/blog/stylelabs-dam/getting-started-with-the-sitecore-plugin-for-stylelabs-dam-part-1-stylelabs-configuration/)
+we have configured OAuth and CORS in our Stylelabs environment so that we can use it within our Sitecore environment. Now we need to install the Stylelabs
+plugin within Sitecore and make some additional configuration changes.
+
+Once logged into Sitecore and on the launchpad, click on control panel and go to “install a package”. First we need to upload the plugin, that you can
+[download from dev.sitecore.net](https://dev.sitecore.net/Downloads/Sitecore_Plugin_for_Stylelabs_DAM.aspx), to our Sitecore instance. Once that has been
+uploaded, we can start the actual installation.
+
+![](/images/blog/Package-installation-1024x735.png)
+
+During the installation a question pops up. Sitecore detected a change to an item which is already in the database.
+
+![](/images/blog/Plugin-install-error-cropped.png)
+
+To make sure we are not overwriting important changes we will choose the merge option. This will merge our changes with the current item in the database,
+without affecting any child items.
+
+![](/images/blog/Plugin-install-fix-cropped.png)
+
+Click apply to all and the installation will continue. Once the installation has finished, we can close this dialog window. Now that the plugin has been
+installed, we need to setup the configuration itself.  
+• We go to the Content Editor.  
+• Open up the System node (/sitecore/System) and there we’ll find an item called Modules.  
+• Right-click on the Modules item and select “Insert from Template”.  
+• Search for the “M Configuration” template in the system node and give the new item the name “M Plugin”.  
+• Now click insert and an item will be created under the “Modules” item.
+
+![](/images/blog/Plugin-create-config-cropped-1024x691.png)
+
+Now we need to fill in the three fields provided by the item. The first field called “MInstance” needs to point to our Stylelabs environment.  
+The second field “ClientId” needs to contain the exact same Client ID as we provided when we did the configuration within Stylelabs.Lastly, we need to provide
+the URL to the search within Stylelabs. Use the same URL as your instance followed by “/en-us/content”.
+
+![](/images/blog/Plugin-config-cropped.png)
+
+Finally click save and we are finished with setting up the configuration within Sitecore.
+
+To test our settings, we can go back the Home item (/sitecore/content/Home) in the Sitecore Content Editor. By default, it contains two fields: Title and Text.
+Text is a rich text field that has been extended by our plugin. Click “Show Editor” to open the rich text editor.
+
+There you will now notice the **M** button:
+
+![](/images/blog/RTE-M-Button-Cropped-and-highlighted.png)
+
+Click the button and now you will need to authorize Sitecore to browse your Stylelabs DAM.
+
+![](/images/blog/Authorization-cropped.png)
+
+After confirming the authorization, you can browse and search your Stylelabs DAM and use those assets within your Sitecore instance.
+
+![](/images/blog/Asset-selection-plugin-1024x576.png)
+
+As you can see, setting up the Sitecore Plugin for Stylelabs DAM is relatively easy and quick to do!

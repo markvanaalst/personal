@@ -1,0 +1,115 @@
+---
+title: "Extending the Item Buckets Search Operations"
+slug: "extending-the-item-buckets-search-operations"
+date: "2013-04-01"
+categories:
+  - "sitecore"
+tags:
+  - "item-buckets-sitecore"
+
+excerpt: As you might know you can use Item Buckets in Sitecore 7 to execute operations on multiple items at the same time.
+---
+
+As you might know you can use Item Buckets in Sitecore 7 to execute operations on multiple items at the same time. Those operations are called Search Operations
+and Sitecore 7 ships with default ones like moving, copying and deleting items.
+
+As a developer you can fairly easy create your own search operations. There are three things you need to do to create your own:
+
+1. Create a Sitecore items that represents the operation
+2. Configure a command to link the operation to the code
+3. Write the class which defines the logic
+
+Let say we want to create a operation which protects multiple items to prevent editing their content.
+
+We go to the Content Editor and navigate to the "/sitecore/system/Settings/Buckets/Settings/Search Operations" item. Underneath you will find four categories in
+which you can create the item. For this purpose we will create a item underneath "Information Architecture".
+
+[![](/images/blog/search-operations-2.png "search-operations-2")](http://markvanaalst.net/wp-content/uploads/2013/04/search-operations-2.png)
+
+Notice the value in the "Type" field. This is a command that needs to be mapped with the class and assembly that contains the logic. The mapping is handled by
+configuration files within the App_Config\\Include folder. Create a new config file that contains the following xml
+
+```xml
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  {" "}
+  <sitecore>
+    {" "}
+    <commands>
+      <command name="bucket:protectitems" type="Sitecore.Buckets.Search.SearchOperations.ProtectCommand, Website" />{" "}
+    </commands>{" "}
+  </sitecore>{" "}
+</configuration>
+```
+
+As you can see we still need to create a class which contains the logic.
+
+```csharp
+using Sitecore.Buckets.Util;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.SearchTypes;
+using Sitecore.ContentSearch.Utilities;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Globalization;
+using Sitecore.Shell.Applications.Dialogs.ProgressBoxes;
+using Sitecore.Shell.Framework.Commands;
+using Sitecore.Web.UI.Sheer;
+using System.Collections.Generic;
+
+namespace Sitecore.Buckets.Search.SearchOperations {
+  public class ProtectCommand : Command {
+    public override void Execute(CommandContext context) {
+      string[] strings = context.Parameters.GetValues("url");
+      if (strings != null) {
+
+        List list = UIFilterHelpers.ExtractSearchQuery(strings.Replace("\\"", string.Empty));
+
+        string jobName = Translate.Text("Applying Protection");
+        string title = Translate.Text("Protecting All Items");
+        string icon = "~/icon/Applications/32x32/document_lock.png";
+
+        if (context.Items.Length > 0) {
+          var parameters = new object[] {context.Items[], list};
+          ProgressBox.Execute(jobName, title, icon, StartProcess, parameters);
+          SheerResponse.Alert(Translate.Text("Finished Protecting all items"), new string[]);
+        }
+      }
+    }
+
+  private void StartProcess(params object[] parameters) {
+    var indexableItem = (Item) parameters[];
+    SitecoreIndexableItem indexable = indexableItem;
+    if(indexable == null) {
+      Log.Error("Protect Items - Unable to cast current item - " + parameters[].GetType().FullName, this);
+      }
+      else {
+        var searchStringModel = (List) parameters[];
+        foreach (SearchStringModel model in searchStringModel) {
+          if (model.Operation == null) {
+            model.Operation = "should";
+          }
+        }
+      }
+      using(IProviderSearchContext context = ContentSearchManager.GetIndex(indexable).CreateSearchContext()) {
+        foreach (SitecoreUISearchResultItem resultItem in LinqHelper.CreateQuery(context, searchStringModel, indexable)) {
+          Item item = resultItem.GetItem();
+          if ((item != null) {
+          item.Security.CanDelete(Context.User)) {
+            item.Editing.BeginEdit();
+            item.Appearance.ReadOnly = !item.Appearance.ReadOnly;
+            item.Editing.EndEdit();
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Compile the code and go to your search window. After running a search you can go and click the Protect Items operation.
+
+[![](/images/blog/search-operations-3.png "search-operations-3")](http://markvanaalst.net/wp-content/uploads/2013/04/search-operations-3.png)
+
+After clicking a dialog will appear that shows the progress:
+
+[![](/images/blog/search-operations-4.png "search-operations-4")](http://markvanaalst.net/wp-content/uploads/2013/04/search-operations-4.png)

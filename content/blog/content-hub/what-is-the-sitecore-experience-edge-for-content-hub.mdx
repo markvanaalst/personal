@@ -1,0 +1,82 @@
+---
+title: "What is the Sitecore Experience Edge for Content Hub"
+slug: "what-is-the-sitecore-experience-edge-for-content-hub"
+date: "2021-03-29"
+categories:
+  - "content-hub"
+tags:
+  - "caas"
+  - "content-hub"
+  - "experience-edge"
+excerpt: Recently we released the Sitecore Experience Edge for Content Hub and we plan to release Sitecore Experience Edge for Experience Manager (XM)
+image: /assets/images/posts/StockSnap_ZTXOFYBPSL-scaled.jpg
+---
+
+Recently we released the Sitecore Experience Edge for Content Hub and we plan to release Sitecore Experience Edge for Experience Manager (XM) sometime during
+the second quarter of 2021. For now, we will focus on what is available right now.
+
+The [Sitecore Experience Edge](https://www.sitecore.com/blog/content/were-thrilled-to-announce-groundbreaking-sitecore-experience-edge) brings content
+management features into the Sitecore Content Hub. In addition to the content management features, it adds a global auto-scaled delivery platform that hosts a
+high performing [GraphQL](https://graphql.org/) API.  
+This complete service is hosted and managed by Sitecore allowing content delivery at scale to any digital touchpoint.  
+Let’s break it down and go over all the components piece by piece:
+
+## **Sitecore Content Hub**
+
+When using the Sitecore Experience Edge, Content Hub becomes a content management system. For that we are utilizing the
+[Content Marketing Platform (CMP)](https://docs.stylelabs.com/content/4.0.x/user-documentation/cmp/cmp-intro.html) feature that was already available within
+Content Hub. By adding the Experience Edge, we added a delivery method that is designed to be flexible and high performant.
+
+However, with the Sitecore Experience Edge we are not limited to delivering only content. You can also deliver Sitecore Product Content Management (PCM) data
+using the Experience Edge or any custom definitions you have defined within Content Hub.  
+Apart from content, the Experience Edge also supports the use of Digital Asset Management (DAM) assets by providing the links to the assets hosted on the CDN.
+
+<Img
+  src="/images/blog/components.png"
+  alt="sample 1"
+  width={1000}
+  height={800}
+  aspectRatio="16:9"
+  bleed
+  caption="this is a caption"
+/>
+
+## **API**
+
+To consume the content delivered by the Sitecore Experience Edge you will need to make requests to the API. There are three API endpoints available, each with a
+different purpose.
+
+First, we have the Preview API. You can use the Preview API to access all content, including drafts and other content that is not approved yet. Please note that
+the Preview API is not optimized for public consumption in a production environment. You can access the Preview API by using the url:  
+`https://[YouContentHubUrl]/api/graphql`
+
+Then there is the Delivery API. The Delivery API provides access only to approved and published content. You will use this API for all production-related
+actions. The Delivery API is a GraphQL API exposing the Delivery platform with identical schema to the Preview API. It is optimized for performance and
+geo-replicated latency. The base URL for the Delivery API is `https://delivery.sitecore-staging.cloud/instanceId/graphql` where _instanceId_ is your unique
+identifier provided during provisioning.
+
+In order to work with the delivery API you will need to authenticate using API keys. One way of creating a key would be to go to the settings within your
+Content Hub instance. Another option is to request such a token by using the Token API.
+
+The Token API serves as a management tool to validate API keys used for accessing the Preview and Delivery GraphQL APIs. The URL for all token API requests is
+the URL for the delivery platform with “/token/api/apikey” appended.
+
+## Delivery Platform
+
+![](/images/blog/delivery-platform.png)
+
+The delivery platform is a global and auto-scaled delivery platform. It improves the content publishing experience of Sitecore Experience Edge for Content Hub.
+The Content Delivery Network (CDN) acts as a proxy layer between your application(s) and the delivery platform.
+
+GraphQL serves as the querying language to consume data from Sitecore Content Hub and deliver it to your custom channels. The CDN links the delivery platform to
+static or dynamic sites, and any other runtime applications that can consume GraphQL data. All queries going to and coming from the delivery platform will get
+cached by the CDN to optimize response times.
+
+Whenever Content Hub detects changes in approved content, or changes to the schema it raises an event which triggers the automatic publishing process.
+
+The delivery platform is a multi-environment platform: it provides delivery services for multiple Content Hub environments and is distributed at a regional
+level. That is, a delivery platform instance is available in all major cities or regions around the world. This geographical distribution offers a scalable
+solution with minimal response times. Additionally, the content of all environments will be duplicated in all delivery platform instances to improve resiliency
+and availability.
+
+As you can see, the combination of all these components really complement Content Hub and make it possible to deliver content to any channel on a global scale.

@@ -1,0 +1,89 @@
+---
+title: "Introducing the SXA Styleguide"
+slug: "introducing-the-sxa-styleguide"
+date: "2020-03-09"
+categories:
+  - "sxa"
+tags:
+  - "sxa-9-3"
+  - "sxa-styleguide"
+image: /assets/images/posts/home.png
+excerpt: I would like to introduce you to something I have been working on for some time; the SXA Styleguide. A website completely build using nothing but just SXA 9.3.
+---
+
+Whenever I want to test something, do some R&D or just need an example SXA implementation to record a video or explain a certain concept I had two choices: Use
+a blank SXA instance or use Habitat Home, our official Sitecore Demo environment. Both of them work excellent, but a blank SXA instance is typically not
+sufficient due to the lack of content. The other option, using Habitat Home was often the opposite since it is a full demo of the entire Experience Platform.
+
+So I needed something that was somewhere in the middle. A website with content that preferably did not required to much code to run. Since I am working closely
+with the SXA product team I got access to such a site. This however was build on a very early SXA version and got upgraded each version. This also meant that
+while the site still worked, it did not leverage all sorts of new features that SXA introduced along the way.
+
+### The Styleguide
+
+So I figured it was time for a complete rebuild of that website using all the features that SXA 9.3 has to offer. And while at it, why not make it open-source.
+
+When I started with SXA it helped me a lot that I had an example site that I could easily install and see how certain components worked and other SXA specific
+features where implemented. So why not share this new site with the rest of the community.
+
+I would like to introduce you to something I have been working on for some time; the SXA Styleguide. A website completely build using nothing but just SXA 9.3.
+
+![](/images/blog/home.png)
+
+### Whats in the Styleguide?
+
+The content for the SXA Styleguide is an updated version of the old showcase website.
+
+It describes some of the features that SXA offers apart from the toolbox.
+
+[![](/images/blog/Navigation-page-150x150.png)](https://www.markvanaalst.com/wp-content/uploads/2020/03/Navigation-page.png)
+
+In the site are several examples of search and it has a listing of all the OOTB components. These components all have their own page that illustrate how
+components can be used in a variety of configurations.
+
+Finally we have a list of SXA resources that are publicly available.
+
+![](/images/blog/Resources-993x1024.png)
+
+That's simply how the site looks. The most interesting for me at the time when I used the showcase website was the ability to take a look under the hood.
+
+The Styleguide uses its own theme, created using the new CLI with support for Creative Exchange Live (there is a
+[seperate repository](https://github.com/markvanaalst/SXA.Styleguide.Frontend) that contains all the theme source files). You will also notice that I am using
+Scriban Templates inside some of the rendering variants.
+
+There is an extension theme, including all the scaffolding steps, that injects some JavaScript and CSS into the Styleguide theme and adds some extra styles.
+
+And there is much more like search scopes, custom facets, personalization rules, page and partials designs including the use of base partials etcetera.
+
+## Installing the Styleguide
+
+Installing the Styleguide is very simple. Download the package from the [releases tab on Github](https://github.com/markvanaalst/SXA.Styleguide/releases) and
+install in any Sitecore 9.3 instance with SXA. After installation rebuild the search indexes and you are good to go. By default the site runs in a virtual
+folder (https://_\[yourhostname\]_/styleguide) using the master database.
+
+Thanks to [Michael West](https://michaellwest.blogspot.com/) you can also run the Styleguide in a Docker container. Just make sure you have the
+[pre-build 9.3 images](https://github.com/Sitecore/docker-images/blob/master/README.md) locally or in your container resource. For more instructions please see
+the [readme file.](https://github.com/markvanaalst/SXA.Styleguide/blob/master/README.md)
+
+## What's next
+
+I will be using this site as an example site for future blogposts and videos. And obviously I will continue to develop the site. I already have tons of ideas on
+improvements and new funtionality but am always open for more. If you have any feedback or ideas on how to improve please reach out to me through the various
+social channels, [GitHub](https://github.com/markvanaalst/SXA.Styleguide/issues) or via email.
+
+Finally I would like to thank the SXA team, and in specific [Adam Najmanowicz](https://twitter.com/adamnaj) (SXA Product Manager) for his patience :-), support
+and feedback he provided as well as [Sebastian Winter](https://twitter.com/lovesitecore) for all of his initial testing.
+
+The SXA Styleguide is available as a [Sitecore package](https://github.com/markvanaalst/SXA.Styleguide/releases) on
+[GitHub](https://github.com/markvanaalst/SXA.Styleguide) as well as the Visual Studio project that contains all the serialized items.
+
+---
+
+_Please note: The SXA Styleguide should not be considered as a demo environment for SXA or Sitecore in general. For demo purposes I strongly recommend
+[Habitat Home](https://github.com/Sitecore/Sitecore.HabitatHome.Platform), the official demo environment maintained by Sitecore and available as open-source._
+
+---
+
+The SXA Styleguide is not supported by Sitecore Professional Services or Sitecore Support.
+
+Support is provided on a best-effort basis via GitHub issues.

@@ -1,0 +1,69 @@
+---
+title: "Making changes to standard SXA components"
+slug: "making-changes-to-standard-sxa-components"
+date: "2020-07-01"
+categories:
+  - "sxa"
+tags:
+  - "best-practice"
+  - "sxa"
+image: /assets/images/posts/inherit-template.png
+excerpt: With the installation of SXA you get access to several standard SXA components that you can use to build your webpages.
+---
+
+With the installation of SXA you get access to several standard SXA components that you can use to build your webpages. Those components are designed to fit the
+most common requirements but will never meet all requirements. Instead of providing even more components, the standard components have been made extremely
+flexible. This gives you the opportunity to makes changes to those standard components to meet your specific requirements.
+
+But where do you make these changes? Since SXA upgrades will reinstall/overwrite all the standard SXA items, your changes will be reverted to standard SXA
+behavior.
+
+Fortunately, this is something for which SXA has a standard solution. Let’s take a look at the following example. In this video Ruby Tjassing is showing how to
+add a background images to a component. For the sake of video length she is adding it to a standard SXA component.
+
+<YouTube youTubeId="MJPA5_m3Iv0" />
+
+Now, let me explain how you can achieve something similar and making sure future updates won't override your changes at the same time.
+
+## Clone components
+
+SXA supports cloning existing components. When you clone a component you are creating a new component but you can choose whether you want to re-use (inherit)
+specific elements like rendering parameters, datasource and the actual view file. In case you don't want to inherit you can also create a copy of the default
+ones. That will give you total freedom by also leaves out benefiting from any future updates to those modules.
+
+![](/images/blog/clone-dialog.png)
+
+You can give the new component a more logical name, add the component to a module and assigns a CSS class.
+
+After you have cloned the component you will notice that you have a new rendering with adjusted properties.
+
+![](/images/blog/cloned_templates.png)
+
+Apart from the rendering item there are also new templates created. By default these templates inherit from the component you cloned from. Since it uses
+inheritance you are free to make any adjustments to the templates and items themselves.
+
+So if we want our component to inherit from the Background Image template we can do so.
+
+![](/images/blog/inherit-template.png)
+
+Voila, we have achieved the same goal as Ruby did in her video. But with the ability to make sure SXA upgrades won't affect our changes. We would still need to
+add out new component to the toolbox. You could do that
+[manually](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/copy-and-customize-a-rendering.html#UUID-bd653f68-1c35-da0d-e4ae-a2b98f5d979a_id__Add_a_rendering_body)
+or use [scaffolding](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/add-modules-to-site-and-tenant-scaffolding.html).
+
+We have now created our very own custom module without writing a single line of code. Using this same technique you could also create your very own custom
+toolbox. Rename the SXA components and use the terminology that make sense for your authors.
+
+---
+
+Note: This article is meant to show you that you can make changes to standard SXA components and still be safe from any updates.
+
+For the sake of the article I left some steps out like creating modules and adding components to the toolbox. Those steps have been very well documented (by
+Ruby) on the [SXA documentation site](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/index-en.html).
+
+#### Recommended reading
+
+- [Best practices: Extending SXA](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/recommendations--extending-sxa.html)
+- [Creating a new module](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/create-a-new-sxa-module.html)
+- [Copy and customize a rendering](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/copy-and-customize-a-rendering.html)
+- [Use the Component wizard to create a custom rendering](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/use-the-component-wizard-to-create-a-custom-rendering.html)

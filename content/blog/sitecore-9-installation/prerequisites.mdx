@@ -1,0 +1,127 @@
+---
+title: "Installing Sitecore 9: Prerequisites"
+slug: "installing-sitecore-9-prerequisites"
+date: "2018-03-21"
+categories:
+  - "Sitecore 9 installation"
+tags:
+  - "community"
+excerpt: Before you are planning to install Sitecore you need to make sure that your environment meets all the prerequisites.
+---
+
+Before you are planning to install Sitecore you need to make sure that your environment meets all the prerequisites.
+
+First of all you need a Windows OS (8.1/10 or Windows Server 2012 R2 (64 bit) or higher) which has the .NET Framework 4.6.2 or later installed. Our latest
+version (Sitecore 9.0 Update 1) also requires that you have installed the
+[Microsoft Visual C++ 2015 Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=53587).
+
+On you Windows machine you should have Internet Information Services (IIS) enabled. To make sure you have this you can open the “Add / Remove Features” dialog.
+You can find this in the Control Panel under Programs.
+
+In addition to the operation system and database server Sitecore requires additional software:
+
+- Solr 6.6.2
+- Microsoft PowerShell 5.1 or later (Included in Windows 10)
+- WebAdministration module (Installed when you have configured a computer with IIS)
+- [Web Platform Installer 5.0](https://www.microsoft.com/web/downloads/platform.aspx#additionalDownloads)
+  - Web Deploy 3.6 for Hosting Servers (Use Web Platform Installer to install)
+  - URL Rewrite 2.1 (Use Web Platform Installer to install)
+- [Microsoft SQL Server Data-Tier Application Framework (DacFx) version 2016](https://www.microsoft.com/en-us/download/details.aspx?id=53013)
+
+We will cover installing SQL Server and SORL in a bit. If you want to make sure you have the right PowerShell version installed, you can open up a new
+PowerShell console and type the command “$PSVersionTable.PSVersion”. This will list the version you have installed. It should display 5 as the major version and
+1 as minor version.
+
+Then we are going to user the Web Platform Installer (WPI) to install the web deploy and URL rewrite modules. If WPI is not yet installed, you can download it
+[here](https://www.microsoft.com/web/downloads/platform.aspx). Open WPI, search for “web deploy 3.6” and click the Add button. Now do the same for “URL Rewrite
+2.1” and add this as well. Once both modules are added to the list of items to be installed, click the Install button.
+
+Now install the [Microsoft SQL Server Data-Tier Application Framework (DacFx) version 2016](https://www.microsoft.com/en-us/download/details.aspx?id=53013).
+This framework itself requires the Microsoft SQL Server System CLR Types to be installed as well. In case you don’t have these installed, then you can download
+them here: [x64 version](http://go.microsoft.com/fwlink/?LinkID=817290&clcid=0x409) / [x86 version](http://go.microsoft.com/fwlink/?LinkID=817274&clcid=0x409).
+
+## Install and configure SQL Server
+
+Besides the Windows operation system you will need a SQL Server instance to host all the databases. Sitecore uses SQL Server 2016 SP1 to host all the databases.
+If you are only installing the Experience Management (XM) then you can also use SQL Server 2014 SP2. But be advised; the Experience Database does not run on SQL
+Server 2014, therefore we would recommend to always use SQL Server 2016.
+
+For an installation on your local development environment you can use the free
+[SQL Server Express edition](https://www.microsoft.com/en-us/download/details.aspx?id=54284). To manage your local SQL Server instance Microsoft has a separate
+tool called Management Studio. We need this tool to make some configuration changes. You can download it [here](https://go.microsoft.com/fwlink/?linkid=867670).
+
+Since we are going to use Web Deploy Packages later on to install the platform, we need to ensure that SQL Server allows user and logins to be contained at
+database level.
+
+Start MS SQL Server Management Studio, connect to your local instance using Windows Authentication and run this script:
+
+`sp_configure 'contained database authentication', 1; GO RECONFIGURE; GO`
+
+If all went well you should receive a message like “Configuration option ‘contained database authentication’ changed from 0 to 1”
+
+We also want to enable to standard administrator user (SA) for our local environment. You can enable this user by going to Security > Logins. Select the sa
+user, right click and select properties. You can now enter a password for this user. Then click “Status” in the upper left of the dialog window and ensure that
+login is set to enabled.
+
+Now we made sure that we have a SQL user that we can use to login. However to login using a SQL user we need the enable Mixed Authentication. Click the server
+name in the Object Explorer, right click and select properties. Now select “Security” and ensure that “Server Authentication” is set to SQL Server and Windows
+Authentication mode.
+
+## Install Solr
+
+Now it is time to install Solr. Since Solr is a Java application we need to install the Java Runtime first. We can use the latest version which you can find on
+the [Oracle website](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
+Once installed you need to install Solr. The first thing to keep in mind is that Sitecore requires Solr 6.6.2. You can download this specific version
+[here](https://www.apache.org/dist/lucene/solr/6.6.2/). The other thing worth noticing is that Sitecore is secure by default. This means that our Solr instance
+must be using a SSL certificate in order to work with Sitecore. First you would need to install Solr by extracting everything from the download into your own
+folder. I am using the folder “C:\\solr\\solr-6.6.2” but you are free to use your own location.
+
+One you have extracted all the files it’s time to setup SSL for Solr. We start by creating the appropriate certificated using the JRE keytool. It should be
+installed alongside you Java environment. (in my case C:\\Program Files\\Java\\jre1.8.0_151\\bin\\keytool.exe).
+
+Find your command prompt and right click to Run as adminstrator. Go to folder where you installed Solr. Run the following command:
+`C:\Program Files\Java\jre1.8.0_151\bin\keytool.exe” -genkeypair -alias solr-ssl -keyalg RSA -keysize 2048 -keypass secret -storepass secret -validity 9999 -keystore solr-ssl.keystore.jks -ext SAN=DNS:localhost,IP:127.0.0.1 -dname “CN=localhost, OU=Organizational Unit, O=Organization, L=Location, ST=State, C=Country”`
+
+Once this command has completed a keystore file called solr-ssl-keystore.jks is created in your Solr folder. To convert this keystore into a certificate for
+Windows you will need to run the following command:
+
+`C:\Program Files\Java\jre1.8.0_151\bin\keytool.exe” -importkeystore -srckeystore solr-ssl.keystore.jks -destkeystore solr-ssl.keystore.p12 -srcstoretype jks -deststoretype pkcs12`
+
+Now you should have a certificate called solr-ssl.keystore.p12 in your current folder
+
+To install this certificate in Windows you simply double click the p12 file and follow the wizard. Make sure to place the certificate in the Trusted Root
+Certification Authorities.
+
+The only thing left now is to configure Solr to use SSL. You can do this easily by editing the solr.in.cmd files in the Solr bin folder. You will need to
+uncomment all the settings prefixed with SOLR_SSL and update the paths to your keystore file.
+
+Now that Solr is configured to use SSL there is only one thing left to do. To actually run Solr as a Windows service. The easiest way to do that is by using
+[NSSM](https://nssm.cc/), a service helper that can easily create Windows services for you.
+
+- Download the latest version and extract it to a folder of your choosing (for example “C:\\solr\\nssm-2.24\\win64”)
+- Open a command prompt (with administrative privileges) and go to the NSSM folder
+- Run “.\\nssm.exe install solr-6.2.2” and a NSSM window will appear
+- Fill in the required details
+  {" "}
+  <table>
+    <tbody>
+      <tr>
+        <td>Path:</td>
+        <td>C:\solr\solr-6.6.2\bin\solr.cmd</td>
+      </tr>
+      <tr>
+        <td>Startup folder</td>
+        <td>C:\solr\solr-6.6.2\bin</td>
+      </tr>
+      <tr>
+        <td>Arguments:</td>
+        <td>start -p 8983 -f -v</td>
+      </tr>
+    </tbody>
+  </table>
+
+Now start the Windows services and navigate to https://localhost:8983 to open Solr. If everything is installed successfully you are now all set to install
+Sitecore 9.
+
+Since we have taken care of all the prerequisites, let have a look at the Sitecore Install Framework next

@@ -1,0 +1,51 @@
+---
+title: "Using JQuery in custom fields"
+slug: "using-jquery-in-custom-fields"
+date: "2010-02-18"
+categories:
+  - "sitecore"
+tags:
+  - "custom-field"
+  - "jquery"
+  - "sitecore"
+excerpt: At the moment I'm creating a custom field for tagging content items. I prototyped my custom field in html using JQuery.
+---
+
+At the moment I'm creating a custom field for tagging content items. I prototyped my custom field in html using JQuery. But when I wanted to convert this to the
+actual custom field I ran into a problem. As you might know Sitecore uses the Prototype library for all of it's javascript. And prototype uses the same dollar
+sign for all of its functions and variables as JQuery does. But JQuery provides a [noConflict](http://api.jquery.com/jQuery.noConflict/) function where you can
+reassign the default $.
+
+But then came the next challenge. I needed to use the noConflict function before all other javascript was called. Luckally I remembered that I have seen it
+before in other custom fields that are on the [Shared Source](http://trac.sitecore.net/Index/) environment. So I started browsing the source code of Alexey
+Rusakov's project ([Sitecore Fieldtypes](http://trac.sitecore.net/FieldTypes/)) and I found the
+[InjectScripts](http://svn.sitecore.net/FieldTypes/trunk/sitecore%20modules/Outercore.FieldTypes/Common/InjectScripts.cs) class which provides an option to add
+HTML to the section of the Content Editor. There I just added a reference to my JQuery library and off course calling the .noConflict funtion.
+
+```csharp
+namespace Sitecore.SharedSource.Taxonomy {
+  class AddScripts {
+    public void Process(PipelineArgs args) {
+      if (Sitecore.Context.ClientPage.IsEvent) return;
+
+      HttpContext context = HttpContext.Current; if (context == null) return;
+
+      Page page = context.Handler as Page; if (page == null) return;
+
+      Assert.IsNotNull(page.Header, "Content Editor tag is missing runat='value'");
+
+      string[] scripts = new[] { "/sitecore modules/Shell/Taxonomy/jquery-1.4.1.min.js" };
+
+      foreach (string script in scripts) {
+        page.Header.Controls.Add(new LiteralControl("".FormatWith(script)));
+        page.Header.Controls.Add(new LiteralControl("$.noConflict();"));
+      }
+    }
+  }
+}
+```
+
+So now I can call my JQuery by using "jQuery" in stead of "$" and the field works.
+
+In my opinion this is just an example of how the Shared Source environment can help you. So if you have created a module, field or any thing else please put it
+on the Shared Source environment so others can benefit from it.

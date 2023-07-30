@@ -1,0 +1,80 @@
+---
+title: "Installing Sitecore 9: Install the Sitecore Installation Framework Module"
+slug: "install-the-sitecore-installation-framework-module"
+date: "2018-03-21"
+categories:
+  - "Sitecore 9 installation"
+tags:
+  - "community"
+  - "sif"
+  - "sitecore"
+excerpt: To install the Sitecore Experience Platform you need the Sitecore Installation framework first.
+---
+
+To install the Sitecore Experience Platform you need the Sitecore Installation framework first.
+
+You can download SIF from the Sitecore developer site at [https://dev.sitecore.net](https://dev.sitecore.net) but it is also available on the Sitecore gallery,
+a public MyGet feed where you can download Sitecore PowerShell modules.
+
+## Registering the Repository
+
+First you will need to register the repository in PowerShell. This way PowerShell knows where to look for the Sitecore modules.
+
+![](/images/blog/5baffd19a25c2_open-powershell-admin-228x300.gif)
+
+To register the gallery, you will need to open a PowerShell windows with administrative privileges. Windows offers a shortcut to do so. Go with your mouse
+cursor to the bottom left corner on top of the Windows logo. Then right click with the mouse and a menu will appear. Choose “Windows PowerShell (Admin).
+
+A dialog window might appear asking to allow the application the option to make changes to your device. Click “Yes” and the PowerShell console will open.
+
+Then run the following command:
+
+```ps1
+Register-PSRepository -Name SitecoreGallery -SourceLocation https://sitecore.myget.org/F/sc-powershell/api/v2
+```
+
+## Install the Framework
+
+Now we are ready to install the SitecoreInstallFramework. Run this command to install the framework:
+
+```ps1
+Install-Module SitecoreInstallFramework
+```
+
+When you are prompted to install the module, type Y and press Enter
+
+You have now successfully installed the Sitecore Installation Framework onto your machine!
+
+## Updating the Framework
+
+Since we are constantly updating this module it is recommended to update the framework whenever you want to install a newer version of Sitecore. To update the
+framework, you will need a PowerShell console and type:
+
+```ps1
+Update-Module SitecoreInstallFramework
+```
+
+## Installing the Framework Manually
+
+As an alternative to using the MyGet feed you can also install it manually. The Sitecore Installation Framework is also provided as a zip download. But if you
+manually install the Sitecore Installation Framework, you must first download and install the Sitecore Fundamentals package.
+
+You can download the Sitecore Fundamentals and the Sitecore Installation Framework packages from the [Sitecore Developer site](https://dev.sitecore.net). Both
+downloads are available on the page with the latest version of the platform.
+
+To install both modules you will need to extract the packages and copy the files.
+
+- Extract the Sitecore Fundamentals.ZIP package to the following folder: `C:\Program Files\WindowsPowerShell\Modules\SitecoreFundamentals`
+- Extract the Sitecore Install Framework.ZIP package to the following folder: `C:\Program Files\WindowsPowerShell\Modules\SitecoreInstallFramework`
+
+## Validating the Installation
+
+If you want to validate your installations, run this command in the PowerShell prompt:
+
+```ps1
+Get-Module SitecoreInstallFramework –ListAvailable
+```
+
+It should return a list with only one module named the SitecoreInstallFramework.
+
+You now have The Sitecore Installation Framework installed and are ready to proceed to install the Sitecore Experience Platform.

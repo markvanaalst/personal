@@ -1,0 +1,42 @@
+---
+title: "Daily Tip: Support Package Generator"
+slug: "daily-tip-support-package-generator"
+date: "2012-11-05"
+categories:
+  - "sitecore"
+tags:
+  - "daily-tip"
+  - "support"
+  - "sitecore"
+excerpt: You might recognize this scenario. During your project you encounter some problem and you need the help of Sitecore Support
+---
+
+You might recognize this scenario. During your project you encounter some problem and you need the help of
+[Sitecore Support](http://support.sitecore.net "Sitecore Support"). You create a new ticket and then you need to wait until their first reply. If you only wrote
+down you issue and didn't provide any log files, the first reply will probably be to provide those log files. Of course these log files are necessary
+(especially when your ticket isn't a know issue) to investigate your problem.
+
+To speed things up it's important that you provide the support department with as many information as possible. You could just include the Sitecore log files,
+but there are more files that might be relevant to solve your issue.
+
+For that purpose Sitecore has created a little but very usefull application. It's called the "Support Package Generator". What is does is collecting all files
+that might come in handy for the support engineers.
+
+[![](/images/blog/Support-Package-Generator-Generate-Package.png "Support Package Generator Generate Package")](https://markvanaalst.com/wp-content/uploads/2022/01/Support-Package-Generator-Generate-Package.png)
+
+It collects files from you Sitecore instance but also some local files:
+
+- Application pool
+- Web.config file
+- /App_config folder content
+- Sitecore and IIS logs
+- Windows event logs
+- Performance counters
+- /bin directory listing
+- .NET framework files — required for working with process memory dumps
+
+The tool will collect all the files you choose and stores it in a ZIP file, which you can attach to your ticket. This will improve the time it will take to
+resolve your issue.
+
+You can download the Support Package Generator from
+[SDN](http://sdn.sitecore.net/Resources/Tools/Support%20Package%20Generator.aspx "Download the Support Package Generator").

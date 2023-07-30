@@ -1,0 +1,127 @@
+---
+title: "Installing Sitecore 9: Breaking down SIF"
+slug: "installing-sitecore-9-breaking-down-sif"
+date: "2018-04-12"
+categories:
+  - "Sitecore 9 installation"
+tags:
+  - "community"
+  - "sif"
+image: "~/assets/images/posts/xp0-config.png"
+excerpt: As described in a previous blogpost you can use a PowerShell script to install Sitecore on your machine using the Sitecore Install Framework
+---
+
+As described in a [previous blogpost](/sitecore-9-installation/installing-the-platform/) you can use a PowerShell script to install Sitecore on your machine
+using the Sitecore Install Framework (SIF). There are a few variables here that you can change to match your situation.
+
+If you look closely then you can see that a total of five different steps are defined:
+
+- Client certificate for xConnect
+- Setup Solr for xDB
+- The xConnect instance
+- Setup Solr for Sitecore
+- Install Sitecore instance
+
+For each of those steps there are different configurations needed. When you look at the individual steps you will see that it uses parameters. Most of the
+parameters are provided in the first part if the installation script and referenced by the five different configurations. These parameters are specific for your
+environment. Once the configuration is complete, the installation for that specific part is invoked by calling the Install-SitecoreConfiguration command. One of
+the parameters that each configuration has is Path. The value of that parameter is a path to the actual JSON configuration for that part.
+
+![](/images/blog/5baffd1c63ff8_xp0-config-768x549.png)
+
+The configuration file consists of multiple parts:
+
+### Parameters
+
+Values used to install Sitecore. The value of each parameter can be passed command-line or have a default value (e.g. license file location, site name, database
+credentials etc).
+
+<YouTube youTubeId="x0FQhV4o_Ss" />
+
+### Variables
+
+Variables are values that are used in the installation as well. The value of each variable will be calculated at runtime and is dependent on the parameters. A
+database prefix would be a parameter, the actual database name (prefix + name) will be calculated and is therefore a variable)
+
+<YouTube youTubeId="nDCaAkpoF68" />
+
+### Tasks
+
+Steps that perform an action during the installation.
+
+<YouTube youTubeId="-OqsrjlzwS0" />
+
+### Modules
+
+PowerShell modules that can be imported in the installation sessions. Could contain extensions to SIF
+
+<YouTube youTubeId="AqnXfSYoNz0" />
+
+### Settings
+
+Optional properties to augment an install.
+
+<YouTube youTubeId="ZmWpLCwEsS0" />
+
+Whenever the command Install-SitecoreConfiguration is invoked, the script will first process all of the parameters. Once those are all validated it will parse
+the settings that are stored in the JSON configuration file. Once the settings defined in the JSON configurations and those provided command-line are loaded, it
+will collect all the dynamic parameters that override parameters defined in the configuration.
+
+Then the script starts to register all the added and required modules including SIF and the SitecoreFundamentals module.
+
+Next SIF will map the parameters with the override value, and map all the variables so that the variables will use the value from the parameters defined.
+
+Finally SIF will resolve the task list defined in the configuration. Once the tasks are all validated it will start running those tasks.
+
+## Simple Example
+
+Now let’s see how this all ties together and setup an example configuration file:
+
+```json
+{
+  "Parameters": {
+    "RootFolder": {
+      "Type": "string",
+      "Description": "The working folder for our example",
+      "DefaultValue": "C:SIF-Example"
+    },
+    "FolderName": {
+      "Type": "string",
+      "Description": "The name of the folder to create",
+      "DefaultValue": "MyNewFolder"
+    }
+  },
+  "Variables": {
+    "Base.Path": "joinpath(parameter('RootFolder'),parameter('FolderName'))"
+  },
+  "Tasks": {
+    "CreatePaths": {
+      "Type": "EnsurePath",
+      "Params": {
+        "Exists": "variable('Base.Path')"
+      }
+    }
+  }
+}
+```
+
+We are going to create a folder and subfolder using SIF. In our configuration file we setup two parameters. One for the root folder and one of the working
+folder inside our rootfolder.
+
+Using variables we are going to join these two separate parameters and make one valid path. Finally we are defining a task that will create the folder, but only
+if the variable exists.
+
+To run this configuration we create a small PowerShell script that uses this configuration and run it against the Install-SitecoreConfigurationCommand
+
+```ps1
+#define parameters $PSScriptRoot = "C:\\Sitecore\\SIF Example"
+
+#Example $example = @{ Path = "$PSScriptRoot\\example.json" }
+
+Install-SitecoreConfiguration @example -Verbose \[/ps\]
+```
+
+Now start a new PowerShell console, go to the folder in which you stored the PowerShell file and run it using “.\\example.ps1”. When the script has run you
+should have a new folder “SIF-Example”on your C drive and a folder called MyNewFolder inside of that.
+
+![](/images/blog/5baffd1d7cc17_powershell-example-768x565.png)

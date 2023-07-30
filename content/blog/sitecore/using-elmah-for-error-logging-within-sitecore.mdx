@@ -1,0 +1,95 @@
+---
+title: "Using ELMAH for error logging within Sitecore"
+slug: "using-elmah-for-error-logging-within-sitecore"
+date: "2011-03-24"
+categories:
+  - "sitecore"
+tags:
+  - "elmah"
+  - "exceptions"
+  - "logging"
+  - "sitecore"
+excerpt: Since a while I use ELMAH for error logging in my custom ASP.NET applications.
+---
+
+Since a while I use ELMAH for error logging in my custom ASP.NET applications. Normally in a Sitecore project I log all exceptions to the Sitecore log files.
+But the disadvantage of this is that the exceptions are in the same files as all Sitecore log messages. So I tried to implement ELMAH within my Sitecore
+installation.
+
+### What is ELMAH?
+
+According to the official site: “ELMAH (Error Logging Modules and Handlers) is an application-wide error logging facility that is completely pluggable. It can
+be dynamically added to a running ASP.NET web application, or even all ASP.NET web applications on a machine, without any need for re-compilation or
+re-deployment.”
+
+### What does this mean?
+
+ELMAH has the following features
+
+- Log all (unhandled) exceptions
+- A user interface which lets you view remotely all exceptions, including detailed information (even when customerrors mode is turned off!) and the original
+  yellow error screen (YSOD)
+- Email notification when errors occur
+- RSS feeds which show the latest errors
+
+ELMAH uses two key components. There is one HTTP module which logs exceptions, and one HTTP Handler that shows the exceptions. You can choose SQL Server,
+SQLite, MS Access, Oracle, Vista DB or MySQL as a storage medium to save the exceptions to.
+
+### How do you implement it?
+
+First off all you need to download the right version from the official [download](http://code.google.com/p/elmah/downloads/list) page. Then copy the Elmah.dll
+file to your Bin folder. If you want to use the SQLite data storage then you also need to copy the System.Data.SQLite.dll into the Bin folder. For this example
+I will use the SQLite data storage.
+
+When you copied the files into the Bin folder, you need to edit the web.config. Unfortunately the web.config changes are outside the `<sitecore>` node, so we
+can’t use the config include files.
+
+1. First we need to add a new sectiongroup to the configuration/configSections node
+
+```xml
+<sectionGroup name="elmah"> <section name="errorLog" requirePermission="false" type="Elmah.ErrorLogSectionHandler, Elmah"/> </sectionGroup>
+```
+
+2. Then we need to add the ELMAH section to the configuration node. In this section is configured what type of storage we use
+
+```xml
+<elmah> <errorLog type="Elmah.SQLiteErrorLog, Elmah" connectionStringName="ELMAH.SQLite"/> </elmah>
+```
+
+3. As you might noticed we also need to add a connectionstring. This can be added to the /App_Config/ConnectionStrings.config
+
+```xml
+<add name="ELMAH.SQLite" connectionString="Data Source=|DataDirectory|errors.s3db"/>
+```
+
+4. ELMAH uses a HTTP Handler with the file extension .axd. To prevent IIS returning a 404 we need to add the location and filename of the handler to the
+   IgnoreUrlPrefixes setting.
+
+```xml
+<setting name="IgnoreUrlPrefixes" value="/sitecore/admin/elmah.axd|/sitecore….
+```
+
+5. Then we need to add the Http module which logs the exceptions to the end of the system.webserver/modules section
+
+```xml
+<add name="ErrorLog" type="Elmah.ErrorLogModule, Elmah"/>
+```
+
+6. The last part is adding the Http handler to the end of to the system.webserver/handlers section
+
+```xml
+<add name="Elmah" path="/sitecore/admin/elmah.axd" verb="POST,GET,HEAD" type="Elmah.ErrorLogPageFactory, Elmah" preCondition="integratedMode" />
+```
+
+If all it setup correctly you can now view ELMAH log at [http://www.mysite.com/sitecore/admin/elmah.axd](http://www.mysite.com/sitecore/admin/elmah.axd)
+
+Right now ELMAH only logs the unhandled exceptions. If you want ELMAH to log exceptions which you handle in a catch statement you need to add the following line
+in your catch statement:
+
+```csharp
+Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+```
+
+I created a simple application which lets you view the ELMAH error log within Sitecore. I will put this on the Shared Source environment later this week.
+
+[![View Elmah logs within Sitecore](/images/blog/Elmah.png "View Elmah logs within Sitecore")](http://www.markvanaalst.com/wp-content/uploads/2011/03/Elmah.png)

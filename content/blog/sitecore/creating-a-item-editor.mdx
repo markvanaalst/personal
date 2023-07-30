@@ -1,0 +1,74 @@
+---
+title: "Creating a Item Editor"
+slug: "creating-a-item-editor"
+date: "2009-08-19"
+categories:
+  - "sitecore"
+tags:
+  - "item-editor"
+  - "sitecore"
+  - "user-interface"
+excerpt: For a blog module that I am developing I wanted to create an custom item editor. As you might know those are the tabs in the Content Editor.
+---
+
+For a blog module that I am developing I wanted to create an custom item editor. As you might know those are the "tabs" in the Content Editor.
+
+1\. Create a aspx file for the item editor user interface. 2. Select the core database in the desktop mode 3. Open the Content Editor and go to
+the following path /Sitecore/Content/Applications/Content Editor/Editors/Items. 4. You can create an item editor using the /Sitecore Client/Content
+Editor/Editor data template. 5. You can give your item editor a name using the header field in the data section. 6. In the icon field you can enter a path to
+the icon. 7. In the url field you need to fill in the url to the aspx file created in step 1 8. Save the item. 9. Switch back to the master database.
+
+Now we have created the item and the user-interface for the Item Editor. The next step is to assign the item editor to a template.
+
+10\. You can do this by setting it on the standard values or a individual item. Open the item in the content editor or template manager. 11 . Click on the
+configure tab, go to the appearance group and click the editor command. A dialog will appear. 12. In this dialog you can select the item editor you want to use,
+using the arrows you can sort. 13. Finally close the dialog and save and publish.
+
+Now when you select a item based on this template you see a item editor in the content editor with the title you filled in. You can edit the item editor using
+normal ASP.Net controls. This is a great solution for creating custom reports. But when you want to create an real custom editor functionality, you would like
+to use the default save button of the content editor. I might be confusing for a end-user to have two save button in one screen.
+
+Unfortunately, Sitecore provides no default solution for capturing that event. Thanks to Eugene Omelnitsky from [Sitecore Support](http://support.sitecore.net)
+(for pointing me in the right direction) I found a solution. You can adapt to the Save event using javascript. I then used
+[JQuery](http://www.jquery.com "JQuery") to do an ajax call to the server and execute my save method.
+
+This is the Javascript function which captures the save event and triggers an ajax call to my page method.
+
+```js
+function scGetFrameValue(value, request) {
+  if (request.parameters == "contenteditor:save" || request.parameters == "item:save") {
+    $.ajax({
+      type: "POST",
+      url: "EntryEditor.aspx/SaveItem",
+      data:
+        "{ e: '" +
+        $("#EditorIntroduction").val() +
+        "', title: '" +
+        $("#tbTitle").val() +
+        "', content: '" +
+        $("#EditorContent").val() +
+        "' }",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (msg) {
+        alert("succes!");
+      },
+    });
+  }
+}
+```
+
+And this is the method that I use server side
+
+```csharp
+[System.Web.Services.WebMethod]
+public static void SaveItem(string entryid, string introduction, string content, string title) {
+  Database master = Factory.GetDatabase("master");
+
+  Item currentItem = ItemManager.GetItem(new ID(entryid), Sitecore.Context.Language, Sitecore.Data.Version.Latest, master);
+  Entry currentEntry = new Entry(currentItem);
+  currentEntry.BeginEdit(); currentEntry.Title = title; currentEntry.Introduction = introduction; currentEntry.Text = content; currentEntry.EndEdit();
+}
+```
+
+The code above is not perfect, it needs a bit more flexibility but for testing purposes it works.

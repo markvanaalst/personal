@@ -1,0 +1,28 @@
+---
+title: "Quick tip: Keep your local Sitecore license in one place"
+slug: "quick-tip-keep-your-local-sitecore-license-in-one-place"
+date: "2016-06-17"
+categories:
+  - "sitecore"
+excerpt: So, you are running multiple Sitecore instances on your local machine and each one with their own license file.
+---
+
+So, you are running multiple Sitecore instances on your local machine and each one with their own license file. And when your license has expired you need to
+replace all those local licenses.
+
+Try including a small config include file in your App_Config\\Include folder which sets the data folder. Just point the location of the license file to a
+central folder on your machine like this:
+
+```xml
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <settings>
+    <setting name="LicenseFile">
+      <patch:attribute name="value">C:\\SC-Repository\\License\\license.xml</patch:attribute>
+    </setting>
+    </settings>
+  </sitecore>
+</configuration>
+```
+
+Now when you need to update your license you can simply do it by replacing just one file and all your instances are updated.

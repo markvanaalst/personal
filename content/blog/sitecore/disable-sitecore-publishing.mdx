@@ -1,0 +1,35 @@
+---
+title: "Disable Sitecore publishing"
+slug: "disable-sitecore-publishing"
+date: "2008-10-20"
+categories:
+  - "sitecore"
+tags:
+  - "publishing"
+  - "sitecore"
+excerpt: To avoid problems during the development of an Sitecore site it could be useful to disable the Sitecore Publishing method.
+---
+
+To avoid problems during the development of an Sitecore site it could be useful to disable the Sitecore Publishing method.
+
+This can be done by editing the following web.config rule:
+
+<site
+  name="website"
+  virtualFolder="/"
+  physicalFolder="/"
+  rootPath="/sitecore/content"
+  startItem="/home"
+  database="web"
+  domain="extranet"
+  allowDebug="true"
+  cacheHtml="true"
+  htmlCacheSize="10MB"
+  enablePreview="true"
+  enableWebEdit="true"
+  enableDebugger="true"
+  disableClientData="false"
+/>
+
+These are the settings of your current site. The database key contains the database name from where the site needs to get its content. By setting this to the
+master database you do not need to publish your content anymore.

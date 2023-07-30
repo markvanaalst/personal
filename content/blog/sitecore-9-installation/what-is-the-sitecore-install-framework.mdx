@@ -1,0 +1,37 @@
+---
+title: "Installing Sitecore 9: What is the Sitecore Install Framework"
+slug: "what-is-the-sitecore-install-framework"
+date: "2018-03-21"
+categories:
+  - "Sitecore 9 installation"
+tags:
+  - "community"
+excerpt: Okay now that we took care of the prerequisites, it is finally time to install Sitecore.
+---
+
+Okay now that we took care of the [prerequisites](http://markvanaalst.com/installing-sitecore-9-prerequisites/), it is finally time to install Sitecore. With
+the introduction of Sitecore we introduced something called the Sitecore Installation Framework, also known as SIF (you know we love those three letter
+acronyms).
+
+SIF is a PowerShell module for handling the installation and configuration of Sitecore instances. This could be a local developer installation but also
+production setups. It will install and configure your web instances, windows services, databases, search engine configuration, certificates and much more.
+
+SIF uses configuration files to install the Sitecore instance. These configuration files are shipped with each version of Sitecore, together with the WDP
+packages which contain all the application files needed.
+
+Besides SIF, the configuration files and WDP packages there is one more PowerShell module that the installation needs. This is the Sitecore Fundamentals module,
+and this helps you to install a Sitecore instance which is secure by default. It will help setup SSL and create self-signed certificates.
+
+The Sitecore Installation Framework and the Sitecore Fundamentals modules are both PowerShell modules. This means that these modules are not tied to a
+particular Sitecore installation. You can use these modules to install multiple Sitecore instances.
+
+So, to summarize for a Sitecore installation you will need:
+
+- Sitecore Installation Framework
+- Sitecore Fundamentals
+- Web Deploy Packages
+- Configuration Files (included in the WDP package)
+
+All the required downloads you can get from [https://dev.sitecore.net](https://dev.sitecore.net).
+
+Now you know that SIF is, it is time to install it on your machine.

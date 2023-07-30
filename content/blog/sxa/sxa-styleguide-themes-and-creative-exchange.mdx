@@ -1,0 +1,86 @@
+---
+title: "SXA Styleguide, Themes and Creative Exchange"
+slug: "sxa-styleguide-themes-and-creative-exchange"
+date: "2020-07-13"
+categories:
+  - "sxa"
+tags:
+  - "cli"
+  - "sxa"
+  - "themes"
+excerpt: Recently a tweet by Kiran Patil caught my attention and made me think that I needed to provide a bit more context to the issue.
+image: assets/images/posts/workspace-1-1024x677.png
+---
+
+Recently a tweet by Kiran Patil caught my attention and made me think that I needed to provide a bit more context to the issue he (and perhaps others) might run
+into.
+
+https://twitter.com/kiranpatils/status/1280315487625281547
+
+So what is the actual issue? When you install the SXA Styleguide you get a website build in SXA that explains how SXA works. It includes example usage of all
+the components and much more. One of the things it adds is it own theme in the media folder.
+
+At first glance this might look like a ordinary theme, and it actually is just a SXA theme. However, it is a theme created using the SXA CLI that was introduced
+with SXA 9.3. So what does that mean?
+
+## SXA CLI
+
+When you [create a new theme using the SXA CLI](https://www.markvanaalst.com/blog/sxa/installing-the-sitecore-sxa-cli/) you get more configuration options that
+allow you to define how Creative Exchange will behave.
+
+In previous versions of SXA you needed to
+[create a theme](https://doc.sitecore.com/developers/sxa/18/sitecore-experience-accelerator/en/create-a-custom-theme.html) in Sitecore,
+[export your site](https://doc.sitecore.com/developers/sxa/18/sitecore-experience-accelerator/en/modify-your-site-design-with-creative-exchange-live.html) and
+install it locally. Then using Gulp tasks you can compile your Sass files locally and synchronize the files with your Sitecore instance. SXA will then, using
+the [Asset Optimizer](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/enable-and-configure-the-asset-optimizer.html), minimize
+those file when requested by the client.
+
+This method works pretty well, but has one disadvantage. By uploading all the files to Sitecore it unintentionally works as a sort of version control system for
+your frontend assets. If you have a rather small team of developers this might work well, but in larger teams this quickly becomes an issue. Wouldn't it be nice
+if frontend developers could just use their own version control methods as the single source of truth, and only have their artifacts being synchronized to
+Sitecore?
+
+With the SXA CLI (9.3) you get a lot more customization options in the way how themes are being handled by SXA. You can choose whether you want to compile your
+themes locally, and if you want to upload the source files to Sitecore or just the compiled assets. There is a lot of flexibility here to make sure the frontend
+developers can match their preferred developer workflow as closely as possible. However this also means that, depending on your workflow, the themes in Sitecore
+are no longer the single source of truth. Instead you could consider that with SXA 9.3 themes are developer artifacts.
+
+## Styleguide implementation
+
+This is one of the reasons why I choose to keep the frontend assets of the Styleguide separate. It allows me to work on the theme (if needed) independent from
+the application itself. I can develop on any environment that runs NodeJS and can connect to any Sitecore instance that has the Styleguide installed and
+Creative Exchange enabled. It could be a developer environment but also running it in a continues integration environment.
+
+Therefore the only files that are being uploaded to Sitecore are the optimized-min files. When SXA detect a theme with those files, any request for them will
+bypass the Asset Optimizer since the files are already optimized.
+
+This also allows you to implement the minification processor of your choosing since it no longer happens server side.
+
+## Enabling Creative Exchange Live for SXA Styleguide
+
+Now that you have a little more context as to why the Styleguide doesn't contain all the theme source files, let's have a look at how to use Creative Exchange
+with the Styleguide (assuming Creative Exchange is enabled on your Sitecore instance)
+
+- First of all you will need to clone [this repository](https://github.com/markvanaalst/SXA.Styleguide.Frontend)
+- In the the repository folder open `\src\-\media\Themes\Sitecore\Styleguide\Styleguide\gulp\config.js`
+- Update config file for Gulp tasks: `serverOptions.server` - path to sitecore instance. Example `server: 'http://www.sxa.sc'`;
+- go to the folder `\src\-\media\Themes\Sitecore\Styleguide\Styleguide\` using the command prompt (or VS Code terminal)
+- Run `npm install` (_node.js and npm should be already installed_);
+- Run the gulp task to start Creative Exchange Live
+
+## Visual Studio Code
+
+Personally I prefer to use Visual Studio Code as my code editor. Therefore I also included a VS Code workspace in the repository that loads the most important
+folders of the repository in your workspace. It also checks if you have two Scriban extensions installed to edit Scriban files more easily.
+
+![](/images/blog/workspace-1-1024x677.png)
+
+If you want to install the SXA Styleguide you can download the installation package. If you want to makes changes to the theme you can clone the frontend
+repository and follow the instruction mentioned earlier.
+
+- [Installation package](https://github.com/markvanaalst/SXA.Styleguide/releases)
+- [Theme Source files](https://github.com/markvanaalst/SXA.Styleguide.Frontend)
+
+Hope this clears things up a bit on how to work with Create Exchange and the SXA Styleguide!
+
+Special thanks to [Kiran](https://twitter.com/kiranpatils) for mentioning the issue on Twitter allowing me to address it!

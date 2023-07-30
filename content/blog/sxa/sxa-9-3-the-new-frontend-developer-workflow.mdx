@@ -1,0 +1,66 @@
+---
+title: "SXA 9.3: The new frontend developer workflow"
+slug: "sxa-9-3-the-new-frontend-developer-workflow"
+date: "2019-11-28"
+categories:
+  - "sxa"
+tags:
+  - "frontend"
+  - "sxa-9-3"
+image: /assets/images/posts/StockSnap_ZTXOFYBPSL-scaled.jpg
+excerpt: One of the biggest focus areas of the SXA 9.3 release is making SXA more appealing and easier for frontend developers to work with.
+---
+
+One of the biggest focus areas of the SXA 9.3 release is making SXA more appealing and easier for frontend developers to work with. As a major effort in that,
+the whole frontend developer workflow is now improved based on feedback we received.
+
+## What has changed?
+
+Everyone who develops with SXA has seen the way themes are implement. A single theme is stored inside the media library alongside with all of it’s files.
+Meaning that not only the CSS and JavaScript files are stored in the media library but also all the source files and even the Gulp configuration.
+
+With SXA 9.3 this had changed dramatically. How? Well first of all the way you create a theme has changed. SXA 9.3 introduces an SXA CLI, a command line
+interface. This allows you to create a new SXA theme locally by simply typing “sxa new “themename” in the console window. The CLI will ask you several questions
+and will then create all the required files locally.
+
+Let’s have a closer look at the CLI. Once installed you can use the command prompt to create a new theme.
+
+![](/images/blog/sxa-cli-1024x597.png)
+
+First it will ask you some basic questions like instance url, username, password and the theme path in Sitecore. Nothing new then what you are used too when
+creating a new theme. The only difference is that you don’t have to edit the configuration file itself.
+
+Then it will ask you which active modules you want to include in your theme. By selecting one or more, the CLI will know which base themes it needs to include.
+It will use NPM then to install the base themes for your theme. Once that has completed it will setup the local file/folder structure.
+
+Once you have confirmed the current url is the right one, it will ask you some additional questions. You now also have the option to use EcmaScript 6+, when
+selected the theme will include babel to make your scripts backwards compatible for older browser.
+
+Now we reached the point where it gets interesting. As you can see the CLI offers you to compile your JavaScript and SASS files into minified files. This means
+that you can now minimize your files locally before Creative Exchange Live uploads it to Sitecore.
+
+> When SXA 9.3 finds a pre-optimized.min file in the media library it will no longer use it’s built in assets optimizer but respects the pre-optimized file.
+
+This has a lot of benefits. You are now no longer limited to the standard SXA Assets Optimizer and just use the one you are comfortable with. Creative Exchange
+offers a standard one, but if you want you can change the Gulp tasks to include your own. By default it uses the
+[clean-css](https://github.com/jakubpawlowicz/clean-css) library for stylesheets and [UglifyJS3](http://lisperator.net/uglifyjs/) for JavaScript.
+
+![](/images/blog/theme-structure.png)
+
+Another option you can see is that the CLI will ask you whether you want to upload the source files. Meaning that it really asks you of you want to store all
+the .sass, .css and .js files in the media library. By default Creative Exchange Live now only stores the pre-optimized.min files in the media library. It is no
+longer required to have all the source files in the media library and therefore your local filesystem will become the single source of truth when it comes to
+theming. Unless you really desire to store all the source files in the media library. This is still possible, however SXA will always search for a
+pre-optimzed.min file first inside a theme. Only when it cannot find such a file, it will use the asset optimizer to create a bundle out of the source files and
+use the at rendering time.
+
+To summarize, using this new developer workflow you can now:  
+• Create SXA themes using the CLI (which is available through NPM)  
+• Use Creative Exchange Live tooling (available as NPM packages) and no longer part of the theme  
+• No more unnecessary file in the media library  
+• Use your own source control system for themes  
+• Store just the compiled assets in Sitecore
+
+And as a bonus, it is now also possible to edit [Scriban templates](https://www.markvanaalst.com/blog/sxa/sxa-9-3-introducing-scriban/) using Creative Exchange
+Live. Scriban templates are a new option inside rendering variants that allow you to use templated html. You can edit these templates using you own code editor
+and Creative Exchange will synchronize your changes instantly.

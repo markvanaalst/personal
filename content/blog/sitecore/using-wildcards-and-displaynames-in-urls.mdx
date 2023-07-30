@@ -1,0 +1,89 @@
+---
+title: "Using wildcards and displaynames in urls"
+slug: "using-wildcards-and-displaynames-in-urls"
+date: "2012-05-08"
+categories:
+  - "sitecore"
+tags:
+  - "tips-and-tricks"
+  - "sitecore"
+excerpt: In Sitecore we know wildcards, which will give you the possibility to create dynamic urls.
+---
+
+In Sitecore we know wildcards, which will give you the possibility to create dynamic urls. Basically we can use wildcards to pass variables by using the URL
+instead of querystring parameters. If you would like to know more on how wildcards work and what they can do for you I recommend
+[this](http://adeneys.wordpress.com/2009/07/28/techniques-for-sharing-content/) blogpost from Alistair Deneys.
+
+[![Example of our wildcard node](/images/blog/Wildcard-node.png "Wildcard node")](https://markvanaalst.com/wp-content/uploads/2022/01/Wildcard-node.png)
+
+So let's assume we have the following case. We have a multilingual website with the Dutch and English language. On this website we have a catalog section which
+shows all our products. All the products are stored outside the section and are being loaded with wildcards. Based upon the name of the page that's requested we
+will retrieve the correct item from the product repository and use it in the wildcard item. This is basically how wildcards work, nothing new here.
+
+But since we have an multilingual site we would like to use the displayname in the url, so we can create urls which could be in Dutch or English. Because we use
+the Sitecore LinkManager we can easily configure this in the web.config. We can find the linkmanager configuration in the /configuration/sitecore/linkmanager
+node inside the web.config. The default linkprovider has an option called "useDisplayName". When we set this option on true we can create urls which use the
+displayname, and with that are multilingual.
+
+[![Set the property useDisplayName to true in the LinkManager](/images/blog/Linkmanager-300x115.png "Linkmanager")](http://newguid.net/wp-content/uploads/2012/05/Linkmanager.png)
+
+With our example site we can now have two urls pointing to the same content item.
+
+[![](/images/blog/Link-displaynames-to-content-item.png "Link displaynames to content item")](https://markvanaalst.com/wp-content/uploads/2022/01/Link-displaynames-to-content-item.png)
+
+So far so good. We can browse the site using the displayname setting in the linkmanager. But what happens when we are going to request a wildcard item. If we
+are requesting the wildcard item in the default language (in this case English) everything goes well. But when we are going to request the item in another
+language (Dutch) we are getting the "Item Not Found" page.
+
+This is happening because the ItemResolver processor cannot get the parent item by using the displayname. In the processor there is a method called GetSubItem.
+This method will try to get the requested item by using the request path.
+
+```csharp
+private Item GetSubItem(string path, Item root) {
+   Item child = root;
+
+    foreach (string str in path.Split(new char\[\] { '/' })) {
+       if(str.Length != 0) {
+        child = this.GetChild(child, str);
+        if (child == null) {
+          return null;
+        }
+      }
+    }
+  return child;
+}
+```
+
+But the path used is the path which has been constructed by the parsing the request. Which means that we have a path (/sitecore/content/Home/Catalogus/test)
+which cannot be resolved, because of the use of the displayname. So we need to add some code to the GetSubItems method. We will get the item by combining the
+parent's path and the item name. We can retrieve it from the context database and return it.
+
+```csharp
+private Item GetSubItem(string path, Item root) {
+  Item childItem = root;
+  Item parentItem = childItem;
+
+  foreach (string itemName in path.Split(new char\[\] { '/' })) {
+     if (itemName.Length != 0) {
+        childItem = this.GetChild(childItem, itemName);
+        if (childItem == null) {
+          string itemPath = string.Format("{0}/{1}", parentItem.Paths.FullPath, itemName);
+          using (new SecurityDisabler()) {
+            childItem = Context.Database.Items\[itemPath\];
+          }
+        return childItem;
+      }
+    }
+  }
+  return null;
+}
+```
+
+Of course you would like to add some safety checking to see if the user has the appropriate access rights. You could do that by calling the
+AuthorizationManager.
+
+```csharp
+if (AuthorizationManager.IsAllowed(item, AccessRight.ItemRead, Context.User)) {
+  return item;
+}
+```

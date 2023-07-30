@@ -1,0 +1,40 @@
+---
+title: 'Dynamic load where parameters for linqDatasource'
+slug: 'dynamic-load-where-parameters-for-linqdatasource'
+date: '2008-04-21'
+categories:
+  - 'ASP.NET'
+tags:
+  - 'c-sharp'
+  - 'LINQ'
+excerpt: When using an Linq Datasource for a datagrid you do not always want all rows from a table
+---
+
+When using an Linq Datasource (linq to sql) for a datagrid (Gridview, ListView, etc) you don't always want all rows from a table. To exclute data you can use
+the WhereParameters to add an where statement to your DataSource.
+
+You can do limited where statements with the Visual Studio Wizards. When you need more than a limited statement you can dynamicly create an Parameter to add to
+your Linq DataSource.
+
+The following examples shows how to filter the Linq Datasource that recovers all rows from the _Post_ table and filters them on the BlogId. The
+_BlogManager.CurrentBlogId_ gets the blog GUID from the Session.
+
+```csharp
+Parameter where param = new Parameter();
+whereparam.Name = "BlogId";
+whereparam.DefaultValue = BlogManager.CurrentBlogId.ToString();
+whereparam.Type = TypeCode.Object;
+linqDataSource.WhereParameters.Add(whereparam);
+linqDataSource.Where = "BlogId == <strong>Guid(@BlogId)</strong>";
+```
+
+You convert the _@BlogId_ (string) to a Guid In the _linqDataSource.Where_ property otherwise you get the following error*:*
+
+```
+## _Operator '==' incompatible with operand types 'Guid' and 'String'_
+
+\_**excerpt:** An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the
+error and where it originated in the code.
+
+**Exception Details:** System.Web.Query.Dynamic.ParseException: Operator '==' incompatible with operand types 'Guid' and 'String'\_
+```

@@ -1,0 +1,39 @@
+---
+title: "Using XAML controls outside the Sitecore folder"
+slug: "using-xaml-controls-outside-the-sitecore-folder"
+date: "2012-01-23"
+categories:
+  - "sitecore"
+tags:
+  - "xaml"
+  - "sheerui"
+  - "sitecore"
+excerpt: In certain cases you want to offer the end-user a userfriendly interface to manage content, users or anything else.
+---
+
+In certain cases you want to offer the end-user a userfriendly interface to manage content, users or anything else. Thanks to Sitecore's backend flexibility
+this is possible in more ways than one. In this case I will use the technique which is described in
+[this blogpost](http://www.sitecore.net/Community/Technical-Blogs/Getting-to-Know-Sitecore/Posts/2010/06/Customizing-With-Large-Data-Sets.aspx) by Adam Conn.
+
+In the example you can see that a new window is opened by the code below:
+
+```csharp
+public override void Execute(CommandContext context)
+{
+	Assert.ArgumentNotNull(context, "context");
+	UrlString url = new UrlString("/sitecore/shell/~/xaml/GridExample.GridExamplePage");
+	url["id"] = context.Items[0].ID.ToString();
+	SheerResponse.ShowModalDialog(url.ToString(), "650", "500");
+}
+```
+
+As you can see this is done by calling a url with a /~xaml/ handler. The xaml handler calls the Sitecore.Web.UI.XamlSharp.Xaml.XamlPageHandlerFactory class
+which basicly searches for the control. In the example from Adam the control which is being searched for is placed in the "/sitecore modules" folder. By default
+Sitecore searches these controls in the "/sitecore modules"  and "/sitecore/shell/Applications" folders.
+
+But if you build custom applications within Sitecore the chance is that you do not want to place the custom code into the "/sitecore" or "/sitecore modules"
+folders. Of course you can place the code into your own location, but then the XAML handler cannot find the control.
+
+The configuration which defines the folders for Sitecore to look for controls is inside the "/App_Config/XamlSharp.config" file. There are two watchers defined
+which tell Sitecore to look into the folder mentioned earlier. You can add a new watcher by adding it to the XamlSharp.config. Or better, use a Sitecore include
+config file.

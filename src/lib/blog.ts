@@ -1,0 +1,27 @@
+import { allPosts, type Post } from 'contentlayer/generated'
+
+export function getPost(slug: string): Post | undefined {
+  return allPosts.find((post) => post.slug === slug)
+}
+
+export function getLatestPosts(count: number = 10) {
+  return sortByNewest(allPosts).slice(0, count)
+}
+
+export function sortByNewest(posts: Post[]) {
+  return posts.sort(
+    (objA, objB) =>
+      new Date(objB.date).getTime() - new Date(objA.date).getTime(),
+  )
+}
+
+export function getPostUrl(slug: string): string {
+  const _post = allPosts.find((post) => post.slug === slug)
+
+  if (_post == undefined) return ''
+
+  if (_post.categories) {
+    return `${_post.categories[0]}/${_post.slug}`
+  }
+  return _post.slug
+}

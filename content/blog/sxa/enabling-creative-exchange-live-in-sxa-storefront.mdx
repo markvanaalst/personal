@@ -1,0 +1,46 @@
+---
+title: "Enabling Creative Exchange Live in SXA Storefront"
+slug: "enabling-creative-exchange-live-in-sxa-storefront"
+date: "2018-03-26"
+categories:
+  - "sxa"
+tags:
+  - "sxa"
+  - "creative-exchange"
+  - "storefront"
+excerpt: One of the features I personally really like in SXA is Creative Exchange Live.
+---
+
+One of the features I personally really like in SXA is Creative Exchange Live. It gives you the ability to make theme modifications right from your favorite
+code editor. By utilizing gulp tasks your changes are immediately synchronized to your Sitecore instance.
+
+Recently I wanted to make some changes to the default theme in SXA Storefront. Naturally I exported the default theme in the Experience Editor do that I could
+unzip the theme and make the necessary changes. When I tried setting up the Creative Exchange Live I noticed that not all files were in the correct place. The
+package.json missed some information and the index.js file was missing.
+
+Luckily these files are not specific for that theme, so I could re-use the files from the standard Basic2 theme.
+
+Then when I exported the theme once again, all files were in place. I can now run "npm install" and after installation of all required packages I can now run
+gulp to synchronize my changes to the Sitecore instance.
+
+To summarize; you can follow these steps to enable Creative Exchange Live:
+
+1. Remove the existing package.json and the gulpfilebabel items in the root of the Storefront theme (/sitecore/media library/Themes/Storefront Branded)
+2. Copy the gulpfilebabel, index, package and readme items from the Basic2 theme (/sitecore/media library/Themes/Basic2) to the Storefront theme
+3. Export the Theme using the export function in the Sitecore Experience Editor ![](/images/blog/export-theme.png)
+4. Extract the zip file on your local harddrive and open the folder in a Command Window. You can also open the folder in a text editor like Visual Studio code
+   ![](/images/blog/visual-studio-code-600x329.png)
+5. Run npm install to install all the required packages
+6. Run gulp to start the synchronization
+
+I wrote a little PowerShell script that removed the files in the Storefront theme and copied the required files from the basic theme. You can use this script
+yourself to make the Storefront theme compatible with Creative Exchange Live:
+
+```ps1 Remove-Item -Path "master:\media library\Themes\Storefront Branded\package" -Permanently Remove-Item -Path "master:\media
+library\\Themes\\Storefront Branded\\gulpfilebabel" -Permanently
+
+Copy-Item -Path "master:\\media library\\Themes\\Basic2\\gulpfilebabel" -Destination "master:\\media library\\Themes\\Storefront Branded\\gulpfilebabel"
+Copy-Item -Path "master:\\media library\\Themes\\Basic2\\index" -Destination "master:\\media library\\Themes\\Storefront Branded\\index" Copy-Item -Path
+"master:\\media library\\Themes\\Basic2\\package" -Destination "master:\\media library\\Themes\\Storefront Branded\\package" Copy-Item -Path "master:\\media
+library\\Themes\\Basic2\\readme" -Destination "master:\\media library\\Themes\\Storefront Branded\\readme" \
+```
