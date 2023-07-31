@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest'
+
 import { getBaseUrl, unique } from '../utils'
 
 describe('utils', () => {
@@ -5,7 +7,7 @@ describe('utils', () => {
     const env = process.env
 
     beforeEach(() => {
-      jest.resetModules()
+      vi.resetModules()
       process.env = { ...env }
     })
 
@@ -17,7 +19,7 @@ describe('utils', () => {
       // @ts-ignore
       process.env.NODE_ENV = 'production'
 
-      expect(getBaseUrl()).toBe('https://tsnext-tw.vercel.app')
+      expect(getBaseUrl()).toBe('https://mva.vercel.app')
     })
 
     it('should return localhost when environment is development', () => {

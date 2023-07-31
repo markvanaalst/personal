@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { describe, expect, it } from 'vitest'
 
 import { defaultMetadata, getMetadata } from '../metadata'
 
-const title =
-  'Next.js Starter Template | Next.js + Tailwind CSS + Typescript Starter'
+const title = 'MarkvanAalst.com | blogging about web technologies'
 const description =
   'Next.js bootstrapped by Tailwind CSS and Typescript setup with useful development features.'
 
@@ -15,16 +15,16 @@ const expectedMetadata: Metadata = {
   },
   description,
   keywords: defaultMetadata.keywords.join(','),
-  metadataBase: new URL('https://tsnext-tw.vercel.app/'),
+  metadataBase: new URL('https://mva.vercel.app'),
   title,
   openGraph: {
     description,
-    images: `https://tsnext-tw.vercel.app/api/og?title=${encodeURIComponent(
-      'Next.js Starter Template',
+    images: `https://mva.vercel.app/api/og?title=${encodeURIComponent(
+      'MarkvanAalst.com',
     )}&description=${encodeURIComponent(description)}`,
-    siteName: 'Next.js Starter Template',
-    title,
-    url: 'https://tsnext-tw.vercel.app/',
+    siteName: 'MarkvanAalst.com',
+    title: 'MarkvanAalst.com | blogging about web technologies',
+    url: 'https://mva.vercel.app/',
   },
   robots: defaultMetadata.robots,
   viewport: {

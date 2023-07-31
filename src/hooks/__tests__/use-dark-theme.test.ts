@@ -1,15 +1,16 @@
 import { renderHook, waitFor } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 
 import { useTheme } from '../use-theme'
 
 describe('useDarkTheme', () => {
   it('should return correct states', async () => {
-    jest.mock('next-themes', () => {
+    vi.mock('next-themes', () => {
       return {
         useTheme: () => ({
           theme: 'light',
           resolvedTheme: 'light',
-          setTheme: jest.fn(),
+          setTheme: vi.fn(),
         }),
       }
     })

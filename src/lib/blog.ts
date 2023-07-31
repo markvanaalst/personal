@@ -8,7 +8,7 @@ export function getLatestPosts(count: number = 10) {
   return sortByNewest(allPosts).slice(0, count)
 }
 
-export function sortByNewest(posts: Post[]) {
+export function sortByNewest<T extends { date: string }>(posts: T[]): T[] {
   return posts.sort(
     (objA, objB) =>
       new Date(objB.date).getTime() - new Date(objA.date).getTime(),

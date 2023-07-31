@@ -2,12 +2,12 @@ import { render } from '@testing-library/react'
 
 import ThemeSwitch from './theme-switch'
 
-jest.mock('../../../hooks/use-theme', () => {
+vi.mock('../../../hooks/use-theme', () => {
   return {
     useTheme: () => ({
       theme: 'light',
       mounted: true,
-      setTheme: jest.fn(),
+      setTheme: vi.fn(),
     }),
   }
 })
