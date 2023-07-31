@@ -42,15 +42,12 @@ export default function Home() {
           <Vercel className={cn('w-12 h-12')} />
         </div>
         <h1 className={cn('text-2xl font-bold mb-4', 'lg:text-3xl')}>
-          Next.js (App Router) + Tailwind CSS + Typescript Starter Template
+          MarkvanAalst.com
         </h1>
-        <p className={cn('mb-4')}>
-          Next.js bootstrapped by Tailwind CSS and Typescript setup with useful
-          development features.
-        </p>
+        <p className={cn('mb-4')}>Personal website for Mark van Aalst</p>
         <div className={cn('flex items-center justify-center mb-8')}>
           <Link
-            href="https://github.com/bonabrian/nextjs-starter-tailwind"
+            href="https://github.com/markvanaalst/personal"
             target="_blank"
             className={cn(
               'border-b border-dotted border-gray-600 hover:text-primary-500 hover:border-primary-500',

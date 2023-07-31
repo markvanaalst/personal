@@ -44,29 +44,23 @@ const mapKeywords = (keywords?: string | Array<string> | null): string => {
 }
 
 export const defaultMetadata = {
-  applicationName: 'Next.js Starter Template',
-  title: 'Next.js Starter Template',
-  titleTemplate: '%s | Next.js + Tailwind CSS + Typescript Starter',
+  applicationName: 'MarkvanAalst.com',
+  title: 'MarkvanAalst.com',
+  titleTemplate: '%s | blogging about web technologies',
   description:
     'Next.js bootstrapped by Tailwind CSS and Typescript setup with useful development features.',
   author: {
-    name: 'Bona Brian Siagian',
-    url: 'https://bonabrian.com',
-    email: 'bonabriansiagian@gmail.com',
-    github: 'https://github.com/bonabrian',
+    name: 'Mark van Aalst',
+    url: 'https://www.markvanaalst.com',
+    email: 'markvanaalst@gmail.com',
+    github: 'https://github.com/markvanaalst',
   },
   keywords: [
-    'react',
-    'typescript',
-    'boilerplate-template',
+    'Mark van Aalst',
+    'Sitecore',
     'nextjs',
-    'nextjs-boilerplate',
-    'nextjs-starter',
-    'nextjs-template',
     'nextjs13',
-    'app-directory',
     'tailwindcss',
-    'tailwindcss-starter-kit',
     'eslint',
     'prettier',
   ],
