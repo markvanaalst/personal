@@ -3,10 +3,10 @@ import Link from 'next/link'
 import {
   Eslint,
   Jest,
+  Logo,
   NextJs,
   TailwindCss,
   TypeScript,
-  Vercel,
 } from '@/components/ui/icons'
 import { getLatestPosts, getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
@@ -39,7 +39,7 @@ export default function Home() {
     <div className={cn('flex flex-col justify-center min-h-[70vh]')}>
       <div className={cn('flex flex-col items-center text-center')}>
         <div className={cn('text-current mb-4')}>
-          <Vercel className={cn('w-12 h-12')} />
+          <Logo className={cn('h-16')} />
         </div>
         <h1 className={cn('text-2xl font-bold mb-4', 'lg:text-3xl')}>
           MarkvanAalst.com
