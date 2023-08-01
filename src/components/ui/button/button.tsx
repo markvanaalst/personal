@@ -73,7 +73,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'button relative inline-flex items-center justify-center appearance-none select-none whitespace-nowrap align-middle outline-none outline-offset-2 leading-tight rounded-md font-semibold transition-common duration-normal h-10 min-w-10 text-base px-4',
+          'button relative inline-flex items-center justify-center appearance-none select-none whitespace-nowrap align-middle outline-none outline-offset-2 leading-tight rounded-full font-semibold transition-common duration-normal h-10 min-w-10 text-base px-4',
           'disabled:cursor-not-allowed opacity-60',
           colorSchemes[color][variant],
           className,

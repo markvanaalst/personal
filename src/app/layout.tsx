@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import Analytics from '@/components/analytics'
 import Providers from '@/components/providers'
-import ThemeSwitch from '@/components/ui/theme-switch'
+import Navbar from '@/components/ui/navigation/navbar'
 import { defaultMetadata, getMetadata } from '@/lib/metadata'
 
 const fontSans = PlusJakartaSans({
@@ -29,24 +29,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={fontSans.variable}>
       <body>
         <Providers>
-          <div className="mx-auto max-w-5xl py-12" role="main">
-            <header className="flex items-center justify-end">
-              <ThemeSwitch />
-            </header>
-            <main role="main" className="my-4">
-              {children}
-            </main>
-            <footer className="flex items-center justify-center">
-              <span className="mr-1">© {year}</span>
-              <Link
-                href={defaultMetadata.author.url}
-                target="_blank"
-                className="border-b border-dotted border-gray-600 dark:border-slate-50 hover:text-primary-500 hover:border-primary-500 dark:hover:border-primary-500"
-              >
-                {defaultMetadata.author.name}
-              </Link>
-            </footer>
-          </div>
+          <header className="flex items-center justify-end">
+            <Navbar />
+          </header>
+          <main role="main" className="my-4">
+            {children}
+          </main>
+          <footer className="flex items-center justify-center">
+            <span className="mr-1">© {year}</span>
+            <Link
+              href={defaultMetadata.author.url}
+              target="_blank"
+              className="border-b border-gray-600 border-dotted dark:border-slate-50 hover:text-primary-500 hover:border-primary-500 dark:hover:border-primary-500"
+            >
+              {defaultMetadata.author.name}
+            </Link>
+          </footer>
           <Analytics />
         </Providers>
       </body>

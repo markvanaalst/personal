@@ -20,9 +20,10 @@
         "name": "next"
       }
     ],
-    "types": ["vitest/globals"],
+    //"types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"],
+      "@config/*": ["./.config/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },

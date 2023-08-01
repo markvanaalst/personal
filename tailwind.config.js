@@ -7,6 +7,12 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        sm: '540px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
       fontFamily: {
         // uses `next/font` see `app/layout.tsx`
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
