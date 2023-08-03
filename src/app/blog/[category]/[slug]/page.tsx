@@ -41,21 +41,39 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   return (
     <div className={cn('flex flex-col justify-center min-w-12 ')}>
       {post.image != null && (
-        <div className="relative bg-[url(/images/blog/variant-background.png)] bg-cover ">
-          <div className="min-h-500 bg-slate-950/25">
-            <div className={cn('article-header')}>
-              <div className={cn('max-w-5xl mx-auto')}>
+        <div
+          className={`relative min-h-420 bg-cover sm:min-h-120`}
+          style={{ backgroundImage: `url(${post.image})` }}
+        >
+          <div className="bg-slate-950/50 min-h-420 sm:min-h-120">
+            <div
+              className={cn('px-4 mx-auto max-w-5xl text-left py-24 lg:py-36')}
+            >
+              <div className={cn('')}>
                 <h1
                   className={cn(
-                    'text-5xl font-bold leading-normal mt-0 mb-3 text-white',
+                    'text-4xl font-bold leading-normal mt-0 mb-3 theme-text',
                   )}
                 >
                   {post.title}
                 </h1>
+                <div className={cn('')}>Published on {date}</div>
+
+                <div className={cn('mt-4')}>
+                  {post.categories?.map((tag, key) => (
+                    <Button
+                      key={key}
+                      className={cn('opacity-100')}
+                      variant="solid"
+                    >
+                      {tag}
+                    </Button>
+                  ))}
+                </div>
               </div>
             </div>
             <div
-              className={cn('absolute left-0 w-full -bottom-1')}
+              className={cn('absolute left-0 w-full -bottom-1 invert')}
               style={{ height: `calc(6% + 8vw)` }}
             >
               <svg
@@ -66,32 +84,14 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                 height="100%"
                 className="rotate"
               >
-                <path fill="white" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+                <path fill="currentColor" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
               </svg>
             </div>
           </div>
         </div>
       )}
       <article className={cn('max-w-5xl mx-auto')}>
-        <h1
-          className={cn(
-            'text-3xl text-center font-bold leading-normal mt-0 mb-3',
-          )}
-        >
-          {post.title}
-        </h1>
-
-        <div className={cn('text-center')}>Published on {date}</div>
-
-        <div className={cn('text-center')}>
-          {post.categories?.map((tag, key) => (
-            <Button key={key} variant="ghost">
-              {tag}
-            </Button>
-          ))}
-        </div>
-
-        <div className="mt-10 prose">
+        <div className="mt-10 prose dark:prose-invert">
           <MDXContent components={components} />
         </div>
       </article>

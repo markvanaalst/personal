@@ -1,0 +1,33 @@
+@tailwind utilities;
+
+@layer utilities {
+    
+.theme-light {
+    --theme-bg-alt: theme('colors.gray.100');
+    --theme-bg: theme('colors.white');
+    --theme-outline: theme('colors.gray.600');
+    --theme-text-alt: theme('colors.blackAlpha.700');
+    --theme-text: theme('colors.blackAlpha.800');
+    --theme-border: theme('colors.gray.300');
+    --theme-border-alt: theme('colors.gray.300');
+    --theme-shadow: theme('boxShadow.DEFAULT');
+    --theme-shadow-md: theme('boxShadow.md');
+    --theme-shadow-lg: theme('boxShadow.lg');
+    --theme-link-hover: theme('colors.primary.800');
+  }
+
+  .theme-dark {
+    --theme-bg-alt: theme('colors.gray.700');
+    --theme-bg: theme('colors.gray.800');
+    --theme-outline: theme('colors.white');
+    --theme-text-alt: theme('colors.gray.100');
+    --theme-text: theme('colors.white');
+    --theme-border: theme('colors.gray.700');
+    --theme-border-alt: theme('colors.gray.700');
+    --theme-shadow: theme('boxShadow.dark');
+    --theme-shadow-md: theme('boxShadow.md-dark');
+    --theme-shadow-lg: theme('boxShadow.lg-dark');
+    --theme-link-hover: theme('colors.teal.600');
+  }
+  
+}
