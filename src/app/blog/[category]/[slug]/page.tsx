@@ -49,7 +49,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             <div
               className={cn('px-4 mx-auto max-w-5xl text-left py-24 lg:py-36')}
             >
-              <div className={cn('')}>
+              <div className={cn('invert')}>
                 <h1
                   className={cn(
                     'text-4xl font-bold leading-normal mt-0 mb-3 theme-text',
@@ -84,14 +84,17 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                 height="100%"
                 className="rotate"
               >
-                <path fill="currentColor" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+                <path
+                  fill="currentColor"
+                  d="M64 7.9 L64 10 L0 10 L0 0 Z"
+                ></path>
               </svg>
             </div>
           </div>
         </div>
       )}
       <article className={cn('max-w-5xl mx-auto')}>
-        <div className="mt-10 prose dark:prose-invert">
+        <div className="prose dark:prose-invert">
           <MDXContent components={components} />
         </div>
       </article>
