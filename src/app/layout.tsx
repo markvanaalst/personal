@@ -32,7 +32,7 @@ export default function RootLayout({
           <header className="flex items-center justify-end">
             <Navbar />
           </header>
-          <main role="main" className="my-4">
+          <main role="main" className="">
             {children}
           </main>
           <footer className="flex items-center justify-center">

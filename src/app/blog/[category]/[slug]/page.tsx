@@ -39,7 +39,39 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   const MDXContent = useMDXComponent(post.body.code)
 
   return (
-    <div className={cn('flex flex-col justify-center min-h-[70vh]')}>
+    <div className={cn('flex flex-col justify-center min-w-12 ')}>
+      {post.image != null && (
+        <div className="relative bg-[url(/images/blog/variant-background.png)] bg-cover ">
+          <div className="min-h-500 bg-slate-950/25">
+            <div className={cn('article-header')}>
+              <div className={cn('max-w-5xl mx-auto')}>
+                <h1
+                  className={cn(
+                    'text-5xl font-bold leading-normal mt-0 mb-3 text-white',
+                  )}
+                >
+                  {post.title}
+                </h1>
+              </div>
+            </div>
+            <div
+              className={cn('absolute left-0 w-full -bottom-1')}
+              style={{ height: `calc(6% + 8vw)` }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 8"
+                preserveAspectRatio="none"
+                width="100%"
+                height="100%"
+                className="rotate"
+              >
+                <path fill="white" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
       <article className={cn('max-w-5xl mx-auto')}>
         <h1
           className={cn(

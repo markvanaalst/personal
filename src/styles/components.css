@@ -3,4 +3,8 @@
 @layer components {
     @import './components/youtube.css';
     @import './components/navigation.css';
+
+    .rotate {
+        transform: rotateY(180deg);
+    }
 }

@@ -45,6 +45,13 @@ module.exports = {
         11: '2.75rem',
         12: '3rem',
       },
+      minHeight: {
+        500: '500px',
+        420: '420px',
+        320: '320px',
+        220: '220px',
+        120: '120px',
+      },
       transitionProperty: {
         common:
           'background-color,border-color,color,fill,stroke,opacity,box-shadow,transform',
