@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { components } from '@/components/mdx-components'
-import Button from '@/components/ui/button'
 import { getPost } from '@/lib/blog'
 import cn from '@/lib/cn'
 
@@ -56,18 +55,6 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                   {post.title}
                 </h1>
                 <div className={cn('')}>Published on {date}</div>
-
-                <div className={cn('mt-4')}>
-                  {post.categories?.map((tag, key) => (
-                    <Button
-                      key={key}
-                      className={cn('opacity-100')}
-                      variant="solid"
-                    >
-                      {tag}
-                    </Button>
-                  ))}
-                </div>
               </div>
             </div>
             <div
