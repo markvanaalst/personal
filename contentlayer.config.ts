@@ -55,7 +55,11 @@ export const Post = defineDocumentType(() => ({
       of: { type: 'string' },
     },
     excerpt: { type: 'string' },
-    image: { type: 'string', required: false },
+    image: {
+      type: 'string',
+      required: false,
+      default: '/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg',
+    },
   },
   computedFields,
 }))

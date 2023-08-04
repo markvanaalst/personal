@@ -15,7 +15,7 @@ module.exports = {
       },
       fontFamily: {
         // uses `next/font` see `app/layout.tsx`
-        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         white: '#ffffff',

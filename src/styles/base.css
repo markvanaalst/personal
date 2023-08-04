@@ -7,6 +7,26 @@
   }
 
   body {
-    @apply antialiased text-theme-text bg-theme-bg;
+    @apply antialiased font-light text-theme-text bg-theme-bg;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-extralight;
+  }
+
+  h1 {
+    @apply font-sans text-lg leading-tight text-theme-text;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans leading-tight text-theme-text;
   }
 }

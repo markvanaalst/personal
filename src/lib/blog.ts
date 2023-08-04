@@ -4,8 +4,12 @@ export function getPost(slug: string): Post | undefined {
   return allPosts.find((post) => post.slug === slug)
 }
 
-export function getLatestPosts(count: number = 10) {
-  return sortByNewest(allPosts).slice(0, count)
+export function getLatestPost() {
+  return getLatestPosts(1)[0]
+}
+
+export function getLatestPosts(count: number = 10, skipFirst?: boolean) {
+  return sortByNewest(allPosts).slice(skipFirst ? 1 : 0, count)
 }
 
 export function sortByNewest<T extends { date: string }>(posts: T[]): T[] {

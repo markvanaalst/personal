@@ -1,35 +1,21 @@
-import Link from 'next/link'
-
-import { getLatestPosts, getPostUrl } from '@/lib/blog'
+import PostItem from '@/components/ui/blog/post'
+import { getLatestPost, getLatestPosts } from '@/lib/blog'
 import cn from '@/lib/cn'
 
 export default function Home() {
-
   return (
     <div className={cn('flex flex-col justify-center min-h-[70vh]')}>
       <div className={cn('flex flex-col items-center text-center')}>
-        <p className={cn('mb-4')}>Personal website for Mark van Aalst</p>
-        <div className={cn('flex items-center justify-center mb-8')}>
-          <Link
-            href="https://github.com/markvanaalst/personal"
-            target="_blank"
-            className={cn(
-              'border-b border-dotted border-gray-600 hover:text-primary-500 hover:border-primary-500',
-              'dark:border-slate-50 dark:hover:border-primary-500',
-            )}
-          >
-            See the repository
-          </Link>
-        </div>
-        <div>
-          {getLatestPosts().map((post) => (
-            <article key={post._id} className="mb-4">
-              <Link href={'blog/' + getPostUrl(post.slug)}>
-                <h2 className="heading-md">{post.title}</h2>
-                <p>{post.excerpt}</p>
-              </Link>
-            </article>
-          ))}
+        <div className={cn('flex flex-row flex-wrap py-4')}>
+          <div className={cn('w-full sm:w-2/3 md:w-3/4 px-2 max-w-4xl')}>
+            <PostItem post={getLatestPost()} wide={true} />
+            <div className="flex flex-wrap">
+              {getLatestPosts(5, true).map((post, key) => (
+                <PostItem post={post} key={key} />
+              ))}
+            </div>
+          </div>
+          <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2')}>Sidebar</div>
         </div>
       </div>
     </div>
