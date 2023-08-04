@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getPostUrl } from '@/lib/blog'
-import cn from '@/lib/cn'
 
 import Button from '../button'
 import type { Post } from '.contentlayer/generated/types'
@@ -12,10 +11,6 @@ type PostItemProps = {
 }
 
 const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
-  const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
-    new Date(post.date),
-  )
-
   return (
     <article className="h-96">
       <div className="absolute w-full overflow-hidden h-96">
@@ -47,7 +42,7 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
                 </Link>
               </Button>
             )}
-            <h2 className="my-4 text-2xl drop-shadow-sm">
+            <h2 className="my-4 text-2xl sm:text-xl drop-shadow-sm">
               <Link href={`/blog/${getPostUrl(post.slug)}`}>{post.title}</Link>
             </h2>
             <Button variant="outline">
