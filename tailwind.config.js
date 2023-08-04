@@ -41,6 +41,18 @@ module.exports = {
           800: '#422e93',
           900: '#2b1c7a',
         },
+        blue: {
+          50: '#ebeff3',
+          100: '#d6e0e8',
+          200: '#adc0d1',
+          300: '#85a1b9',
+          400: '#5c81a2',
+          500: '#33628b',
+          600: '#294e6f',
+          700: '#1f3b53',
+          800: '#142738',
+          900: '#0a141c',
+        },
         blackAlpha: {
           50: 'rgba(0,0,0,0.03)',
           100: 'rgba(0,0,0,0.07)',
@@ -65,6 +77,26 @@ module.exports = {
           800: 'rgba(255,255,255,0.85)',
           900: 'rgba(255,255,255,0.96)',
         },
+      },
+      fontSize: {
+        // 12px
+        '2xs': '0.75rem',
+        // 14px
+        xs: '0.875rem',
+        // 16px
+        sm: '0.95rem',
+        // 18px
+        base: '1rem',
+        // 20px
+        lg: '1.25rem',
+        // 24px
+        xl: '1.5rem',
+        // 36px
+        '2xl': '2.25rem',
+        // 48px
+        '3xl': '3rem',
+        // 60px
+        '4xl': '3.75rem',
       },
       minWidth: {
         1: '0.25rem',
@@ -103,7 +135,8 @@ module.exports = {
       boxShadow: {
         inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.15)',
         sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        DEFAULT:
+          '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)',
         md: '0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         dark: '0 2px 4px 0 rgba(0, 0, 0, 0.8)',

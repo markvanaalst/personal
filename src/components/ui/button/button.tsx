@@ -32,13 +32,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const colorSchemes: Record<ColorScheme, Record<ButtonVariant, string>> = {
       primary: {
-        solid:
-          'bg-primary-500 text-white hover:[&:not(:disabled)]:bg-primary-600',
+        solid: 'bg-blue-500 text-white hover:[&:not(:disabled)]:bg-blue-600',
         ghost:
           'bg-transparent text-primary-500 hover:[&:not(:disabled)]:bg-primary-400/20',
         link: 'h-auto bg-transparent text-primary-500 hover:[&:not(:disabled)]:underline',
         outline:
-          'bg-transparent border border-primary-500 text-primary-500 hover:[&:not(:disabled)]:bg-primary-500 hover:[&:not(:disabled)]:text-white',
+          'bg-transparent border border-theme-border text-blue-500 hover:[&:not(:disabled)]:bg-blue-500 hover:[&:not(:disabled)]:text-white',
       },
       red: {
         solid: 'bg-red-500 text-white hover:[&:not(:disabled)]:bg-red-600',
@@ -73,8 +72,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'button relative inline-flex items-center justify-center appearance-none select-none whitespace-nowrap align-middle outline-none outline-offset-2 leading-tight rounded-full font-semibold transition-common duration-normal h-10 min-w-10 text-base px-4',
-          'disabled:cursor-not-allowed opacity-60',
+          'button relative inline-flex font-normal items-center justify-center appearance-none select-none whitespace-nowrap align-middle outline-none outline-offset-2 leading-tight text-xs transition-common duration-normal h-10 min-w-10 px-4',
+          'disabled:cursor-not-allowed ',
           colorSchemes[color][variant],
           className,
         )}

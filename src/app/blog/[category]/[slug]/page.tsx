@@ -46,9 +46,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           style={{ backgroundImage: `url(${post.image})` }}
         >
           <div className="bg-slate-950/50 min-h-420 sm:min-h-120">
-            <div
-              className={cn('px-4 mx-auto max-w-5xl text-left py-24 lg:py-36')}
-            >
+            <div className={cn('px-4 mx-auto max-w-5xl py-24 lg:py-36')}>
               <div className={cn('invert')}>
                 <h1
                   className={cn(

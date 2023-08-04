@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body>
         <Providers>
-          <header className="flex items-center justify-end">
+          <header className="flex items-center justify-center">
             <Navbar />
           </header>
           <main role="main" className="">
