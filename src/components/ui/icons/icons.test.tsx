@@ -1,55 +1,32 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import {
-  Eslint,
-  Jest,
-  Moon,
-  NextJs,
-  Sun,
-  TailwindCss,
-  TypeScript,
-  Vercel,
-} from './icons'
+import { Logo, LogoIcon, Moon, Sun } from './icons'
 
-const icons = [
-  {
-    icon: <TypeScript data-testid="typescript" />,
-    dataTestId: 'typescript',
-  },
-  {
-    icon: <Vercel data-testid="vercel" />,
-    dataTestId: 'vercel',
-  },
-  {
-    icon: <NextJs data-testid="nextjs" />,
-    dataTestId: 'nextjs',
-  },
-  {
-    icon: <TailwindCss data-testid="tailwindcss" />,
-    dataTestId: 'tailwindcss',
-  },
-  {
-    icon: <Eslint data-testid="eslint" />,
-    dataTestId: 'eslint',
-  },
-  {
-    icon: <Jest data-testid="jest" />,
-    dataTestId: 'jest',
-  },
-  {
-    icon: <Sun data-testid="sun" />,
-    dataTestId: 'sun',
-  },
-  {
-    icon: <Moon data-testid="moon" />,
-    dataTestId: 'moon',
-  },
-]
+describe('Moon', () => {
+  it('should render Moon icon', () => {
+    render(<Moon data-testid="moon" />)
+    expect(screen.getByTestId('moon')).toBeInTheDocument()
+  })
+})
 
-describe('Icons', () => {
-  it.each(icons)('should render %s icon', ({ icon, dataTestId }) => {
-    render(<>{icon}</>)
-    expect(screen.getByTestId(dataTestId)).toBeInTheDocument()
+describe('Sun', () => {
+  it('should render Sun icon', () => {
+    render(<Sun data-testid="sun" />)
+    expect(screen.getByTestId('sun')).toBeInTheDocument()
+  })
+})
+
+describe('Logo', () => {
+  it('should render Logo', () => {
+    render(<Logo data-testid="logo" />)
+    expect(screen.getByTestId('logo')).toBeInTheDocument()
+  })
+})
+
+describe('LogoIcon', () => {
+  it('should render Logo icon', () => {
+    render(<LogoIcon data-testid="logoIcon" />)
+    expect(screen.getByTestId('logoIcon')).toBeInTheDocument()
   })
 })

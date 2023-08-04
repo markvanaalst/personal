@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { useTheme } from '../use-theme'
 
@@ -19,7 +19,7 @@ describe('useDarkTheme', () => {
 
     await waitFor(() => {
       const { theme } = result.current
-      expect(theme).toBe(undefined)
+      expect(theme).toBe('light')
     })
 
     expect(result.current.mounted).toBe(true)
