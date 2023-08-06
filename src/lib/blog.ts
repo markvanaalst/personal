@@ -4,6 +4,10 @@ export function getPost(slug: string): Post | undefined {
   return allPosts.find((post) => post.slug === slug)
 }
 
+export function getPostsByCategory(category: string): Post[] | undefined {
+  return allPosts.filter((post) => post.categories.includes(category))
+}
+
 export function getLatestPost() {
   return getLatestPosts(1)[0]
 }
