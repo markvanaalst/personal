@@ -53,6 +53,7 @@ export const Post = defineDocumentType(() => ({
     categories: {
       type: 'list',
       of: { type: 'string' },
+      required: true,
     },
     excerpt: { type: 'string' },
     image: {

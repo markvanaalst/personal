@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest'
 
-import { sortByNewest } from '../blog'
+import { getPost, getPostUrl, sortByNewest } from '../blog'
 
 // Mock the Post type
 type Post = {
@@ -62,11 +62,12 @@ describe('sortByNewest', () => {
   })
 })
 
-//describe('getPostUrl', () => {
-//  test('should return the correct post URL with category', () => {
-//    const postUrl = getPostUrl('post-1')
-//    expect(postUrl).toBe('category-1/post-1')
-//  })
+describe('getPostUrl', () => {
+  test('should return the correct post URL with category', () => {
+    const postUrl = getPostUrl('post-1')
+    expect(postUrl).toBe('category-1/post-1')
+  })
+})
 //
 //  test('should return the correct post URL without category', () => {
 //    const postUrl = getPostUrl('post-3')

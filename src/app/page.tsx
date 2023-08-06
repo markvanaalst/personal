@@ -1,5 +1,7 @@
+import Categories from '@/components/ui/blog/categories'
 import FeaturedPostItem from '@/components/ui/blog/featuredPost'
 import PostItem from '@/components/ui/blog/post'
+import Profile from '@/components/ui/blog/profile'
 import { getLatestPost, getLatestPosts } from '@/lib/blog'
 import cn from '@/lib/cn'
 
@@ -16,7 +18,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2')}>Sidebar</div>
+          <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2')}>
+            <Profile />
+            <Categories />
+          </div>
         </div>
       </div>
     </div>
