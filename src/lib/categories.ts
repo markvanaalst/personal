@@ -3,6 +3,7 @@ import { allPosts } from 'contentlayer/generated'
 
 type category = {
   name: string
+  slug: string
   count: number
 }
 
@@ -17,6 +18,7 @@ export function getCategories(): category[] {
       if (!object) {
         const cat: category = {
           name: singleCategory,
+          slug: singleCategory.replace(' ', '-'),
           count: _posts.filter((post) =>
             post.categories.includes(singleCategory),
           ).length,

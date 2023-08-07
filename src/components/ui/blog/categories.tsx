@@ -12,7 +12,7 @@ const Categories = () => {
           {categories.map((category, i) => (
             <li className="px-1 py-2 transition duration-300" key={i}>
               <a
-                href={`/blog/category/${category.name}`}
+                href={`/blog/category/${category.slug}`}
                 className="flex items-center text-theme-text cursor-pointer"
               >
                 {category.name}

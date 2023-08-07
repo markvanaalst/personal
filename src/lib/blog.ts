@@ -29,7 +29,7 @@ export function getPostUrl(slug: string): string {
   if (_post == undefined) return ''
 
   if (_post.categories) {
-    return `${_post.categories[0]}/${_post.slug}`
+    return `${_post.categories[0].replace(' ', '-')}/${_post.slug}`
   }
   return _post.slug
 }

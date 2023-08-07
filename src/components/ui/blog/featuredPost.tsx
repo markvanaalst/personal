@@ -35,7 +35,7 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
             {post.categories && (
               <Button variant="ghost">
                 <Link
-                  href={`/blog/${post.categories[0]}`}
+                  href={`/blog/${post.categories[0].replace(' ', '-')}`}
                   className="uppercase"
                 >
                   {post.categories[0]}
