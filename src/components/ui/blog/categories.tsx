@@ -5,7 +5,7 @@ const Categories = () => {
   const categories = getCategories()
 
   return (
-    <div className="w-full bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl shadow-lg mt-4 mb-8 p-4">
+    <div className="w-full border bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl shadow-lg mt-4 mb-8 p-4">
       <div className="top-0 w-full">
         <h4 className={cn('font-normal px-1')}>Categories</h4>
         <ul className={cn('text-sm')}>
