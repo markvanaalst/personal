@@ -1,10 +1,14 @@
+import Image from 'next/image'
+
 const Profile = () => {
   return (
-    <div className="w-full bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl shadow-lg mt-4 mb-8">
-      <img
-        className="object-cover w-full h-56"
+    <div className="w-full border bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl p-4 shadow-lg mt-4 mb-8">
+      <Image
+        className="rounded-full mx-auto border"
         src="/images/mva_profile.webp"
         alt="avatar"
+        width={112}
+        height={112}
       />
 
       <div className="p-5 text-center">
