@@ -2,21 +2,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getPostUrl } from '@/lib/blog'
+import cn from '@/lib/cn'
 
 import Button from '../button'
 import type { Post } from '.contentlayer/generated/types'
 
 type PostItemProps = {
   post: Post
+  className?: string
 }
 
-const PostItem = ({ post }: PostItemProps): JSX.Element => {
+const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
     new Date(post.date),
   )
 
   return (
-    <div className="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div
+      className={cn(
+        'overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800',
+        className,
+      )}
+    >
       <Image
         src={post.image}
         className="object-cover w-full h-64"
