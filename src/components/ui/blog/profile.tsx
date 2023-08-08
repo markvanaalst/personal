@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 const Profile = () => {
   return (
-    <div className="w-full border bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl p-4 shadow-lg mt-4 mb-8">
+    <div className="w-full max-w-xs p-4 mt-4 mb-8 overflow-hidden bg-theme-bg-alt text-theme-text ">
       <Image
-        className="rounded-full mx-auto border"
+        className="mx-auto border rounded-full"
         src="/images/mva_profile.webp"
         alt="avatar"
         width={112}
@@ -15,12 +15,12 @@ const Profile = () => {
         <a href="#" className="block text-xl font-bold" role="link">
           Mark van Aalst
         </a>
-        <span className="text-sm text-theme-text">
+        <span className="text-xs text-theme-text">
           Focussing on developer experience and developer relations
         </span>
       </div>
 
-      <div className="w-full items-center gap-3 text-center sm:gap-x-5 p-4">
+      <div className="items-center w-full gap-3 p-4 text-center sm:gap-x-5">
         <button className="bg-theme-bg dark:border-theme-border dark:hover:bg-theme-bg-alt rounded-lg duration-300 transition-colors border px-8 py-2.5">
           <a href="https://twitter.com/markvanaalst">
             <svg

@@ -1,4 +1,5 @@
 import Categories from '@/components/ui/blog/categories'
+import Disclaimer from '@/components/ui/blog/disclaimer'
 import FeaturedPostItem from '@/components/ui/blog/featuredPost'
 import PostItem from '@/components/ui/blog/post'
 import Profile from '@/components/ui/blog/profile'
@@ -21,6 +22,7 @@ export default function Home() {
           <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2')}>
             <Profile />
             <Categories />
+            <Disclaimer />
           </div>
         </div>
       </div>

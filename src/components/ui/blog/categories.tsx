@@ -5,21 +5,21 @@ const Categories = () => {
   const categories = getCategories()
 
   return (
-    <div className="w-full border bg-theme-bg-alt text-theme-text max-w-xs overflow-hidden rounded-xl shadow-lg mt-4 mb-8 p-4">
+    <div className="w-full max-w-xs p-4 mt-4 mb-8 overflow-hidden bg-theme-bg-alt text-theme-text">
       <div className="top-0 w-full">
-        <h4 className={cn('font-normal px-1')}>Categories</h4>
-        <ul className={cn('text-sm')}>
+        <h4 className={cn('font-normal px-1 mb-4')}>Categories</h4>
+        <ul className={cn('text-xs')}>
           {categories.map((category, i) => (
             <li className="px-1 py-2 transition duration-300" key={i}>
               <a
                 href={`/blog/category/${category.slug}`}
-                className="flex items-center text-theme-text cursor-pointer"
+                className="flex items-center cursor-pointer text-theme-text"
               >
                 {category.name}
-                <span className="text-gray-500 ml-auto">
+                <span className="ml-auto text-gray-500">
                   {category.count} articles
                 </span>
-                <i className="text-gray-500 bx bx-right-arrow-alt ml-1" />
+                <i className="ml-1 text-gray-500 bx bx-right-arrow-alt" />
               </a>
             </li>
           ))}
