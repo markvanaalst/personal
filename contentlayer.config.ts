@@ -2,7 +2,7 @@ import type { ComputedFields } from 'contentlayer/source-files'
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import powershell from 'highlight.js/lib/languages/powershell'
 import highlight from 'rehype-highlight'
-import rehypeImgSize from 'rehype-img-size'
+//import rehypeImgSize from 'rehype-img-size'
 import remarkGfm from 'remark-gfm'
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
@@ -28,6 +28,10 @@ export const Page = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: {
+      type: 'string',
+      required: true,
+    },
+    slug: {
       type: 'string',
       required: true,
     },
@@ -73,7 +77,7 @@ export default makeSource({
     rehypePlugins: [
       [highlight, { languages: { powershell } }],
       // @ts-ignore
-      [rehypeImgSize, { dir: 'public' }],
+      //[rehypeImgSize, { dir: 'public' }],
     ],
   },
 })

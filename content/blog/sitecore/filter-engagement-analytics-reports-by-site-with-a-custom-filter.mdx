@@ -19,12 +19,12 @@ But did you know that adding your own filters is fairly easy. Let's say we have 
 
 We have a standard Sitecore installation in which we define two seperate websites.
 
-<Img src="/images/blog/customfilter-sites.png "customfilter-sites")
+<Img src="/images/blog/customfilter-sites.png" />
 
 To make this work we need to make a little configuration within Sitecore. I created a seperate configuration file and placed it in the App_Config\\\\Include
 folder. The configuration looks like this:
 
-<Img src="/images/blog/customfilter-config.png "customfilter-config")
+<Img src="/images/blog/customfilter-config.png" />
 
 Off course we need to add the same hostnames to the IIS configuration to let IIS resolve the urls with the correct site.
 
@@ -34,7 +34,7 @@ Now we can go and setup a new filter. The default filters are located at "/sitec
 are going to create the new filter by using the "/sitecore/templates/System/Analytics/Filter" template. You can create a new filter with the following
 information:
 
-<Img src="/images/blog/customfilter-filtervalues.png "customfilter-filtervalues")
+<Img src="/images/blog/customfilter-filtervalues.png" />
 
 The ColumnName field relates to the columnname in the database table. This filter is using the MultiSite column in the Visits table.
 
@@ -42,7 +42,7 @@ After creating the filter we need to add some filter values. Since we have defin
 items based upon the "/sitecore/templates/System/Analytics/Predefined Filter Value". In the value field you can add the name of the site which is given in the
 sites configuration.
 
-<Img src="/images/blog/customfilter-sitevalue.png "customfilter-sitevalue")
+<Img src="/images/blog/customfilter-sitevalue.png" />
 
 ### Apply the filter
 
@@ -50,17 +50,17 @@ The only thing left now is to apply the newly created filter on the report. For 
 where we need to apply the filter, we first need to identify the datasource which is used by the report. If you open up the
 "/sitecore/system/Settings/Analytics/Reports/Reports/Recent Activity/Latest Visits" report you will find a field called Queries.
 
-[<Img src="/images/blog/customfilter-queries.png "customfilter-queries")](http://markvanaalst.net/wp-content/uploads/2013/02/customfilter-queries.png" />
+<Img src="/images/blog/customfilter-queries.png" />
 
 In this field there is a property DataSource with a value. That value identifies the datasource being used and refers to the item under the
 "/sitecore/system/Settings/Analytics/Reports SQL Queries" node.
 
 When you open the datasource item ("/sitecore/system/Settings/Analytics/Reports SQL Queries/Latest Visits") you can add your own filter to the Filters field.
 
-[<Img src="/images/blog/customfilter-filters.png "customfilter-filters")](http://markvanaalst.net/wp-content/uploads/2013/02/customfilter-filters.png" />
+<Img src="/images/blog/customfilter-filters.png" />
 
 ### The result
 
 When you added the custom filter, you will get the extra filter option when you click on filter button in the Engagement Analytics Latest Visits report.
 
-<Img src="/images/blog/customfilter-result.png "customfilter-result")
+<Img src="/images/blog/customfilter-result.png"/>
