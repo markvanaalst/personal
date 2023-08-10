@@ -44,7 +44,7 @@ extension.
 
 It is going to look like this:
 
-![](/images/blog/menu-change.png)
+<Img src="/images/blog/menu-change.png" />
 
 Notice the difference in the top menu bar when the page is scrolled down
 
@@ -54,14 +54,14 @@ When we look at the Habitat Home theme, we can see that it uses all the base the
 Extension Themes node does not have any items (yet). As a matter of fact, this theme is not directly used with the current site. It uses the Habitat Home v2
 theme which inherits from the Habitat Home theme.
 
-![](/images/blog/hh-theme-details-1024x487.png)
+<Img src="/images/blog/hh-theme-details-1024x487.png" />
 
 ## Create a extension theme
 
 Let’s create our first Extension Theme. Right click on the “Extension Themes” node and insert a new theme extension. I am going to name it “Static top menu”.
 You can see that it creates the theme item, as well as four folders in which we can place our files.
 
-![](/images/blog/extension-theme.png)
+<Img src="/images/blog/extension-theme.png" />
 
 Now that we have create our Theme Extension we need to add some JavaScript and CSS that will make the navigation bar stick to the top of the page.
 
@@ -162,7 +162,7 @@ Now we have taken all the steps needed to setup our menu.
 The next step is to make our extension theme available for the site(s). They way we do that is by creating a new module in SXA. Right click on the
 "/sitecore/system/Settings/Feature" node in the content editor and select Insert > Module.
 
-![](/images/blog/create-new-module.png)
+<Img src="/images/blog/create-new-module.png" />
 
 We are creating a new site module, meaning that we can add the module to any existing and new site. For this example I am going to use the scaffolding process
 to make sure all the required items are created to before the menu can be applied. I am not creating a new component in this module, therefore I won't be
@@ -174,7 +174,7 @@ Once the folders are created I need to create a new branch template for my custo
 Accelerator/Presentation/Styles" template. Once created I am renaming that to a proper name "Static Top Menu" and will add the actual style as a child item as
 seen below.
 
-![](/images/blog/custom-style.png)
+<Img src="/images/blog/custom-style.png" />
 
 ### Scaffolding
 
@@ -182,11 +182,11 @@ As said earlier, we will be using SXA's native scaffolding functionality to add 
 settings node.  
 There you can add actions to the setup item. In this case I am going to add two actions; Add Site Item and Attach Theme Extension.
 
-![](/images/blog/scaffolding-add-site-item.png)
+<Img src="/images/blog/scaffolding-add-site-item.png" />
 
 Adding the custom style based on it's branch template to the "Styles" folder
 
-![](/images/blog/scaffolding-attach-theme-extension.png)
+<Img src="/images/blog/scaffolding-attach-theme-extension.png" />
 
 Extend the Habitat Home v2 theme with our theme extension
 
@@ -195,14 +195,14 @@ Extend the Habitat Home v2 theme with our theme extension
 Now we have taken all the required steps to add our module to a new or existing site. Let's have a look at how we add this module to our existing site. Using
 the content editor we can add a new site module by right clicking on the site itself (Habitat Home), then go to Scripts > Add Site Module.
 
-![](/images/blog/add-site-module.png)
+<Img src="/images/blog/add-site-module.png" />
 
 A new dialog window appears with the option to add the "Static Top Menu" module. Click OK to install the module.
 
 Once installed there is one more thing to do to enable our new menu. Open the partial design "Header' in the Experience Editor and select the outer container.
 Click the paint bucket and a dialog will appear which will let you add some predefined styles.
 
-![](/images/blog/add-style.png)
+<Img src="/images/blog/add-style.png" />
 
 Scroll down until you see the Static Top Menu section and select Navigation Always visible
 
@@ -210,7 +210,7 @@ Click OK and save the partial design. You have now added the required CSS class 
 
 As a result we now see our menu change as soon as we scroll the page:
 
-![](/images/blog/menu-scrolled-1024x679.png)
+<Img src="/images/blog/menu-scrolled-1024x679.png" />
 
 ## How does this actually works
 

@@ -23,7 +23,7 @@ The other dependency is that you have Creative Exchange Live (CEL) enabled on yo
 “Website\\App_Config\\Include\\z.Feature.Overrides”. There you will find a file called “z.SPE.Sync.Enabler.Gulp.config.disabled”. Remove the .disabled from the
 filename and you have CEL enabled.
 
-![](/images/blog/sxa-cel-config-1024x396.png)
+<Img src="/images/blog/sxa-cel-config-1024x396.png" />
 
 Remove .disabled to enable Creative Exchange Live
 
@@ -75,7 +75,7 @@ npm i -g @sxa/CLI
 Now all sorts of magic start. NPM installing the CLI module and all of its dependencies. You will get some warning about outdated packages but that’s nothing to
 worry about at this point.
 
-![](/images/blog/sxa-cli-install-1024x597.png)
+<Img src="/images/blog/sxa-cli-install-1024x597.png" />
 
 Installing the SXA CLI using NPM
 
@@ -86,7 +86,7 @@ Now that the CLI is installed, let’s start using it. Run “sxa register” fo
 sxa register https://sxa93.dev.local
 ```
 
-![](/images/blog/sxa-cli-newtheme-1024x597.png)
+<Img src="/images/blog/sxa-cli-newtheme-1024x597.png" />
 
 Register the url and start creating a new theme
 
@@ -110,12 +110,12 @@ You can choose between SearchSiteSetup, MapsSiteSetup, ThemingSiteSetup. Based o
 those modules. Once the theme files are downloaded the CLI will setup the theme file and folder structure. When this is all setup you could change the url to
 which the theme needs to be published.
 
-![](/images/blog/sxa-cli-basicinfo-1024x254.png)
+<Img src="/images/blog/sxa-cli-basicinfo-1024x254.png" />
 
 This is also the point at which the CLI has created the folder structure within Sitecore. As you can see it has not sychronized anything since we haven't made
 any changes. It simply created the bare folder structure
 
-![](/images/blog/sxa-cli-sitecore.png)
+<Img src="/images/blog/sxa-cli-sitecore.png" />
 
 Now you will get some questions that relate to the frontend technologies used. First some JavaScript focused questions:
 
@@ -157,20 +157,20 @@ C:\\Projects\\SXA\\cd ExampleTheme C:\\Projects\\SXA\\ExampleTheme\\npm install
 After all of this is completed. You can run “gulp” in the theme folder and start making your edits. Your theme will then compile locally and upload the compiled
 assets to Sitecore.
 
-![](/images/blog/sxa-gulp.png)
+<Img src="/images/blog/sxa-gulp.png" />
 
 Running gulp to synchronize our theme with Sitecore
 
 So now, with the gulp task running, whenever I make a change in my source files. For example a sass file, it will first compile that into CSS and bundle that
 into a pre-optimized-min.js file. That minified file will then be uploaded to Sitecore.
 
-![](/images/blog/sxa-cel-uploadmin.png)
+<Img src="/images/blog/sxa-cel-uploadmin.png" />
 
 The results in the gulp output
 
 And as you can see it indeed upload my changes in a minified file to my newly created theme
 
-![](/images/blog/sxa-cel-upload-result.png)
+<Img src="/images/blog/sxa-cel-upload-result.png" />
 
 Voila, we have now installed the CLI, created a new theme locally and configured Creative Exchange Live to synchronize our changes (using compiled assets) into
 Sitecore.

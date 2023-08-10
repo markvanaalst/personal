@@ -17,14 +17,14 @@ you to remove them individually or all at once.
 
 So how does it work. Let’s look at a simple example. Here we have a simple search page. Facets on the left side, and the results on the right.
 
-![](/images/blog/aggregated-facet-filter.png)
+<Img src="/images/blog/aggregated-facet-filter.png" />
 
 On the left side you see the facets. The “Size” facet and the “Colour” facet are part of the aggregated facet filter component. Since we haven’t applied any
 facets to our results yet, the Facet Summary component is hidden.
 
 When we open this page in the Experience Editor you will see the following sets of components:
 
-![](/images/blog/aggregated-facet-filter-editmode.png)
+<Img src="/images/blog/aggregated-facet-filter-editmode.png" />
 
 When you want to select any of the facets mentioned earlier, you will see that it selects the component which holds the three facets. This component (the
 aggregated search filter) uses rendering variants to define which facets need to be shown. In the example above we are simply using the default rendering
@@ -32,7 +32,7 @@ variant.
 
 The rendering variant also defines which facets are being shown. When we look at the rendering variant definition used above, we see this structure:
 
-![](/images/blog/aggregated-facet-filter-variant.png)
+<Img src="/images/blog/aggregated-facet-filter-variant.png" />
 
 You might notice that our rendering variants holds three facets while the search page only shows two facets. That is because one of the improvements made in SXA
 9.3 is that facets have become smarter. As soon as the items in the search results do not have a field value that matches the facet will be hidden. This means
@@ -45,7 +45,7 @@ an aggregated facet filter component and all those facets at once. This is extre
 
 The other new component is the facet summary. The facet summary gives the user an overview of all the facets applied to the current set of results.
 
-![](/images/blog/facet-summary.png)
+<Img src="/images/blog/facet-summary.png" />
 
 In our example search have now selected the fruit color green and medium as our size. On the left side, just above the facets you can now see our facet summary
 which gives the visitor the option to remove a facet or clear all the facets at once.

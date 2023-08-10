@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { type MDXComponents } from 'mdx/types'
-import type { ImageProps } from 'next/image'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import cn from '@/lib/cn'
@@ -10,25 +8,20 @@ import YouTube from './ui/video/youtube'
 
 export const components: MDXComponents = {
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
+  h2: ({ children }) => <h2>{children}</h2>,
   YouTube: ({ youTubeId }) => <YouTube youTubeId={youTubeId as string} />,
-  Img: ({
-    bleed = false,
-    caption,
-    ...props
-  }: {
-    bleed?: boolean
-    caption?: string
-  } & ImageProps) => {
+  Img: ({ ...props }) => {
     return (
-      <figure className={cn(bleed ? '!col-span-full' : 'justify-self-center')}>
-        <Image className="border rounded-lg" {...props} />
-
-        {caption && (
-          <figcaption className="text-sm text-center text-muted">
-            {caption}
-          </figcaption>
-        )}
-      </figure>
+      <div className={cn('-mx-20')}>
+        <img {...props} className={cn('mx-auto')} />
+      </div>
+    )
+  },
+  pre: ({ children }) => {
+    return (
+      <div className={cn('-mx-24')}>
+        <pre>{children}</pre>
+      </div>
     )
   },
 }

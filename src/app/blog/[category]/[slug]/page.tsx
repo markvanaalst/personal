@@ -79,7 +79,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </div>
       )}
       <article className={cn('max-w-5xl mx-auto')}>
-        <div className="prose dark:prose-invert">
+        <div className="prose dark:prose-invert prose-img:rounded-md prose-img:border-1 
+        border-gray-500 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit">
           <MDXContent components={components} />
         </div>
       </article>

@@ -22,9 +22,9 @@ At this moment we have assembly packages available for the following Sitecore ro
 
 | Name                                                   | Sitecore Version | Description                                                             |
 | ------------------------------------------------------ | ---------------- | ----------------------------------------------------------------------- |
-| Sitecore.Assemblies.Platform                           | 9.0+             | All roles based on the main Sitecore platform (CM, CD, Reporting, etc). |
-| Sitecore.Assemblies.XConnect.Web                       | 9.0+             | The primary XConnect (Collection) role.                                 |
-| Sitecore.Assemblies.XConnect.IndexWorker               | 9.0+             | The XConnect search indexer role.                                       |
+| Sitecore.Assemblies.Platform| 9.0+ | All roles based on the main Sitecore platform (CM, CD, Reporting, etc). |
+| Sitecore.Assemblies.XConnect.Web | 9.0+ | The primary XConnect (Collection) role.                                 |
+| Sitecore.Assemblies.XConnect.IndexWorker | 9.0+ | The XConnect search indexer role.                                       |
 | Sitecore.Assemblies.XConnect.MarketingAutomationEngine | 9.0+             | The XConnect Marketing Automation Engine processing role.               |
 | Sitecore.Assemblies.XConnect.ProcessingEngine          | 9.1+             | The Sitecore Cortex™ data processing role.                              |
 
@@ -58,7 +58,7 @@ the project template.
 
 In this example project, I am referencing the Sitecore.Kernel package including its dependencies using NuGet.
 
-![](/images/blog/nuget_kernel.png)
+<Img src="/images/blog/nuget_kernel.png" />
 
 As you can see apart from the Sitecore.Kernel assembly I am also including all of its dependencies.
 
@@ -67,7 +67,7 @@ the folder where I did my publish to, my bin folder contains 53 files.
 
 All my dependencies have been copied to the bin folder of my publish target.
 
-![](/images/blog/nuget_publish-bin-default.png)
+<Img src="/images/blog/nuget_publish-bin-default.png" />
 
 Now, this makes sense since Visual Studio simply publishes all the required assemblies to run my application. But in our case, this is not required as those
 assemblies are already in the bin folder of our Sitecore instance. This behavior introduces a greater risk that we end up with inconsistency since we could
@@ -75,7 +75,7 @@ potentially override assemblies with other versions.
 
 This is exactly where the assembly list cames into play. Going back to the NuGet package manager we can also search for the assembly list and reference it.
 
-![](/images/blog/nuget_assemblies.png)
+<Img src="/images/blog/nuget_assemblies.png" />
 
 Your Visual Studio project is now referring the Sitecore.Assemblies.Platform.targets file which is stored in the
 “.\\packages\\Sitecore.Assemblies.Platform.9.3.0\\build” folder. The last thing to do is to create a “\*.wpp.targets” file in our project which adds some
@@ -100,7 +100,7 @@ based configuration:
 This configuration will make sure to exclude all files that are listed in the the referenced assembly list from deployment. So when we run a new publish command
 the number of assemblies in our bin folder will drastically be reduced, therefore reducing any risks of compromising existing assemblies.
 
-![](/images/blog/nuget_publish-bin-excluded.png)
+<Img src="/images/blog/nuget_publish-bin-excluded.png" />
 
 ## Sitecore TDS Support
 

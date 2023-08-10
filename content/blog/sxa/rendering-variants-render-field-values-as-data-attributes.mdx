@@ -19,7 +19,7 @@ Instead I want to share something that isn't documented but can be very helpful 
 
 Let's have a look at the default rendering variant for a promo. It shows a image, title and a link.
 
-![](/images/blog/promo-default-1024x304.png)
+<Img src="/images/blog/promo-default-1024x304.png" />
 
 But what if we wanted to show the image as a background for the title and the link. We can do that by applying some CSS and do some positioning, but that's not
 really how we prefer to do that. Instead we would like to use the image as a background image.
@@ -29,18 +29,18 @@ contain the background-image.
 In the data attributes we set style as the key and for the value we will use "background-image: url($(PromoImage)". SXA will then replace the $(PromoImage) with
 the url to the media item.
 
-![](/images/blog/variant-background.png)
+<Img src="/images/blog/variant-background.png" />
 
 As a final result we can now see that our image is being rendered as a background image. Therefore we don't need complex CSS to put the text in front of the
 image.
 
 > Use the $(fieldName) notation to render field values as data attributes
 
-![](/images/blog/promo-final-1024x188.png)
+<Img src="/images/blog/promo-final-1024x188.png" />
 
 And the HTML which shows that our background image url is resolved and defined in the div element.
 
-![](/images/blog/promo-final-html.png)
+<Img src="/images/blog/promo-final-html.png" />
 
 ---
 

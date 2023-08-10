@@ -21,7 +21,7 @@ Stylelabs environment.
 First, we need to allow the Sitecore instance to authenticate against Stylelabs by setting up an OAuth client. When logged into your Stylelabs environment you
 will need to go to manage and search for “OAuth”.
 
-![](/images/blog/Manage-overview-1-1024x798.png)
+<Img src="/images/blog/Manage-overview-1-1024x798.png" />
 
 Click the OAuth Clients button and then you will get an overview of all the existing clients that can authenticate with your Stylelabs instance.
 
@@ -29,14 +29,14 @@ Click new OAuth Client and start entering your information. Start with a name, t
 client secret, you will need this later in Sitecore as well. And finish with setting up the redirect url that will be used once someone has authenticated
 themselves. This must be the url of your Sitecore instance followed by “/sitecore/client/Stylelabs/Mapp”. Click on “Create” to create the actual client.
 
-![](/images/blog/Setup-new-OAuth-client-plugin-configuration-1024x605.png)
+<Img src="/images/blog/Setup-new-OAuth-client-plugin-configuration-1024x605.png" />
 
 Now that we can use the authentication there is one more thing so setup. In order to access the repositories within Stylelabs we need to setup CORS. CORS stands
 for Cross Origin Resource Sharing and this will allow incoming traffic to your Stylelabs DAM instance.  
 To do so, click on _Manage_ and then go to the settings. On the left side go to _PortalConfiguration_ and then click _CORSConfiguration_. Now you can add the
 URLs to your Sitecore instance.
 
-![](/images/blog/Settings-CORS.png)
+<Img src="/images/blog/Settings-CORS.png" />
 
 And that wraps up all the configuration changes within the Stylelabs environment. Now let’s continue this journey by installing the actual plugin in the
 Sitecore environment in
