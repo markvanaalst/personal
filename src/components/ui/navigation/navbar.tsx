@@ -14,16 +14,17 @@ const Navbar = () => {
     <nav className={cn('container navbar')}>
       {/* logo */}
       <div className={cn('order-0')}>
-        <a
+        <Link
           className={cn(
             'flex items-center justify-center font-medium title-font md:justify-start text-theme-text',
           )}
+          href={'/'}
         >
           <LogoIcon className="h-14 text-theme-text" />
           <span className="ml-3 text-xl">
             Mark<span className="font-light">vanAalst</span>
           </span>
-        </a>
+        </Link>
       </div>
       {/* navbar toggler */}
       <input id="nav-toggle" type="checkbox" className="hidden" />
