@@ -5,20 +5,20 @@ import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { components } from '@/components/mdx-components'
+import { PageHeader } from '@/components/ui/common/pageHeader'
 import cn from '@/lib/cn'
 import { getPageBySlug } from '@/lib/pages'
-import { PageHeader } from '@/components/ui/common/pageHeader'
 
 export async function generateStaticParams() {
   return allPages.map((page: Page) => ({
-    slug: page.slug,
+    slug: page.slugAsParams.split('/'),
   }))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string[] }
 }): Promise<Metadata> {
   const page = getPageBySlug(params.slug)
 
@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { slug: string[] } }) {
   const page = getPageBySlug(params.slug)
   if (!page) notFound()
 

@@ -1,7 +1,7 @@
 import { allPages } from 'contentlayer/generated'
 
-export function getPageBySlug(slug: string) {
-  return allPages.find((page) => page.slug.trim() === slug)
+export function getPageBySlug(slug: string[]) {
+  return allPages.find((page) => page.slugAsParams === slug.join('/'))
 }
 
 export function getPagesSlugs() {
