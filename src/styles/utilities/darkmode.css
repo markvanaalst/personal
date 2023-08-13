@@ -30,6 +30,6 @@
     --theme-link-hover: theme('colors.teal.600');
   }
   .dark img {
-    filter: brightness(0.8) contrast(1.2);
+    filter: brightness(0.5) contrast(1.2);
   }
 }
