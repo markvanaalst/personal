@@ -1,0 +1,34 @@
+{
+  "categoryList": [
+    {
+      "name": "Content Hub",
+      "description": "Content Hub",
+      "slug": "content-hub"
+    },
+    {
+      "name": "SXA",
+      "description": "Sitecore Experience Accelerator",
+      "slug": "sxa"
+    },
+    {
+      "name": "Sitecore",
+      "description": "Sitecore",
+      "slug": "sitecore"
+    },
+    {
+      "name": "Sitecore 9 Installation",
+      "description": "Sitecore 9 Installation",
+      "slug": "sitecore-9-installation"
+    },
+    {
+      "name": "WeBlog",
+      "description": "WeBlog",
+      "slug": "weblog"
+    },
+    {
+      "name": "ASP.NET",
+      "description": "ASP.NET",
+      "slug": "asp-net"
+    }
+  ]
+}

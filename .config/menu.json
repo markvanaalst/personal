@@ -5,39 +5,43 @@
         "url": "/"
       },
       {
+        "name": "Blog",
+        "url": "",
+        "hasChildren": true,
+        "children": [
+          {
+            "name": "ASP.NET",
+            "url": "/blog/asp-net"
+          },
+          {
+            "name": "Content Hub",
+            "url": "/blog/content-hub"
+          },
+          {
+            "name": "Sitecore",
+            "url": "/blog/sitecore"
+          },
+          {
+            "name": "Sitecore 9 Installation",
+            "url": "/blog/sitecore-9-installation"
+          },
+          {
+            "name": "SXA",
+            "url": "/blog/sxa"
+          },
+          {
+            "name": "WeBlog",
+            "url": "/blog/weblog"
+          }
+        ]
+      },
+      {
         "name": "About",
         "url": "/about"
       },
       {
         "name": "Contact",
         "url": "/contact"
-      },
-      {
-        "name": "Pages",
-        "url": "",
-        "hasChildren": true,
-        "children": [
-          {
-            "name": "Authors",
-            "url": "/authors"
-          },
-          {
-            "name": "Categories",
-            "url": "/categories"
-          },
-          {
-            "name": "Tags",
-            "url": "/tags"
-          },
-          {
-            "name": "Elements",
-            "url": "/elements"
-          },
-          {
-            "name": "Privacy Policy",
-            "url": "/privacy-policy"
-          }
-        ]
       }
     ],
     "footer": [
@@ -50,8 +54,8 @@
         "url": "/contact"
       },
       {
-        "name": "Elements",
-        "url": "/elements"
+        "name": "Blog",
+        "url": "/blog"
       },
       {
         "name": "Privacy Policy",

@@ -5,7 +5,9 @@ export function getPost(slug: string): Post | undefined {
 }
 
 export function getPostsByCategory(category: string): Post[] | undefined {
-  return allPosts.filter((post) => post.categories.includes(category))
+  return allPosts.filter((post) =>
+    post.categories.includes(category.replace('-', ' ')),
+  )
 }
 
 export function getLatestPost() {
