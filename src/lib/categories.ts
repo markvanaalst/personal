@@ -1,27 +1,27 @@
 import categories from '@config/blog-categories.json'
 import { allPosts } from 'contentlayer/generated'
 
+const { categoryList } = categories
+
 type categoryListItem = {
   name: string
   description?: string
   slug: string
+  image: string
 }
-type Category = {
-  name: string
-  description?: string
-  slug: string
+interface Category extends categoryListItem {
   count: number
 }
 
 export function getCategories(): Category[] {
   const _posts = allPosts
-  const { categoryList } = categories
   let results: Category[] = []
 
   categoryList.map((category: categoryListItem) => {
     const cat: Category = {
       name: category.name,
       slug: category.slug,
+      image: category.image,
       count: _posts.filter((post) => post.categories.includes(category.slug))
         .length,
     }
@@ -29,4 +29,10 @@ export function getCategories(): Category[] {
   })
 
   return results
+}
+
+export function getCategoryBySlug(slug: string): categoryListItem | undefined {
+  return categoryList.find(
+    (category: categoryListItem) => category.slug === slug,
+  )
 }

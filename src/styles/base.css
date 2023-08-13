@@ -1,5 +1,3 @@
-@tailwind base;
-
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;

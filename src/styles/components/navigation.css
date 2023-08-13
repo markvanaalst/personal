@@ -1,50 +1,48 @@
-@tailwind components;
-
 @layer components {
-input#nav-toggle:checked ~ label#show-button {
+  input#nav-toggle:checked ~ label#show-button {
     @apply hidden;
   }
-  
+
   input#nav-toggle:checked ~ label#hide-button {
     @apply flex md:hidden;
   }
-  
+
   input#nav-toggle:checked ~ #nav-menu {
     @apply block md:flex;
   }
-  
+
   .navbar {
     @apply relative flex flex-wrap items-center justify-between;
   }
-  
+
   .navbar-brand image {
     @apply max-w-full max-h-full;
   }
-  
+
   .navbar-nav {
     @apply text-center md:text-left;
   }
-  
+
   .nav-item {
     @apply mx-3;
   }
-  
+
   .nav-link {
     @apply p-3 text-sm tracking-widest uppercase transition md:p-4;
   }
-  
+
   .nav-dropdown {
     @apply mr-0;
   }
-  
+
   .nav-dropdown-list {
     @apply z-10 p-4 transition bg-white border-solid shadow-lg;
   }
-  
+
   .nav-dropdown-item {
     @apply mb-1;
   }
-  
+
   .nav-dropdown-link {
     @apply min-w-[150px] py-1 text-sm  transition;
   }

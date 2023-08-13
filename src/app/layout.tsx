@@ -7,6 +7,7 @@ import Analytics from '@/components/analytics'
 import Providers from '@/components/providers'
 import Footer from '@/components/ui/navigation/footer'
 import Navbar from '@/components/ui/navigation/navbar'
+import cn from '@/lib/cn'
 import { getMetadata } from '@/lib/metadata'
 
 const poppins = Poppins({
@@ -24,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
-      <body>
+      <body className={cn('bg-theme-bg')}>
         <Providers>
           <header className="flex items-center justify-center">
             <Navbar />

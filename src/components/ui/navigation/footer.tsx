@@ -12,7 +12,7 @@ const Footer = (): JSX.Element => {
   const { main } = menu
 
   return (
-    <footer className="bg-white dark:bg-gray-900">
+    <footer className="bg-theme-bg">
       <div className="container px-6 py-8 mx-auto">
         <div className="flex flex-col items-center text-center">
           <a href="#">

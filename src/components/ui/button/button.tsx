@@ -21,7 +21,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = 'solid',
-      color = 'primary',
+      color = 'default',
       className,
       children,
       disabled,
@@ -31,10 +31,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const colorSchemes: Record<ColorScheme, Record<ButtonVariant, string>> = {
+      default: {
+        solid:
+          'bg-theme-link-hover text-white hover:[&:not(:disabled)]:bg-theme-bg-alt',
+        ghost:
+          'bg-transparent text-theme-text hover:[&:not(:disabled)]:bg-theme-bg-alt',
+        link: 'h-auto bg-transparent text-theme-text hover:[&:not(:disabled)]:underline',
+        outline:
+          'bg-transparent border border-theme-border text-theme-text hover:[&:not(:disabled)]:bg-theme-bg hover:[&:not(:disabled)]:text-theme-text',
+      },
       primary: {
         solid: 'bg-blue-500 text-white hover:[&:not(:disabled)]:bg-blue-600',
         ghost:
-          'bg-transparent text-primary-500 hover:[&:not(:disabled)]:bg-primary-400/20',
+          'bg-transparent text-blue-500 hover:[&:not(:disabled)]:bg-blue-400/20',
         link: 'h-auto bg-transparent text-primary-500 hover:[&:not(:disabled)]:underline',
         outline:
           'bg-transparent border border-theme-border text-blue-500 hover:[&:not(:disabled)]:bg-blue-500 hover:[&:not(:disabled)]:text-white',

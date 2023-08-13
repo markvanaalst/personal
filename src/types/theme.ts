@@ -1,1 +1,1 @@
-export type ColorScheme = 'primary' | 'red' | 'green' | 'blue'
+export type ColorScheme = 'default' | 'primary' | 'red' | 'green' | 'blue'

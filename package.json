@@ -61,6 +61,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
+    "postcss-import": "^15.1.0",
     "prettier": "^2.8.8",
     "react-icons": "^4.10.1",
     "rehype-highlight": "^6.0.0",

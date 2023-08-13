@@ -1,6 +1,13 @@
 @import 'tailwindcss/base';
 @import './base.css';
+
 @import 'tailwindcss/components';
 @import './components.css';
+@import './components/youtube.css';
+@import './components/navigation.css';
+@import './components/featuredPost.css';
+
+
 @import 'tailwindcss/utilities';
+@import './utilities/darkmode.css';
 

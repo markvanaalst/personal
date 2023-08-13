@@ -11,27 +11,27 @@
         "children": [
           {
             "name": "ASP.NET",
-            "url": "/blog/asp-net"
+            "url": "/blog/category/asp-net"
           },
           {
             "name": "Content Hub",
-            "url": "/blog/content-hub"
+            "url": "/blog/category/content-hub"
           },
           {
             "name": "Sitecore",
-            "url": "/blog/sitecore"
+            "url": "/blog/category/sitecore"
           },
           {
             "name": "Sitecore 9 Installation",
-            "url": "/blog/sitecore-9-installation"
+            "url": "/blog/category/sitecore-9-installation"
           },
           {
             "name": "SXA",
-            "url": "/blog/sxa"
+            "url": "/blog/category/sxa"
           },
           {
             "name": "WeBlog",
-            "url": "/blog/weblog"
+            "url": "/blog/category/weblog"
           }
         ]
       },

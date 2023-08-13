@@ -20,7 +20,7 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   return (
     <div
       className={cn(
-        'overflow-hidden bg-white rounded-xs shadow-sm border dark:bg-gray-800',
+        'overflow-hidden bg-white rounded-xs shadow-sm border border-theme-border bg-theme-bg',
         className,
       )}
     >
@@ -36,14 +36,14 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
 
       <div className="p-6">
         <div>
-          <span className="text-xs font-light text-blue-600 uppercase dark:text-blue-400">
+          <span className="text-xs font-light uppercase">
             {post.categories && post.categories[0]}
           </span>
 
           <h1>
             <Link
               href={`/blog/${getPostUrl(post.slug)}`}
-              className="block h-10 mt-2 font-normal transition-colors duration-300 transform line-clamp-2"
+              className="block h-10 mt-2 text-base font-normal transition-colors duration-300 transform line-clamp-2"
               role="link"
             >
               {post.title}
@@ -55,7 +55,7 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         <div className="mt-4">
           <div className="flex flex-row">
             <div className="flex flex-auto">
-              <Button title={`Read more about ${post.title}`} variant="outline">
+              <Button title={`Read more about ${post.title}`} variant="solid">
                 <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
               </Button>
             </div>

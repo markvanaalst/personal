@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const Profile = () => {
   return (
-    <div className="w-full max-w-xs p-4 mt-4 mb-8 overflow-hidden bg-theme-bg-alt text-theme-text ">
+    <div className="w-full max-w-xs p-4 mt-4 mb-8 overflow-hidden bg-theme-bg text-theme-text ">
       <Image
         className="mx-auto border rounded-full"
         src="/images/mva_profile.webp"

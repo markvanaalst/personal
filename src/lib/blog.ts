@@ -1,13 +1,13 @@
 import { allPosts, type Post } from 'contentlayer/generated'
 
+//import { getCategoryBySlug } from './categories'
+
 export function getPost(slug: string): Post | undefined {
   return allPosts.find((post) => post.slug === slug)
 }
 
-export function getPostsByCategory(category: string): Post[] | undefined {
-  return allPosts.filter((post) =>
-    post.categories.includes(category.replace('-', ' ')),
-  )
+export function getPostsByCategory(categorySlug: string): Post[] | undefined {
+  return allPosts.filter((post) => post.categories.includes(categorySlug))
 }
 
 export function getLatestPost() {

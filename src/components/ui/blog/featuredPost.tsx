@@ -35,17 +35,17 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
             {post.categories && (
               <Button variant="ghost">
                 <Link
-                  href={`/blog/${post.categories[0].replace(' ', '-')}`}
+                  href={`/blog/category/${post.categories[0]}`}
                   className="uppercase"
                 >
                   {post.categories[0]}
                 </Link>
               </Button>
             )}
-            <h2 className="my-4 text-2xl sm:text-xl drop-shadow-sm">
+            <h2 className="my-4 text-2xl sm:text-2xl drop-shadow-sm text-theme-text-alt">
               <Link href={`/blog/${getPostUrl(post.slug)}`}>{post.title}</Link>
             </h2>
-            <Button variant="outline">
+            <Button variant="link">
               <Link
                 className="read-more effect-underline"
                 href={`/blog/${getPostUrl(post.slug)}`}

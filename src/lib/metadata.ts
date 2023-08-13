@@ -48,7 +48,7 @@ export const defaultMetadata = {
   title: 'MarkvanAalst.com',
   titleTemplate: '%s | blogging about web technologies',
   description:
-    'Next.js bootstrapped by Tailwind CSS and Typescript setup with useful development features.',
+    'Mark van Aalst is blogging about web development, technology and Sitecore.',
   author: {
     name: 'Mark van Aalst',
     url: 'https://www.markvanaalst.com',

@@ -3,12 +3,12 @@
 @layer utilities {
     
 .light {
-    --theme-bg-alt: theme('colors.gray.100');
+    --theme-bg-alt: theme('colors.gray.400');
     --theme-bg: theme('colors.white');
     --theme-outline: theme('colors.gray.600');
-    --theme-text-alt: theme('colors.gray.100');
+    --theme-text-alt: theme('colors.gray.700');
     --theme-text: theme('colors.blackAlpha.800');
-    --theme-border: theme('colors.blue.500');
+    --theme-border: theme('colors.gray.300');
     --theme-border-alt: theme('colors.gray.300');
     --theme-shadow: theme('boxShadow.DEFAULT');
     --theme-shadow-md: theme('boxShadow.md');
@@ -29,7 +29,7 @@
     --theme-shadow-lg: theme('boxShadow.lg-dark');
     --theme-link-hover: theme('colors.teal.600');
   }
-  .theme-dark img {
+  .dark img {
     filter: brightness(0.8) contrast(1.2);
   }
 }

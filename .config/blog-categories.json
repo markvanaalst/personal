@@ -2,33 +2,40 @@
   "categoryList": [
     {
       "name": "Content Hub",
-      "description": "Content Hub",
-      "slug": "content-hub"
+      "description": "",
+      "slug": "content-hub",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
     },
     {
       "name": "SXA",
       "description": "Sitecore Experience Accelerator",
-      "slug": "sxa"
+      "slug": "sxa",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
+
     },
     {
       "name": "Sitecore",
-      "description": "Sitecore",
-      "slug": "sitecore"
+      "description": "Sitecore related posts",
+      "slug": "sitecore",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
     },
     {
       "name": "Sitecore 9 Installation",
-      "description": "Sitecore 9 Installation",
-      "slug": "sitecore-9-installation"
+      "description": "Series on how to install Sitecore 9",
+      "slug": "sitecore-9-installation",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
     },
     {
       "name": "WeBlog",
-      "description": "WeBlog",
-      "slug": "weblog"
+      "description": "WeBlog - Blog module for Sitecore",
+      "slug": "weblog",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
     },
     {
       "name": "ASP.NET",
-      "description": "ASP.NET",
-      "slug": "asp-net"
+      "description": "",
+      "slug": "asp-net",
+      "image": "/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg"
     }
   ]
 }

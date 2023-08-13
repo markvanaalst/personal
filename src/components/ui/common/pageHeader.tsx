@@ -22,10 +22,10 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
     >
       <div className="bg-slate-950/50 min-h-420 sm:min-h-120">
         <div className={cn('px-4 mx-auto max-w-5xl py-24 lg:py-36')}>
-          <div className={cn('invert')}>
+          <div className={cn('')}>
             <h1
               className={cn(
-                'text-4xl font-bold leading-normal mt-0 mb-3 theme-text',
+                'text-4xl font-bold leading-normal mt-0 mb-3 theme-text dark:text-gray-800',
               )}
             >
               {title}
@@ -36,7 +36,7 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
           </div>
         </div>
         <div
-          className={cn('absolute left-0 w-full -bottom-1 invert')}
+          className={cn('absolute left-0 w-full -bottom-1 xpageheader invert')}
           style={{ height: `calc(6% + 8vw)` }}
         >
           <svg
@@ -45,9 +45,20 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
             preserveAspectRatio="none"
             width="100%"
             height="100%"
-            className="rotate"
+            className="rotate dark:hidden"
           >
-            <path fill="currentColor" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+            <path fill="fill-current" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 8"
+            preserveAspectRatio="none"
+            width="100%"
+            height="100%"
+            className="hidden rotate dark:block dark:fill-gray-800 invert"
+          >
+            <path d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
           </svg>
         </div>
       </div>
