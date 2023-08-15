@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import cn from '@/lib/cn'
 
-import YouTube from './ui/video/youtube'
+import YouTube from './video/youtube'
 
 export const components: MDXComponents = {
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,

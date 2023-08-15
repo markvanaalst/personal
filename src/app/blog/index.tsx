@@ -1,8 +1,8 @@
-import Categories from '@/components/ui/blog/categories'
-import Disclaimer from '@/components/ui/blog/disclaimer'
-import FeaturedPostItem from '@/components/ui/blog/featuredPost'
-import PostItem from '@/components/ui/blog/post'
-import Profile from '@/components/ui/blog/profile'
+import Categories from '@/components/blog/categories'
+import Disclaimer from '@/components/blog/disclaimer'
+import FeaturedPostItem from '@/components/blog/featuredPost'
+import PostItem from '@/components/blog/post'
+import Profile from '@/components/blog/profile'
 import { getLatestPost, getLatestPosts } from '@/lib/blog'
 import cn from '@/lib/cn'
 

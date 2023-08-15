@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { components } from '@/components/mdx-components'
-import { PageHeader } from '@/components/ui/common/pageHeader'
+import { PageHeader } from '@/components/common/pageHeader'
 import cn from '@/lib/cn'
 import { getPageBySlug } from '@/lib/pages'
 

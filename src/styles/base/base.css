@@ -1,0 +1,21 @@
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  h1 {
+    @apply font-sans text-lg leading-tight;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans text-base font-bold leading-tight;
+  }
+}

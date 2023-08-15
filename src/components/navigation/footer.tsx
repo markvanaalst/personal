@@ -1,10 +1,10 @@
-import menu from '@config/menu.json'
 import Link from 'next/link'
 
+import menu from '@/config/menu.json'
 import cn from '@/lib/cn'
 import { defaultMetadata } from '@/lib/metadata'
 
-import { LogoIcon } from '../icons'
+import { LogoIcon } from '../ui/icons'
 
 const Footer = (): JSX.Element => {
   const date = new Date()

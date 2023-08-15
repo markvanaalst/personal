@@ -1,11 +1,11 @@
-import menu from '@config/menu.json'
 import Link from 'next/link'
 import React from 'react'
 
+import menu from '@/config/menu.json'
 import cn from '@/lib/cn'
 
-import { LogoIcon } from '../icons'
 import ThemeSwitch from '../theme-switch'
+import { LogoIcon } from '../ui/icons'
 
 const Navbar = () => {
   const { main } = menu

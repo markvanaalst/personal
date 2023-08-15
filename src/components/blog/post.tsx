@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import Button from '@/components/ui/button'
 import { getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
 
-import Button from '../button'
 import type { Post } from '.contentlayer/generated/types'
 
 type PostItemProps = {
@@ -49,13 +49,16 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
               {post.title}
             </Link>
           </h1>
-          <p className="h-24 mt-2 text-xs line-clamp-4">{post.excerpt}</p>
+          <p className="h-24 mt-2 text-base line-clamp-4">{post.excerpt}</p>
         </div>
 
         <div className="mt-4">
           <div className="flex flex-row">
             <div className="flex flex-auto">
-              <Button title={`Read more about ${post.title}`} variant="solid">
+              <Button
+                title={`Read more about ${post.title}`}
+                variant="secondary"
+              >
                 <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
               </Button>
             </div>

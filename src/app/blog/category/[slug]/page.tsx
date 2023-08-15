@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-import FeaturedCategory from '@/components/ui/blog/featuredCategory'
-import PostItem from '@/components/ui/blog/post'
+import FeaturedCategory from '@/components/blog/featuredCategory'
+import PostItem from '@/components/blog/post'
 import { getPost, getPostsByCategory } from '@/lib/blog'
 import { getCategories } from '@/lib/categories'
 import cn from '@/lib/cn'

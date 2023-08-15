@@ -23,7 +23,7 @@
     //"types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"],
-      "@config/*": ["./.config/*"],
+      "@/config/*": ["./.config/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },

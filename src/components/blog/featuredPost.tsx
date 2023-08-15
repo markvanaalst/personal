@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import Button from '@/components/ui/button'
 import { getPostUrl } from '@/lib/blog'
 
-import Button from '../button'
 import type { Post } from '.contentlayer/generated/types'
 
 type PostItemProps = {
@@ -12,8 +12,8 @@ type PostItemProps = {
 
 const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
   return (
-    <article className="h-96">
-      <div className="absolute w-full overflow-hidden h-96">
+    <article className="h-48 md:h-96">
+      <div className="absolute w-full overflow-hidden h-48 md:h-96">
         <Image
           alt="Featured image"
           src={post.image}
@@ -33,7 +33,7 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
         <div className="flex items-center justify-center h-full py-12 bg-white">
           <div className="w-7/12 text-theme-text">
             {post.categories && (
-              <Button variant="ghost">
+              <Button variant="ghost" className="relative">
                 <Link
                   href={`/blog/category/${post.categories[0]}`}
                   className="uppercase"
@@ -42,10 +42,10 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
                 </Link>
               </Button>
             )}
-            <h2 className="my-4 text-2xl font-medium sm:text-2xl drop-shadow-sm text-theme-text-alt">
+            <h2 className="my-4 md:text-4xl font-medium text-2xl drop-shadow-sm text-theme-text-alt">
               <Link href={`/blog/${getPostUrl(post.slug)}`}>{post.title}</Link>
             </h2>
-            <Button variant="link">
+            <Button variant="link" className="relative">
               <Link
                 className="read-more effect-underline"
                 href={`/blog/${getPostUrl(post.slug)}`}
