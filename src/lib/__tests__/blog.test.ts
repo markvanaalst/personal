@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest'
 
-import { getPost, getPostUrl, sortByNewest } from '../blog'
+import { getPostUrl, sortByNewest } from '../blog'
 
 // Mock the Post type
 type Post = {

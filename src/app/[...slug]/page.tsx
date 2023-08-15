@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import { components } from '@/components/mdx-components'
 import { PageHeader } from '@/components/common/pageHeader'
+import { components } from '@/components/mdx-components'
 import cn from '@/lib/cn'
 import { getPageBySlug } from '@/lib/pages'
 

@@ -1,5 +1,6 @@
-import categories from '@config/blog-categories.json'
 import { allPosts } from 'contentlayer/generated'
+
+import categories from '@/config/blog-categories.json'
 
 const { categoryList } = categories
 
