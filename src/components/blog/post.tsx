@@ -19,11 +19,11 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   )
 
   return (
-    <Card className={cn(className)}>
+    <Card className={cn('shadow-lg', className)}>
       <CardHeader className={cn('p-0')}>
         <Image
           src={post.image}
-          className="object-cover w-full h-64"
+          className="object-cover w-full h-64 rounded-t-lg"
           width={0}
           height={0}
           sizes="100vw"
@@ -48,7 +48,7 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         <p className="h-24 mt-2 text-base line-clamp-4">{post.excerpt}</p>
       </CardContent>
       <CardFooter className={cn('justify-between space-x-2')}>
-        <Button title={`Read more about ${post.title}`} variant="secondary">
+        <Button title={`Read more about ${post.title}`} variant="ghost">
           <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
         </Button>
         <div className="flex p-4 text-xs font-medium uppercase text-theme-text-alt">
