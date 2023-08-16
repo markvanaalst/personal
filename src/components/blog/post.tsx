@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import Button from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
 
@@ -18,57 +19,43 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   )
 
   return (
-    <div
-      className={cn(
-        'overflow-hidden bg-white rounded-xs shadow-sm border border-theme-border bg-theme-bg',
-        className,
-      )}
-    >
-      <Image
-        src={post.image}
-        className="object-cover w-full h-64"
-        width={0}
-        height={0}
-        sizes="100vw"
-        style={{ width: '100%', height: '200px' }} // optional
-        alt={post.title}
-      />
+    <Card className={cn(className)}>
+      <CardHeader className={cn('p-0')}>
+        <Image
+          src={post.image}
+          className="object-cover w-full h-64"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: '100%', height: '200px' }} // optional
+          alt={post.title}
+        />
+      </CardHeader>
+      <CardContent>
+        <span className="text-xs font-light uppercase">
+          {post.categories && post.categories[0]}
+        </span>
 
-      <div className="p-6">
-        <div>
-          <span className="text-xs font-light uppercase">
-            {post.categories && post.categories[0]}
-          </span>
-
-          <h1>
-            <Link
-              href={`/blog/${getPostUrl(post.slug)}`}
-              className="block h-10 mt-2 text-base font-normal transition-colors duration-300 transform line-clamp-2"
-              role="link"
-            >
-              {post.title}
-            </Link>
-          </h1>
-          <p className="h-24 mt-2 text-base line-clamp-4">{post.excerpt}</p>
+        <h2>
+          <Link
+            href={`/blog/${getPostUrl(post.slug)}`}
+            className="block h-10 mt-2 transition-colors duration-300 transform line-clamp-2"
+            role="link"
+          >
+            {post.title}
+          </Link>
+        </h2>
+        <p className="h-24 mt-2 text-base line-clamp-4">{post.excerpt}</p>
+      </CardContent>
+      <CardFooter className={cn('justify-between space-x-2')}>
+        <Button title={`Read more about ${post.title}`} variant="secondary">
+          <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
+        </Button>
+        <div className="flex p-4 text-xs font-medium uppercase text-theme-text-alt">
+          {date}
         </div>
-
-        <div className="mt-4">
-          <div className="flex flex-row">
-            <div className="flex flex-auto">
-              <Button
-                title={`Read more about ${post.title}`}
-                variant="secondary"
-              >
-                <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
-              </Button>
-            </div>
-            <div className="flex p-4 text-xs font-medium uppercase text-theme-text-alt">
-              {date}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   )
 }
 export default PostItem

@@ -19,7 +19,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2')}>
+          <div className={cn('w-full sm:w-1/3 md:w-1/4 px-2 pt-4 grid gap-4')}>
             <Profile />
             <Categories />
             <Disclaimer />

@@ -11,7 +11,9 @@
   h1 {
     @apply font-sans text-lg leading-tight;
   }
-  h2,
+  h2 {
+    @apply font-sans font-semibold leading-tight
+  }
   h3,
   h4,
   h5,
