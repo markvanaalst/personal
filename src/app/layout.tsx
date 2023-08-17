@@ -7,8 +7,8 @@ import Analytics from '@/components/analytics'
 import Footer from '@/components/navigation/footer'
 import Navbar from '@/components/navigation/navbar'
 import Providers from '@/components/providers'
-import { getMetadata } from '@/lib/metadata'
 import cn from '@/lib/cn'
+import { getMetadata } from '@/lib/metadata'
 
 const poppins = Poppins({
   variable: '--font-poppins',
