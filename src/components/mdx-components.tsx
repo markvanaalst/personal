@@ -5,6 +5,7 @@ import Link from 'next/link'
 import cn from '@/lib/cn'
 
 import YouTube from './video/youtube'
+import { Tweet } from './twitter/Tweet'
 
 export const components: MDXComponents = {
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
@@ -21,6 +22,13 @@ export const components: MDXComponents = {
     return (
       <div className={cn('-mx-24')}>
         <pre>{children}</pre>
+      </div>
+    )
+  },
+  Tweet: ({ id }) => {
+    return (
+      <div className={cn('mx-auto')}>
+        <Tweet id={id} />
       </div>
     )
   },
