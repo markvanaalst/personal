@@ -25,18 +25,18 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
           <div className={cn('')}>
             <h1
               className={cn(
-                'text-4xl font-bold leading-normal mt-0 mb-3 theme-text dark:text-gray-800',
+                'text-5xl font-bold leading-normal mt-0 mb-3 text-white',
               )}
             >
               {title}
             </h1>
             {publishDate && (
-              <div className={cn('')}>Published on {publishDate}</div>
+              <div className={cn('text-white')}>Published on {publishDate}</div>
             )}
           </div>
         </div>
         <div
-          className={cn('absolute left-0 w-full -bottom-1 xpageheader invert')}
+          className={cn('absolute left-0 w-full -bottom-1 xpageheader')}
           style={{ height: `calc(6% + 8vw)` }}
         >
           <svg
@@ -45,9 +45,9 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
             preserveAspectRatio="none"
             width="100%"
             height="100%"
-            className="rotate dark:hidden"
+            className="rotate dark:hidden fill-white"
           >
-            <path fill="fill-current" d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
+            <path d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
           </svg>
 
           <svg
@@ -56,7 +56,7 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
             preserveAspectRatio="none"
             width="100%"
             height="100%"
-            className="hidden rotate dark:block dark:fill-gray-800 invert"
+            className="hidden rotate dark:block dark:fill-background"
           >
             <path d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
           </svg>
