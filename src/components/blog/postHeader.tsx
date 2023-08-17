@@ -23,25 +23,23 @@ export const PostHeader = ({ blogpost }: PostHeaderProps) => {
     >
       <div className="bg-slate-950/50 dark:bg-slate-950/70 min-h-420 sm:min-h-120">
         <div className={cn('px-4 mx-auto max-w-5xl py-24 lg:py-36')}>
-          <div className={cn('')}>
-            <h1
-              className={cn(
-                'text-5xl font-bold leading-normal mt-0 mb-3 text-white',
-              )}
-            >
-              {blogpost.title}
-            </h1>
-            {publishDate && (
-              <div className={cn('text-white mb-4')}>
-                Published on {publishDate}
-              </div>
+          <h1
+            className={cn(
+              'text-xl md:text-5xl font-bold leading-normal mt-0 mb-3 text-white',
             )}
-            {blogpost.tags?.map((tag, key) => (
-              <Badge key={key} className={cn('mr-4')}>
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          >
+            {blogpost.title}
+          </h1>
+          {publishDate && (
+            <div className={cn('text-white mb-4')}>
+              Published on {publishDate}
+            </div>
+          )}
+          {blogpost.tags?.map((tag, key) => (
+            <Badge key={key} className={cn('mr-4')}>
+              {tag}
+            </Badge>
+          ))}
         </div>
         <div
           className={cn('absolute left-0 w-full -bottom-1 xpageheader')}
