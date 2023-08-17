@@ -17,10 +17,10 @@ export const PageHeader = ({ image, title, date }: PageHeaderProps) => {
 
   return (
     <div
-      className={`relative min-h-420 bg-cover sm:min-h-120`}
+      className={`relative min-h-420 bg-cover sm:min-h-120 dark:bg-opacity-50`}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="bg-slate-950/50 min-h-420 sm:min-h-120">
+      <div className="bg-slate-950/50 dark:bg-slate-950/70 min-h-420 sm:min-h-120">
         <div className={cn('px-4 mx-auto max-w-5xl py-24 lg:py-36')}>
           <div className={cn('')}>
             <h1
