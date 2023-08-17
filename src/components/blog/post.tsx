@@ -20,10 +20,10 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
 
   return (
     <Card className={cn('shadow-lg', className)}>
-      <CardHeader className={cn('p-0')}>
+      <CardHeader className={cn('p-0 bg-background')}>
         <Image
           src={post.image}
-          className="object-cover w-full h-64 rounded-t-lg"
+          className="object-cover w-full h-64 rounded-t-lg dark:opacity-50"
           width={0}
           height={0}
           sizes="100vw"
@@ -32,20 +32,20 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         />
       </CardHeader>
       <CardContent>
-        <span className="text-xs font-light uppercase">
+        <div className="my-4 text-xs font-light uppercase">
           {post.categories && post.categories[0]}
-        </span>
+        </div>
 
         <h2>
           <Link
             href={`/blog/${getPostUrl(post.slug)}`}
-            className="block h-10 mt-2 transition-colors duration-300 transform line-clamp-2"
+            className="block h-10 transition-colors duration-300 transform line-clamp-2"
             role="link"
           >
             {post.title}
           </Link>
         </h2>
-        <p className="h-24 mt-2 text-base line-clamp-4">{post.excerpt}</p>
+        <p className="h-24 mt-4 text-base line-clamp-4">{post.excerpt}</p>
       </CardContent>
       <CardFooter className={cn('justify-between space-x-2')}>
         <Button title={`Read more about ${post.title}`} variant="ghost">

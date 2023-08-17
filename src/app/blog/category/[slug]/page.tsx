@@ -31,8 +31,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
       <FeaturedCategory categorySlug={params.slug} />
       <div className={cn('flex flex-col items-center')}>
         <div className={cn('flex flex-row flex-wrap py-4')}>
-          <div className={cn('w-full sm:w-2/3 md:w-3/4 px-2 max-w-4xl')}>
-            <div className="grid gap-4 mt-4 md:grid-cols-1 sm:grid-cols-1">
+          <div className={cn('w-full px-2 max-w-6xl')}>
+            <div className="grid gap-4 mt-4 md:grid-cols-2 sm:grid-cols-1">
               {getPostsByCategory(params.slug)?.map((post, key) => (
                 <PostItem post={post} key={key} className={cn('mb-10')} />
               ))}

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import { PageHeader } from '@/components/common/pageHeader'
+import { PostHeader } from '@/components/blog/postHeader'
 import { components } from '@/components/mdx-components'
 import { getPost } from '@/lib/blog'
 import cn from '@/lib/cn'
@@ -36,13 +36,11 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className={cn('flex flex-col justify-center min-w-12 ')}>
-      {post.image != null && (
-        <PageHeader image={post.image} title={post.title} date={post.date} />
-      )}
+      {post.image != null && <PostHeader blogpost={post} />}
       <article className={cn('max-w-5xl mx-auto')}>
         <div
           className={cn(
-            'prose border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
+            'prose max-w-4xl border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
           )}
         >
           <MDXContent components={components} />

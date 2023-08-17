@@ -37,17 +37,15 @@ export default function Page({ params }: { params: { slug: string[] } }) {
   return (
     <div className={cn('flex flex-col justify-center min-h-[70vh]')}>
       <PageHeader title={page.title} />
-      <div className={cn('flex flex-col items-center')}>
-        <div className={cn('flex flex-row flex-wrap py-4')}>
-          <div className={cn('w-full sm:w-2/3 md:w-3/4 px-2 max-w-4xl')}>
-            <div className="grid gap-4 mt-4 md:grid-cols-1 sm:grid-cols-1">
-              <h2>{page?.title}</h2>
-              Test
-              <MDXContent components={components} />
-            </div>
-          </div>
+      <article className={cn('max-w-5xl mx-auto')}>
+        <div
+          className={cn(
+            'prose max-w-4xl border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
+          )}
+        >
+          <MDXContent components={components} />
         </div>
-      </div>
+      </article>
     </div>
   )
 }

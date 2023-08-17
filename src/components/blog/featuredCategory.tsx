@@ -14,7 +14,7 @@ const FeaturedCategory = ({ categorySlug }: CategoryProps): JSX.Element => {
 
   return (
     <article className="h-96">
-      <div className="absolute w-full overflow-hidden h-96">
+      <div className="absolute w-full overflow-hidden h-96 dark:bg-background">
         <Image
           alt="Featured image"
           src={category.image}
@@ -24,6 +24,7 @@ const FeaturedCategory = ({ categorySlug }: CategoryProps): JSX.Element => {
           sizes="(max-width: 768px) 100vw,
 								(max-width: 1200px) 50vw,
 								33vw"
+          className={cn('dark:opacity-30')}
           style={{
             objectFit: 'cover',
           }}
@@ -33,7 +34,7 @@ const FeaturedCategory = ({ categorySlug }: CategoryProps): JSX.Element => {
       <div className="h-full text-center ">
         <div className="flex items-center justify-center h-full py-12 bg-white">
           <div className="w-7/12 text-theme-text">
-            <h2 className="my-4 text-2xl sm:text-xl drop-shadow-sm text-theme-text">
+            <h2 className="my-4 text-2xl font-medium md:text-4xl drop-shadow-sm">
               {category.name}
             </h2>
             <h3 className={cn('text-theme-text-alt', 'relative')}>
