@@ -14,7 +14,7 @@ type PostItemProps = {
 const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
   return (
     <article className="h-48 md:h-96">
-      <div className="absolute w-full h-48 overflow-hidden md:h-96 dark:bg-background">
+      <div className="absolute w-full h-48 overflow-hidden md:h-96 dark:bg-background shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         <Image
           alt={post.title}
           src={post.image}
@@ -47,9 +47,9 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
             <h2 className="my-4 text-2xl font-medium md:text-4xl drop-shadow-sm">
               <Link href={`/blog/${getPostUrl(post.slug)}`}>{post.title}</Link>
             </h2>
-            <Button variant="ghost" className="relative">
+            <Button variant="outline" className="relative">
               <Link
-                className="read-more effect-underline"
+                className="read-more"
                 href={`/blog/${getPostUrl(post.slug)}`}
               >
                 Read more

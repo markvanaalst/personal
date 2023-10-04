@@ -1,33 +1,32 @@
 import { getCategories } from '@/lib/categories'
-import cn from '@/lib/cn'
 
-import { Card, CardContent } from '../ui/card/card'
+import { Card, CardContent, CardHeader } from '../ui/card/card'
 
 const Categories = () => {
   const categories = getCategories()
 
   return (
     <Card>
-      <CardContent className="w-full max-w-xs p-4 mt-4 mb-8 overflow-hidden bg-theme-bg text-theme-text ">
-        <div className="w-full">
-          <h4 className={cn('font-normal px-1 mb-4')}>Categories</h4>
-          <ul className={cn('text-xs')}>
-            {categories.map((category, i) => (
-              <li className="px-1 py-2 transition duration-300" key={i}>
-                <a
-                  href={`/blog/category/${category.slug}`}
-                  className="flex items-center cursor-pointer text-theme-text"
-                >
-                  {category.name}
-                  <span className="ml-auto text-gray-500">
-                    {category.count} articles
-                  </span>
-                  <i className="ml-1 text-gray-500 bx bx-right-arrow-alt" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <CardHeader>Categories</CardHeader>
+      <CardContent className="grid ">
+        {categories.map((category, i) => (
+          <div
+            className="-mx-2 flex space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground"
+            key={i}
+          >
+            <a
+              href={`/blog/category/${category.slug}`}
+              className="text-sm font-medium py-2 leading-none text-foreground hover:text-accent-foreground w-full transition-all"
+            >
+              <div className="flex items-center justify-between space-x-4">
+                <span>{category.name}</span>
+                <span className="text-accent-foreground font-normal">
+                  {category.count} articles
+                </span>
+              </div>
+            </a>
+          </div>
+        ))}
       </CardContent>
     </Card>
   )

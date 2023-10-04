@@ -7,6 +7,7 @@ import { getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
 
 import type { Post } from '.contentlayer/generated/types'
+import Badge from '../ui/badge'
 
 type PostItemProps = {
   post: Post
@@ -19,11 +20,11 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   )
 
   return (
-    <Card className={cn('shadow-lg', className)}>
+    <Card className={cn('border-none shadow-none', className)}>
       <CardHeader className={cn('p-0 bg-background')}>
         <Image
           src={post.image}
-          className="object-cover w-full h-64 rounded-t-lg dark:opacity-50"
+          className="object-cover w-full h-64 rounded-lg dark:opacity-50"
           width={0}
           height={0}
           sizes="100vw"
@@ -31,9 +32,13 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
           alt={post.title}
         />
       </CardHeader>
-      <CardContent>
+      <CardContent className={cn('p-0')}>
         <div className="my-4 text-xs font-light uppercase">
-          {post.categories && post.categories[0]}
+          {post.categories?.map((category, key) => (
+            <Badge key={key} className={cn('mr-4')} variant={'default'}>
+              <Link href={`/blog/category/${category}`}>{category}</Link>
+            </Badge>
+          ))}
         </div>
 
         <h2>
@@ -47,8 +52,8 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         </h2>
         <p className="h-24 mt-4 text-base line-clamp-4">{post.excerpt}</p>
       </CardContent>
-      <CardFooter className={cn('justify-between space-x-2')}>
-        <Button title={`Read more about ${post.title}`} variant="ghost">
+      <CardFooter className={cn(['p-0', 'justify-between', 'space-x-2'])}>
+        <Button title={`Read more about ${post.title}`} variant="outline">
           <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
         </Button>
         <div className="flex p-4 text-xs font-medium uppercase text-theme-text-alt">
