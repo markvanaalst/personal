@@ -22,15 +22,17 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
   return (
     <Card className={cn('border-none shadow-none', className)}>
       <CardHeader className={cn('p-0 bg-background')}>
-        <Image
-          src={post.image}
-          className="object-cover w-full h-64 rounded-lg dark:opacity-50"
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: '100%', height: '200px' }} // optional
-          alt={post.title}
-        />
+        <Link href={`/blog/${getPostUrl(post.slug)}`}>
+          <Image
+            src={post.image}
+            className="object-cover w-full h-64 rounded-lg dark:opacity-50"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: '100%', height: '200px' }} // optional
+            alt={post.title}
+          />
+        </Link>
       </CardHeader>
       <CardContent className={cn('p-0')}>
         <div className="my-4 text-xs font-light uppercase">
@@ -53,8 +55,14 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         <p className="h-24 mt-4 text-base line-clamp-4">{post.excerpt}</p>
       </CardContent>
       <CardFooter className={cn(['p-0', 'justify-between', 'space-x-2'])}>
-        <Button title={`Read more about ${post.title}`} variant="outline">
-          <Link href={`/blog/${getPostUrl(post.slug)}`}>Read more</Link>
+        <Button variant="outline">
+          <Link
+            href={`/blog/${getPostUrl(post.slug)}`}
+            title={`Read more about ${post.title}`}
+          >
+            <span className="sr-only">{post.title}</span>
+            Read more
+          </Link>
         </Button>
         <div className="flex p-4 text-xs font-medium uppercase text-theme-text-alt">
           {date}

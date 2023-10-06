@@ -15,8 +15,8 @@ const Footer = (): JSX.Element => {
     <footer className="bg-theme-bg">
       <div className="container px-6 py-8 mx-auto">
         <div className="flex flex-col items-center text-center">
-          <a href="#">
-            <LogoIcon className={cn('h-14')} />
+          <a href="/" aria-label="Go to the homepage">
+            <LogoIcon className={cn('h-14')} aria-label="Logo" />
           </a>
 
           <div className="flex flex-wrap justify-center mt-6 -mx-4">
@@ -27,8 +27,7 @@ const Footer = (): JSX.Element => {
                 aria-label={menuItem.name}
                 key={i}
               >
-                {' '}
-                {menuItem.name}{' '}
+                {menuItem.name}
               </Link>
             ))}
 
@@ -37,8 +36,7 @@ const Footer = (): JSX.Element => {
               className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              {' '}
-              Privacy{' '}
+              Privacy
             </a>
 
             <a
@@ -46,8 +44,7 @@ const Footer = (): JSX.Element => {
               className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
-              {' '}
-              Cookies{' '}
+              Cookies
             </a>
           </div>
         </div>
@@ -56,7 +53,7 @@ const Footer = (): JSX.Element => {
 
         <div className="flex flex-col items-center sm:flex-row sm:justify-between">
           <p className="text-sm text-gray-500 dark:text-gray-300">
-            © Copyright {year},{' '}
+            © Copyright {year},
             <Link
               href={defaultMetadata.author.url}
               target="_blank"
@@ -64,7 +61,7 @@ const Footer = (): JSX.Element => {
             >
               {defaultMetadata.author.name}
             </Link>
-            . All Rights Reserved.
+            , All Rights Reserved.
           </p>
 
           <div className="flex -mx-2">

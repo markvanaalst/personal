@@ -6,7 +6,7 @@
       },
       {
         "name": "Blog",
-        "url": "",
+        "url": "/blog",
         "hasChildren": true,
         "children": [
           {

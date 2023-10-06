@@ -19,9 +19,10 @@ const Navbar = () => {
             'flex items-center justify-center font-medium title-font md:justify-start text-theme-text',
           )}
           title="Home"
+          aria-label="Go to the homepage"
           href={'/'}
         >
-          <LogoIcon className="h-14 text-theme-text" />
+          <LogoIcon className="h-14 text-theme-text" aria-label="Logo" />
           <span className="ml-3 text-xl">
             Mark<span className="font-light">vanAalst</span>
           </span>
@@ -62,7 +63,7 @@ const Navbar = () => {
             {menu.hasChildren ? (
               <li className="relative nav-item nav-dropdown group">
                 <span className="inline-flex items-center nav-link hover:text-theme-link-hover ">
-                  <a href="#" className="block nav-link">
+                  <a href={menu.url} className="block nav-link">
                     {menu.name}
                   </a>
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -72,7 +73,7 @@ const Navbar = () => {
                     />
                   </svg>
                 </span>
-                <ul className="hidden nav-dropdown-list group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100 dark:bg-theme-dark">
+                <ul className="hidden nav-dropdown-list group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100">
                   {menu.children.map((child, i) => (
                     <li className="nav-dropdown-item" key={`children-${i}`}>
                       <Link
