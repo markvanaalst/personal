@@ -28,6 +28,7 @@ export default function RootLayout({
       <body className={cn('bg-background')}>
         <Providers>
           <header className="flex items-center justify-center">
+            {/* <Navbar /> */}
             <Navbar />
           </header>
           <main role="main" className="">

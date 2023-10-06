@@ -1,6 +1,15 @@
+import { cva } from 'class-variance-authority'
 import Link from 'next/link'
 import React from 'react'
 
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu/navigation-menu'
 import menu from '@/config/menu.json'
 import cn from '@/lib/cn'
 
@@ -9,6 +18,9 @@ import { LogoIcon } from '../ui/icons'
 
 const Navbar = () => {
   const { main } = menu
+  const navigationMenuTriggerStyle = cva(
+    'group inline-flex h-9 w-max mx-8 my-2 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 uppercase tracking-widest font-normal',
+  )
 
   return (
     <nav className={cn('container navbar')}>
@@ -54,55 +66,48 @@ const Navbar = () => {
         </svg>
       </label>
       {/* /navbar toggler */}
-      <ul
-        id="nav-menu"
-        className="order-3 hidden w-full navbar-nav md:order-1 md:flex md:w-auto md:space-x-2"
-      >
-        {main.map((menu, i) => (
-          <React.Fragment key={`menu-${i}`}>
-            {menu.hasChildren ? (
-              <li className="relative nav-item nav-dropdown group">
-                <span className="inline-flex items-center nav-link hover:text-theme-link-hover ">
-                  <a href={menu.url} className="block nav-link">
-                    {menu.name}
-                  </a>
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-                <ul className="hidden nav-dropdown-list group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100">
-                  {menu.children.map((child, i) => (
-                    <li className="nav-dropdown-item" key={`children-${i}`}>
-                      <Link
-                        href={child.url}
-                        passHref
-                        className="block nav-dropdown-link hover:text-theme-link-hover"
-                      >
-                        {child.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ) : (
-              <li className="nav-item">
-                <span className="inline-flex items-center nav-link hover:text-theme-link-hover">
-                  <Link
-                    href={menu.url}
-                    passHref
-                    className="block nav-link hover:text-theme-link-hover"
+
+      <NavigationMenu>
+        <NavigationMenuList>
+          {main.map((menu, i) => (
+            <React.Fragment key={`menu-${i}`}>
+              {menu.children ? (
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger
+                    className={cn(navigationMenuTriggerStyle())}
                   >
                     {menu.name}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                      {menu.children?.map((child) => (
+                        <ListItem
+                          key={child.name}
+                          title={child.name}
+                          href={child.url}
+                        >
+                          {child.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              ) : (
+                <NavigationMenuItem>
+                  <Link href={menu.url} legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(navigationMenuTriggerStyle())}
+                    >
+                      {menu.name}
+                    </NavigationMenuLink>
                   </Link>
-                </span>
-              </li>
-            )}
-          </React.Fragment>
-        ))}
-      </ul>
+                </NavigationMenuItem>
+              )}
+            </React.Fragment>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
+
       <div className="flex order-1 ml-auto md:order-2 md:ml-0">
         <div className="p-1 text-xl cursor-pointer text-dark hover:text-primary">
           <ThemeSwitch />
@@ -111,5 +116,31 @@ const Navbar = () => {
     </nav>
   )
 }
+
+const ListItem = React.forwardRef<
+  React.ElementRef<'a'>,
+  React.ComponentPropsWithoutRef<'a'>
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+            className,
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = 'ListItem'
 
 export default Navbar

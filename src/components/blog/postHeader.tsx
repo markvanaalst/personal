@@ -51,7 +51,7 @@ export const PostHeader = ({ blogpost }: PostHeaderProps) => {
             preserveAspectRatio="none"
             width="100%"
             height="100%"
-            className="rotate dark:hidden fill-white"
+            className="rotate dark:hidden fill-background"
           >
             <path d="M64 7.9 L64 10 L0 10 L0 0 Z"></path>
           </svg>
