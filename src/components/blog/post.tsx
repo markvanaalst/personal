@@ -6,8 +6,8 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
 
-import type { Post } from '.contentlayer/generated/types'
 import Badge from '../ui/badge'
+import type { Post } from '.contentlayer/generated/types'
 
 type PostItemProps = {
   post: Post

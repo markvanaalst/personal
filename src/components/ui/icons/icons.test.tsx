@@ -8,7 +8,6 @@ describe('Moon', () => {
     render(<Moon data-testid="moon" />)
     expect(screen.getByTestId('moon')).toBeInTheDocument()
     expect(screen.getByTestId('moon')).toHaveClass('w-4 h-4')
-
   })
 })
 

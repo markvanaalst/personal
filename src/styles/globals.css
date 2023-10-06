@@ -11,3 +11,6 @@
 
 @import 'tailwindcss/utilities';
 
+.img-wrapper > div {
+    height: 100%;
+}
