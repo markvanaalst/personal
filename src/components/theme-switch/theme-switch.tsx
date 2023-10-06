@@ -18,6 +18,7 @@ const ThemeSwitch = () => {
             'dark:bg-gray-800 dark:hover:bg-gray-700',
           )}
           onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          aria-label="Toggle theme"
         >
           {isDark ? (
             <Sun className={cn('w-5 h-5')} />

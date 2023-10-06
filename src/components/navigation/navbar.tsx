@@ -18,6 +18,7 @@ const Navbar = () => {
           className={cn(
             'flex items-center justify-center font-medium title-font md:justify-start text-theme-text',
           )}
+          title="Home"
           href={'/'}
         >
           <LogoIcon className="h-14 text-theme-text" />
