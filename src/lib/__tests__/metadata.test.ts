@@ -5,7 +5,7 @@ import { defaultMetadata, getMetadata } from '../metadata'
 
 const title = 'MarkvanAalst.com | blogging about web technologies'
 const description =
-  'Next.js bootstrapped by Tailwind CSS and Typescript setup with useful development features.'
+  'Mark van Aalst is blogging about web development, technology and Sitecore.'
 
 const expectedMetadata: Metadata = {
   applicationName: defaultMetadata.applicationName,
@@ -16,7 +16,7 @@ const expectedMetadata: Metadata = {
   description,
   keywords: defaultMetadata.keywords.join(','),
   metadataBase: new URL('https://mva.vercel.app'),
-  title,
+  title: 'MarkvanAalst.com | blogging about web technologies',
   openGraph: {
     description,
     images: `https://mva.vercel.app/api/og?title=${encodeURIComponent(
