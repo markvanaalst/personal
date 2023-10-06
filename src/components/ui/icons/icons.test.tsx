@@ -7,6 +7,8 @@ describe('Moon', () => {
   it('should render Moon icon', () => {
     render(<Moon data-testid="moon" />)
     expect(screen.getByTestId('moon')).toBeInTheDocument()
+    expect(screen.getByTestId('moon')).toHaveClass('w-4 h-4')
+
   })
 })
 
@@ -14,6 +16,7 @@ describe('Sun', () => {
   it('should render Sun icon', () => {
     render(<Sun data-testid="sun" />)
     expect(screen.getByTestId('sun')).toBeInTheDocument()
+    expect(screen.getByTestId('sun')).toHaveClass('w-4 h-4')
   })
 })
 

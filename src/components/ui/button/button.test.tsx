@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { useState } from 'react'
 
-import type { ColorScheme } from '@/types'
+import Button from '@/components/ui/button'
+import type { ButtonVariant, ColorScheme } from '@/types'
 
-import Button, { type ButtonVariant } from './button'
-
-const variants: ButtonVariant[] = ['solid', 'outline', 'ghost', 'link']
+const variants: ButtonVariant[] = ['default', 'outline', 'ghost', 'link']
 const colorSchemes: ColorScheme[] = ['primary', 'red', 'green', 'blue']
 
 describe('Button', () => {
