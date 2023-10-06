@@ -1,6 +1,13 @@
 import { describe, expect } from 'vitest'
 
-import { getLatestPost, getLatestPosts, getPost, getPostUrl, getPostsByCategory, sortByNewest } from '@/lib/blog'
+import {
+  getLatestPost,
+  getLatestPosts,
+  getPost,
+  getPostsByCategory,
+  getPostUrl,
+  sortByNewest,
+} from '@/lib/blog'
 
 import type { Post } from '.contentlayer/generated/types'
 

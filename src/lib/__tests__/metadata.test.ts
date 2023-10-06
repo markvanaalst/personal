@@ -16,14 +16,14 @@ const expectedMetadata: Metadata = {
   description,
   keywords: defaultMetadata.keywords.join(','),
   metadataBase: new URL('https://mva.vercel.app'),
-  title: 'MarkvanAalst.com | blogging about web technologies',
+  title,
   openGraph: {
     description,
     images: `https://mva.vercel.app/api/og?title=${encodeURIComponent(
       'MarkvanAalst.com',
     )}&description=${encodeURIComponent(description)}`,
     siteName: 'MarkvanAalst.com',
-    title: 'MarkvanAalst.com | blogging about web technologies',
+    title,
     url: 'https://mva.vercel.app/',
   },
   robots: defaultMetadata.robots,
