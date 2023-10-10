@@ -89,8 +89,8 @@ function CreateMainFeed() {
     updated: date,
     generator: 'Feed for Node.js',
     feedLinks: {
-      rss2: `${siteURL}/feeds/feed.xml`,
-      json: `${siteURL}/feeds/feed.json`,
+      rss2: `${siteURL}/feeds/rss.xml`,
+      json: `${siteURL}/feeds/rss.json`,
       atom: `${siteURL}/feeds/atom.xml`,
     },
     author,
