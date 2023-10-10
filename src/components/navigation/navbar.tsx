@@ -65,9 +65,8 @@ const Navbar = () => {
           />
         </svg>
       </label>
-      {/* /navbar toggler */}
-
-      <NavigationMenu>
+      {/* /navbar toggler - hide for mobile */}
+      <NavigationMenu className="hidden md:block">
         <NavigationMenuList>
           {main.map((menu, i) => (
             <React.Fragment key={`menu-${i}`}>
