@@ -10,7 +10,7 @@ type categoryListItem = {
   slug: string
   image: string
 }
-interface Category extends categoryListItem {
+export interface Category extends categoryListItem {
   count: number
 }
 
@@ -35,5 +35,13 @@ export function getCategories(): Category[] {
 export function getCategoryBySlug(slug: string): categoryListItem | undefined {
   return categoryList.find(
     (category: categoryListItem) => category.slug === slug,
+  )
+}
+
+export function getCategorySlug(
+  categoryName: string | undefined,
+): categoryListItem | undefined {
+  return categoryList.find(
+    (category: categoryListItem) => category.name === categoryName,
   )
 }

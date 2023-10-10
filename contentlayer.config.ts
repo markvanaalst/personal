@@ -2,10 +2,13 @@ import type { ComputedFields } from 'contentlayer/source-files'
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import powershell from 'highlight.js/lib/languages/powershell'
 import highlight from 'rehype-highlight'
-//import rehypeImgSize from 'rehype-img-size'
 import remarkGfm from 'remark-gfm'
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
+const siteURL =
+  process.env.VERCEL_URL !== undefined
+    ? process.env.VERCEL_URL
+    : 'http://localhost:3000'
 
 const computedFields: ComputedFields = {
   slugAsParams: {
@@ -14,7 +17,7 @@ const computedFields: ComputedFields = {
   },
   url: {
     type: 'string',
-    resolve: (post) => `content/blog/${post._raw.flattenedPath}`,
+    resolve: (post) => `${siteURL}/blog/${post.slug}`,
   },
   wordCount: {
     type: 'number',

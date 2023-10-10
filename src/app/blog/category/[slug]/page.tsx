@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 
 import FeaturedCategory from '@/components/blog/featuredCategory'
 import PostItem from '@/components/blog/post'
-import { getPost, getPostsByCategory } from '@/lib/blog'
-import { getCategories } from '@/lib/categories'
+import { getPostsByCategory } from '@/lib/blog'
+import { getCategories, getCategoryBySlug } from '@/lib/categories'
 import cn from '@/lib/cn'
+import { defaultMetadata } from '@/lib/metadata'
 
 export async function generateStaticParams() {
   return getCategories().map((category) => ({
@@ -17,11 +18,53 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const post = getPost(params.slug)
+  const category = getCategoryBySlug(params.slug)
+
+  const feedTitle = defaultMetadata.titleTemplate.replace(
+    /%s/g,
+    `${defaultMetadata.title}`,
+  )
 
   return {
-    title: post?.title,
-    description: post?.excerpt,
+    title: defaultMetadata.titleTemplate.replace(
+      /%s/g,
+      `${defaultMetadata.title}`,
+    ),
+    description: defaultMetadata.description,
+    alternates: {
+      types: {
+        'application/rss+xml': [
+          {
+            url: '/feed',
+            title: `${feedTitle} | RSS`,
+          },
+          {
+            url: `/blog/category/${params.slug}/feed`,
+            title: `${feedTitle} | ${category?.name} | RSS`,
+          },
+        ],
+        'application/feed+json': [
+          {
+            url: '/feed.json',
+            title: `${feedTitle} | JSON Feed`,
+          },
+          {
+            url: `/blog/category/${params.slug}/feed.json`,
+            title: `${feedTitle} | ${category?.name} | JSON Feed`,
+          },
+        ],
+        'application/atom+xml': [
+          {
+            url: '/atom',
+            title: `${feedTitle} | ATOM`,
+          },
+          {
+            url: `/blog/category/${params.slug}/atom`,
+            title: `${feedTitle} | ${category?.name} | ATOM`,
+          },
+        ],
+      },
+    },
   }
 }
 

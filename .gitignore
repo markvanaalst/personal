@@ -38,3 +38,7 @@ next-env.d.ts
 .contentlayer
 
 .swc
+
+# feeds are generated at build time
+/public/feeds/*.xml
+/public/feeds/*.json
