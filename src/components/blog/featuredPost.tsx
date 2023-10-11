@@ -14,7 +14,7 @@ type PostItemProps = {
 const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
   return (
     <article className="h-48 md:h-96">
-      <div className="absolute w-full h-48 overflow-hidden md:h-96 dark:bg-background shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+      <div className="absolute w-full h-48 overflow-hidden md:h-96 dark:bg-background">
         <Image
           alt={post.title}
           src={post.image}

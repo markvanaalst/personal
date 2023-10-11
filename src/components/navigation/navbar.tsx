@@ -23,7 +23,7 @@ const Navbar = () => {
   )
 
   return (
-    <nav className={cn('container navbar')}>
+    <nav className={cn('container px-2 md:px-8 navbar')}>
       {/* logo */}
       <div className={cn('order-0')}>
         <Link

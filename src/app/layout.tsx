@@ -17,6 +17,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = getMetadata()
+const stickyClasses = cn('sticky top-0 z-50 shadow-md bg-inherit')
 
 export default function RootLayout({
   children,
@@ -27,7 +28,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body className={cn('bg-background')}>
         <Providers>
-          <header className="flex items-center justify-center">
+          <header
+            className={cn('flex items-center justify-center', stickyClasses)}
+          >
             {/* <Navbar /> */}
             <Navbar />
           </header>
