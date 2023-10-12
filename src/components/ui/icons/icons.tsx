@@ -70,6 +70,19 @@ export const LogoIcon = ({ className, ...rest }: ComponentProps<'svg'>) => {
   )
 }
 
+export const MenuOpen = ({ className, ...rest }: ComponentProps<'svg'>) => {
+  return (
+    <svg
+      className={cn('fill-current h-6 w-6', className)}
+      viewBox="0 0 20 20"
+      {...rest}
+    >
+      <title>Menu Open</title>
+      <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z" />
+    </svg>
+  )
+}
+
 export const Logo = ({ className, ...rest }: ComponentProps<'svg'>) => {
   return (
     <svg
