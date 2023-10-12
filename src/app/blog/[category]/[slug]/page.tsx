@@ -37,7 +37,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   return (
     <div className={cn('flex flex-col justify-center min-w-12 ')}>
       {post.image != null && <PostHeader blogpost={post} />}
-      <article className={cn('max-w-5xl mx-auto p-4')}>
+      <article className={cn('w-full md:max-w-5xl mx-auto p-2 md:p-4')}>
         <div
           className={cn(
             'prose max-w-4xl border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit prose-a:text-primary',

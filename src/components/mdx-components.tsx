@@ -29,7 +29,7 @@ export const components: MDXComponents = {
   },
   Tweet: ({ id }) => {
     return (
-      <div className={cn('mx-auto')}>
+      <div className={cn('w-min md:w-full')}>
         <Tweet id={id} />
       </div>
     )
