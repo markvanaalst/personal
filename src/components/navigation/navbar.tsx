@@ -40,13 +40,6 @@ const NavBar = () => {
       }
     }, 0)
 
-    return () => {
-      clearTimeout(timeoutId)
-      window.removeEventListener('click', pageClickEvent, false)
-    }
-  }, [isOpen])
-
-  useEffect(() => {
     const changeNavbarBackground = () => {
       if (window.pageYOffset >= 1) {
         setNavFixed(true)
@@ -54,8 +47,13 @@ const NavBar = () => {
         setNavFixed(false)
       }
     }
-    window.addEventListener('scroll', changeNavbarBackground)
-  })
+
+    return () => {
+      clearTimeout(timeoutId)
+      window.addEventListener('scroll', changeNavbarBackground)
+      window.removeEventListener('click', pageClickEvent, false)
+    }
+  }, [isOpen])
 
   return (
     <>
