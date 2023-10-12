@@ -8,8 +8,10 @@ import ThemeSwitch from '../theme-switch'
 import { LogoIcon } from '../ui/icons'
 import menu from '.config/menu.json'
 
+const hoverClasses =
+  'transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+
 const NavBar = () => {
-  // distructuring the main menu from menu object
   const { main } = menu
 
   const [navFixed, setNavFixed] = useState(false)
@@ -62,7 +64,7 @@ const NavBar = () => {
           navFixed ? 'shadow opacity-90 ' : ''
         }`}
       >
-        <nav className="container flex justify-between navbar">
+        <nav className="container flex justify-between navbar px-2 gap-2">
           {/* logo */}
           <div className="order-0">
             <a className="flex items-center justify-center font-medium title-font md:justify-start text-theme-text">
@@ -113,7 +115,12 @@ const NavBar = () => {
                       onClick={toggleQuickStartMenu}
                       aria-expanded={isOpen}
                     >
-                      <span className="inline-flex items-center nav-link hover:text-theme-link-hover ">
+                      <span
+                        className={cn(
+                          'inline-flex items-center nav-link hover:text-theme-link-hover',
+                          hoverClasses,
+                        )}
+                      >
                         <a href="#" className="block nav-link">
                           {menu.name}
                         </a>
@@ -137,14 +144,11 @@ const NavBar = () => {
                         }`}
                       >
                         {menu.children.map((child, i) => (
-                          <li
-                            className="nav-dropdown-item"
-                            key={`children-${i}`}
-                          >
+                          <li className={hoverClasses} key={`children-${i}`}>
                             <a
                               href={child.url}
                               className={cn(
-                                'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+                                'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none',
                               )}
                             >
                               <div className="text-sm font-medium leading-none">
@@ -160,12 +164,14 @@ const NavBar = () => {
                     </div>
                   </li>
                 ) : (
-                  <li className="nav-item">
+                  <li className={hoverClasses}>
                     <span className="inline-flex items-center nav-link hover:text-theme-link-hover">
                       <Link
                         href={menu.url}
                         passHref
-                        className="block nav-link hover:text-theme-link-hover"
+                        className={cn(
+                          'block nav-link hover:text-theme-link-hover rounded-md',
+                        )}
                       >
                         {menu.name}
                       </Link>
@@ -207,7 +213,8 @@ const ListItem = React.forwardRef<
       <a
         ref={ref}
         className={cn(
-          'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+          `block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none`,
+          hoverClasses,
           className,
         )}
         {...props}
