@@ -67,12 +67,15 @@ const NavBar = () => {
         <nav className="container flex justify-between navbar px-2 gap-2">
           {/* logo */}
           <div className="order-0">
-            <a className="flex items-center justify-center font-medium title-font md:justify-start text-theme-text">
+            <Link
+              href="/"
+              className="flex items-center justify-center font-medium title-font md:justify-start text-theme-text"
+            >
               <LogoIcon className="h-14 text-theme-text" aria-label="Logo" />
               <span className="ml-3 text-xl">
                 Mark<span className="font-light">vanAalst</span>
               </span>
-            </a>
+            </Link>
           </div>
           {/* navbar toggler */}
           <input id="nav-toggle" type="checkbox" className="hidden" />

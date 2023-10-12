@@ -15,7 +15,7 @@ export const components: MDXComponents = {
 
   Img: ({ ...props }) => {
     return (
-      <div className={cn('-mx-20')}>
+      <div className={cn('sm:mx-2 md:-mx-20')}>
         <img {...props} className={cn('mx-auto')} layout="responsive" />
       </div>
     )
