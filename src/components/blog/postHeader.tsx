@@ -25,7 +25,7 @@ export const PostHeader = ({ blogpost }: PostHeaderProps) => {
         <div className={cn('px-4 mx-auto max-w-5xl py-24 lg:py-36')}>
           <h1
             className={cn(
-              'text-xl md:text-5xl font-bold leading-normal mt-0 mb-3 text-white',
+              'text-xl md:text-5xl font-semibold leading-normal mt-0 mb-3 text-white',
             )}
           >
             {blogpost.title}
