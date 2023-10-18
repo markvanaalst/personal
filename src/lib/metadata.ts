@@ -54,6 +54,8 @@ export const defaultMetadata = {
     url: 'https://www.markvanaalst.com',
     email: 'markvanaalst@gmail.com',
     github: 'https://github.com/markvanaalst',
+    twitter: 'https://twitter.com/markvanaalst',
+    linkedin: 'https://www.linkedin.com/in/markvanaalst/',
   },
   keywords: [
     'Mark van Aalst',

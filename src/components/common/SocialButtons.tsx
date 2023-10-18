@@ -1,4 +1,6 @@
-import { FaEnvelope, FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+
+import { defaultMetadata } from '@/lib/metadata'
 
 type SocialButtonsProps = {
   className?: string
@@ -8,32 +10,25 @@ export const SocialButtons = ({ className }: SocialButtonsProps) => {
   return (
     <>
       <SocialLink
-        href="https://www.twitter.com/markvanaalst"
+        href={defaultMetadata.author.twitter}
         label="Twitter"
         className={className}
       >
         <FaTwitter className="fill-current" />
       </SocialLink>
       <SocialLink
-        href="https://www.github.com/markvanaalst"
+        href={defaultMetadata.author.github}
         label="GitHub"
         className={className}
       >
         <FaGithub className="fill-current" />
       </SocialLink>
       <SocialLink
-        href="https://www.linkedin.com/in/markvanaalst"
+        href={defaultMetadata.author.linkedin}
         label="LinkedIn"
         className={className}
       >
         <FaLinkedinIn className="fill-current" />
-      </SocialLink>
-      <SocialLink
-        href="mailto:markvanaalst@gmail.com"
-        label="Email"
-        className={className}
-      >
-        <FaEnvelope className="fill-current" />
       </SocialLink>
     </>
   )
