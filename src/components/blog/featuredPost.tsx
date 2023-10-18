@@ -35,7 +35,7 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
         <div className="flex items-center justify-center h-full py-12 bg-white">
           <div className="px-4">
             {post.categories && (
-              <Button variant="ghost" className="relative">
+              <Button variant="tertiary" size={'xs'} className="relative">
                 <Link
                   href={`/blog/category/${post.categories[0]}`}
                   className="uppercase"

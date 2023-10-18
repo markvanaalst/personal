@@ -36,7 +36,7 @@ export const PostHeader = ({ blogpost }: PostHeaderProps) => {
             </div>
           )}
           {blogpost.tags?.map((tag, key) => (
-            <Badge key={key} className={cn('mr-4')}>
+            <Badge variant={'secondary'} key={key} className={cn('mr-4')}>
               {tag}
             </Badge>
           ))}
