@@ -37,7 +37,7 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
       <CardContent className={cn('p-0')}>
         <div className="my-4 text-xs font-light uppercase">
           {post.categories?.map((category, key) => (
-            <Badge key={key} className={cn('mr-4')} variant={'default'}>
+            <Badge key={key} className={cn('mr-4')} variant={'secondary'}>
               <Link href={`/blog/category/${category}`}>{category}</Link>
             </Badge>
           ))}
