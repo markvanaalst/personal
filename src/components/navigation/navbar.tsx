@@ -9,7 +9,7 @@ import { LogoIcon } from '../ui/icons'
 import menu from '.config/menu.json'
 
 const hoverClasses =
-  'transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+  'transition-all duration-500 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
 
 const NavBar = () => {
   const { main } = menu
@@ -64,7 +64,7 @@ const NavBar = () => {
           navFixed ? 'shadow opacity-90 ' : ''
         }`}
       >
-        <nav className="container flex justify-between navbar px-2 gap-2">
+        <nav className="container flex justify-between gap-2 px-2 navbar">
           {/* logo */}
           <div className="order-0">
             <Link
