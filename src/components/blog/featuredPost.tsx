@@ -47,7 +47,7 @@ const FeaturedPostItem = ({ post }: PostItemProps): JSX.Element => {
             <h2 className="my-2 text-xl font-medium md:my-4 md:text-4xl drop-shadow-sm">
               <Link href={`/blog/${getPostUrl(post.slug)}`}>{post.title}</Link>
             </h2>
-            <Button variant="ghost" size="lg" className="relative">
+            <Button variant="outline" size="lg" className="relative">
               <Link
                 className="uppercase read-more"
                 href={`/blog/${getPostUrl(post.slug)}`}

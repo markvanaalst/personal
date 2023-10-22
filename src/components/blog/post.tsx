@@ -55,7 +55,7 @@ const PostItem = ({ post, className }: PostItemProps): JSX.Element => {
         <p className="h-24 mt-4 text-base line-clamp-4">{post.excerpt}</p>
       </CardContent>
       <CardFooter className={cn(['p-0', 'justify-between', 'space-x-2'])}>
-        <Button variant="outline">
+        <Button variant="default">
           <Link
             href={`/blog/${getPostUrl(post.slug)}`}
             title={`Read more about ${post.title}`}
