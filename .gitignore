@@ -42,3 +42,7 @@ next-env.d.ts
 # feeds are generated at build time
 /public/feeds/*.xml
 /public/feeds/*.json
+
+# Environment files
+.env
+.env.*
