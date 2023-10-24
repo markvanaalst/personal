@@ -8,6 +8,10 @@
     @apply antialiased;
   }
 
+  a {
+    @apply 
+  }
+
   h1 {
     @apply font-sans text-lg leading-tight;
   }
