@@ -3,7 +3,7 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 
-import Analytics, { GoogleAnalytics } from '@/components/analytics'
+import { GoogleAnalytics } from '@/components/analytics'
 import Footer from '@/components/navigation/footer'
 import Navbar from '@/components/navigation/navbar'
 import Providers from '@/components/providers'
@@ -41,7 +41,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <Analytics />
+          {/* <Analytics /> */}
         </Providers>
       </body>
     </html>
