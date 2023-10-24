@@ -3,7 +3,7 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 
-import Analytics from '@/components/analytics'
+import Analytics, { GoogleAnalytics } from '@/components/analytics'
 import Footer from '@/components/navigation/footer'
 import Navbar from '@/components/navigation/navbar'
 import Providers from '@/components/providers'
@@ -27,6 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body className={cn('bg-background')}>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
         <Providers>
           <header
             className={cn('flex items-center justify-center', stickyClasses)}
