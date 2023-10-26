@@ -14,7 +14,9 @@ export function getPostsByCategory(
 ): Post[] | undefined {
   const _posts = posts || allPosts
 
-  return _posts.filter((post) => post.categories.includes(categorySlug))
+  return _posts.filter(
+    (post) => post.categories.includes(categorySlug) && post.published == true,
+  )
 }
 
 export function getLatestPost(posts?: Post[]) {
@@ -28,7 +30,9 @@ export function getLatestPosts(
   skipFirst?: boolean,
   posts?: Post[],
 ) {
-  const _posts = posts || allPosts
+  const _posts =
+    posts?.filter((post) => post.published == true) ||
+    allPosts.filter((post) => post.published == true)
 
   return sortByNewest(_posts).slice(skipFirst ? 1 : 0, count)
 }

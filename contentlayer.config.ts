@@ -34,6 +34,11 @@ export const Page = defineDocumentType(() => ({
       type: 'string',
       required: true,
     },
+    published: {
+      type: 'boolean',
+      required: true,
+      default: false,
+    },
     slug: {
       type: 'string',
       required: true,
@@ -53,6 +58,11 @@ export const Post = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     slug: { type: 'string', required: true },
     date: { type: 'date', required: true },
+    published: {
+      type: 'boolean',
+      required: true,
+      default: false,
+    },
     tags: {
       type: 'list',
       of: { type: 'string' },
