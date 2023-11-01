@@ -12,3 +12,40 @@ excerpt: "Blok is Sitecore’s product design system: the UI framework and style
 published: false
 ---
 
+## What is Sitecore Blok?
+[Blok](https://blok.sitecore.com) is Sitecore's product design system. It's a collection of reusable components, guided by clear standards, that can be assembled together to build a number of different applications. Blok is the UI framework and style guide we use to build applications like [Content Hub ONE](https://developers.sitecore.com/content-management/content-hub-one) and even the [Sitecore Portal](https://portal.sitecorecloud.io/). It's publicly available, so that anyone can easily build software in the Sitecore design language.
+
+Blok is an addition to [Chakra UI](https://chakra-ui.com/), a simple, modular and accessible component library that gives you the building blocks you need to build your React applications. With Blok these components are styled in the Sitecore design language.
+
+## How I used Blok
+One of the things I am responsible for within Sitecore is the [Developer Portal](https://developers.sitecore.com/). The [Developer Portal](https://developers.sitecore.com/) is the place to go for all Sitecore developers. It's the place where you can find all the documentation, guides, and other resources you need to build Sitecore solutions. The Developer Portal was originally built with Next.js and Tailwind CSS. This worked great, but it was a lot of work to maintain and make sure it was consistent with the Sitecore design language. When Blok was released publicly it made sense for us to migrate over. This way we could make the Developer Portal more consistent with the Sitecore design language and any future updates to Blok would be automatically applied to the Developer Portal.
+
+## Getting started
+The Blok website provides detailed intructions on how to get started. You can find them [here](https://blok.sitecore.com/get-started). If you are looking for a quicker way to get setup you can use my template based on Next.js 13. Simply run the following command to get started:
+
+```bash
+npx create-next-app -e https://github.com/markvanaalst/blok-starter-next
+# or
+yarn create-next-app -e https://github.com/markvanaalst/blok-starter-next
+# or
+pnpm create-next-app -e https://github.com/markvanaalst/blok-starter-next
+```
+
+This will create a new Next.js project with Blok already setup. You can find more information about this template on [GitHub](https://github.com/markvanaalst/blok-starter-next)
+
+Once everything is installed you should be able to run the following command to start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Which would result in this screen:
+<Img src="https://github.com/markvanaalst/blok-starter-next/blob/main/public/screenshot.png?raw=true" />
+
+Obviously this is just a single page with a single component. But it shows you how easy it is to get started with Blok. While migrating the Developer Portal to Blok I was able to reuse a lot of the existing components. I only had to make some minor changes to make sure they were consistent with the Sitecore design language. This template helped me get a clean setup quickly and maybe it will help you as well.
+
+If you are looking for some example of using Blok please have a look [here](https://blok-examples.vercel.app/). This site is a collection of examples of how to use Blok. It's my personal repository of Blok examples. I use it to test out new components and to see how they work. It's not complete or definitive and I will add more examples over time. If you have any suggestions or feedback please let me know. You can find the code for this website in my [GitHub repository](https://github.com/markvanaalst/blok-examples).
