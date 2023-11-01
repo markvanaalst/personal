@@ -10,5 +10,7 @@ export const unique = <T, Key extends keyof T>(
 
 export const getBaseUrl = () => {
   const isDevelopment = process.env.NODE_ENV === 'development'
-  return isDevelopment ? 'http://localhost:3000' : 'https://mva.vercel.app'
+  return isDevelopment
+    ? 'http://localhost:3000'
+    : 'https://www.markvanaalst.com'
 }
