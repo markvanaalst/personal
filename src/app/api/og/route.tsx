@@ -2,6 +2,8 @@ import { ImageResponse } from '@vercel/og'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
+import { LogoWhite } from '@/components/ui/icons'
+
 export const runtime = 'edge'
 
 export const GET = async (req: NextRequest) => {
@@ -9,21 +11,31 @@ export const GET = async (req: NextRequest) => {
     const { searchParams } = new URL(req.url)
 
     const title = searchParams?.get('title')?.slice(0, 100)
-    const description = searchParams?.get('description')?.slice(0, 200)
+    //const description = searchParams?.get('description')?.slice(0, 200)
 
     return new ImageResponse(
       (
-        <div tw="w-screen h-screen p-32 flex flex-col justify-center bg-[#121212]">
+        <div
+          tw="w-screen h-screen p-32 flex flex-col justify-center"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #0f172A, #334155)',
+          }}
+        >
           <div tw="flex flex-col w-full items-center text-center">
             {title && (
-              <h1 tw="text-4xl font-bold text-gray-300 leading-tight">
+              <h1 tw="text-6xl font-bold text-gray-300 leading-tight">
                 {title}
               </h1>
             )}
-            {description && (
+            {/* {description && (
               <p tw="font-medium text-2xl text-gray-500">{description}</p>
-            )}
+            )} */}
           </div>
+          <LogoWhite
+            width="338"
+            height="80"
+            style={{ position: 'absolute', bottom: 40, left: 40 }}
+          />
         </div>
       ),
       {
