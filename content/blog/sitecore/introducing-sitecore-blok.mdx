@@ -2,7 +2,7 @@
 published: false
 title: "Introducing Sitecore Blok"
 slug: "introducing-sitecore-blok"
-date: "2023-10-26"
+date: "2023-11-07"
 categories:
   - "sitecore"
 tags:
@@ -18,10 +18,12 @@ excerpt: "Blok is Sitecore’s product design system: the UI framework and style
 Blok is an addition to [Chakra UI](https://chakra-ui.com/), a simple, modular and accessible component library that gives you the building blocks you need to build your React applications. With Blok these components are styled in the Sitecore design language.
 
 ## How I used Blok
-One of the things I am responsible for within Sitecore is the [Developer Portal](https://developers.sitecore.com/). The [Developer Portal](https://developers.sitecore.com/) is the place to go for all Sitecore developers. It's the place where you can find all the documentation, guides, and other resources you need to build Sitecore solutions. The Developer Portal was originally built with Next.js and Tailwind CSS. This worked great, but it was a lot of work to maintain and make sure it was consistent with the Sitecore design language. When Blok was released publicly it made sense for us to migrate over. This way we could make the Developer Portal more consistent with the Sitecore design language and any future updates to Blok would be automatically applied to the Developer Portal.
+One of the things I am responsible for within Sitecore is the [Developer Portal](https://developers.sitecore.com/). The [Developer Portal](https://developers.sitecore.com/) is the place to go for all Sitecore developers. It's the place where you can find all the documentation, guides, and other resources you need to build Sitecore solutions. The Developer Portal was originally built with Next.js and Tailwind CSS. This worked great, but it was a lot of work to maintain and make sure it was consistent with the Sitecore design language. When Blok was released publicly it made sense for us to leverage it. This way we could make the Developer Portal more consistent with the Sitecore design language and any future updates to Blok would be automatically applied to the Developer Portal.
+
+Before migration the complete project I started out prototyping the most important components we use in the Developer Portal. To do that I created a new Next.js project and installed Blok. I then started to create the components we use in the Developer Portal. This way I could test the components and make sure they worked as expected. Once I was happy with the results I started to migrate the complete Developer Portal to Blok. The Developer Portal is now more consistent with the Sitecore design language and it's easier to maintain.
 
 ## Getting started
-The Blok website provides detailed intructions on how to get started. You can find them [here](https://blok.sitecore.com/get-started). If you are looking for a quicker way to get setup you can use my template based on Next.js 13. Simply run the following command to get started:
+The Blok website provides detailed intructions on how to get started. You can find them [here](https://blok.sitecore.com/get-started). But if you are looking for a quicker way to get setup you can use the template is use, which based on Next.js 13. Simply run the following command to get started:
 
 ```bash
 npx create-next-app -e https://github.com/markvanaalst/blok-starter-next
@@ -49,4 +51,4 @@ Which would result in this screen:
 Obviously this is just a single page with a single component. But it shows you how easy it is to get started with Blok. While migrating the Developer Portal to Blok I was able to reuse a lot of the existing components. I only had to make some minor changes to make sure they were consistent with the Sitecore design language. This template helped me get a clean setup quickly and maybe it will help you as well.
 
 ## More examples
-If you are looking for some example of using Blok please have a look [here](https://blok-examples.vercel.app/). This site is a collection of examples of how to use Blok. It's my personal repository of Blok examples. I use it to test out new components and to see how they work. It's not complete or definitive and I will add more examples over time. If you have any suggestions or feedback please let me know. You can find the code for this website in my [GitHub repository](https://github.com/markvanaalst/blok-examples).
+If you are looking for some example of using Blok please have a look [here](https://blok-examples.vercel.app/). This site is a collection of examples of how to use Blok. It's my personal repository of Blok examples. I use it to test new components and to see how they work on their own. It's not complete or definitive and I will add more examples over time. If you have any suggestions or feedback please let me know. You can find the code for this website in my [GitHub repository](https://github.com/markvanaalst/blok-examples).
