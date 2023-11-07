@@ -7,7 +7,6 @@ import { PostHeader } from '@/components/blog/postHeader'
 import { components } from '@/components/mdx-components'
 import { getPost } from '@/lib/blog'
 import cn from '@/lib/cn'
-import { getMetadata } from '@/lib/metadata'
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -21,13 +20,15 @@ export async function generateMetadata({
   params: { slug: string }
 }): Promise<Metadata> {
   const post = getPost(params.slug)
-  const updatedMetadata = getMetadata({
-    title: post?.title,
-    description: post?.excerpt,
-  })
+  // const updatedMetata = getMetadata({
+  //   title: post?.title,
+  //   description: post?.excerpt,
+  // })
 
   return {
-    ...updatedMetadata,
+    //...updatedMetadata,
+    title: post?.title,
+    description: post?.excerpt,
   }
 }
 
