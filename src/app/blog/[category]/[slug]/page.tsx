@@ -5,8 +5,9 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { PostHeader } from '@/components/blog/postHeader'
 import { components } from '@/components/mdx-components'
-import { getPost } from '@/lib/blog'
+import { getPost, getPostUrl } from '@/lib/blog'
 import cn from '@/lib/cn'
+import { getBaseUrl } from '@/lib/utils'
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -25,9 +26,14 @@ export async function generateMetadata({
   //   description: post?.excerpt,
   // })
 
+  if (!post?.slug) return {}
+
   return {
     //...updatedMetadata,
     title: post?.title,
+    openGraph: {
+      url: `${getBaseUrl()}/blog/${getPostUrl(post?.slug)}`,
+    },
     description: post?.excerpt,
   }
 }
