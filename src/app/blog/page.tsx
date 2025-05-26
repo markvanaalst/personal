@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <main>
-      <PostsList posts={posts} />
+      <PostsList posts={posts}  />
     </main>
   );
 }

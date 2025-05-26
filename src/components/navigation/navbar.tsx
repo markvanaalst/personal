@@ -34,18 +34,14 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink href='/' className={navigationMenuTriggerStyle()}>
                     Home
                   </NavigationMenuLink>
-                </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/about" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    About
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink href="/about" className={navigationMenuTriggerStyle()}>
+                  About
+                </NavigationMenuLink>
               </NavigationMenuItem>
               {/* <NavigationMenuItem>
                 <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
@@ -64,11 +60,9 @@ const Navbar = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem> */}
               <NavigationMenuItem>
-                <Link href="/contact" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Contact
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink href="/contact" className={navigationMenuTriggerStyle()}>
+                  Contact
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
