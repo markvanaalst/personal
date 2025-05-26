@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
-import { ThemeToggle } from '@/components/theme/theme-toggle';
+import Navbar from '@/components/navigation/navbar';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,7 +29,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           enableSystem
           disableTransitionOnChange
         >
-          <ThemeToggle />
+          <Navbar />
+          {/* Main content area */}
+          <main className="container mx-auto px-4 py-8">
+            {children}
+          </main>
+          
           {children}
         </ThemeProvider>
       </body>
