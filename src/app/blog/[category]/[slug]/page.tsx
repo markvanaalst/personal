@@ -1,62 +1,36 @@
-import { allPosts } from 'contentlayer/generated'
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { useMDXComponent } from 'next-contentlayer/hooks'
-
-import { PostHeader } from '@/components/blog/postHeader'
-import { components } from '@/components/mdx-components'
-import { getPost, getPostUrl } from '@/lib/blog'
-import cn from '@/lib/cn'
-import { getBaseUrl } from '@/lib/utils'
+import fs from 'fs/promises';
+import path from 'path';
+import { notFound } from 'next/navigation';
+import { getPostByCategoryAndSlug } from '@/lib/blog';
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }))
+  const blogDir = path.join(process.cwd(), 'content', 'blog');
+  const files = await fs.readdir(blogDir, { recursive: true });
+
+  return files
+    .filter(file => file.endsWith('.mdx') || file.endsWith('.md'))
+    .map(file => ({
+      slug: file.replace(/\.(mdx|md)$/, '').split(path.sep),
+    }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
-  const post = getPost(params.slug)
-  // const updatedMetata = getMetadata({
-  //   title: post?.title,
-  //   description: post?.excerpt,
-  // })
+export default async function PostPage(props: { params: Promise<{ category: string, slug: string }> }) {
+  const params = await props.params;
+  const post = await getPostByCategoryAndSlug(params.category, params.slug);
 
-  if (!post?.slug) return {}
-
-  return {
-    //...updatedMetadata,
-    title: post?.title,
-    openGraph: {
-      url: `${getBaseUrl()}/blog/${getPostUrl(post?.slug)}`,
-    },
-    description: post?.excerpt,
+  if (!post) {
+    notFound();
   }
-}
-
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug)
-
-  if (!post) notFound()
-
-  const MDXContent = useMDXComponent(post.body.code)
 
   return (
-    <div className={cn('flex flex-col justify-center min-w-12 ')}>
-      {post.image != null && <PostHeader blogpost={post} />}
-      <article className={cn('w-full md:max-w-5xl mx-auto p-2 md:p-4')}>
-        <div
-          className={cn(
-            'prose max-w-4xl border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
-          )}
-        >
-          <MDXContent components={components} />
-        </div>
-      </article>
-    </div>
-  )
+    <article className="prose mx-auto">
+      <h1>{post.frontmatter.title}</h1>
+      <p className="text-sm text-gray-500">{post.frontmatter.date}</p>
+      {post.frontmatter.excerpt && <p className="italic">{post.frontmatter.excerpt}</p>}
+      <hr className="my-4" />
+      {post.content}
+    </article>
+  );
 }
+
+

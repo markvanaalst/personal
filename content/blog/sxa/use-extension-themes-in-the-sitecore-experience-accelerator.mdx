@@ -1,13 +1,13 @@
 ---
-title: "Use Extension Themes in the Sitecore Experience Accelerator"
-slug: "sxa-you-have-seen-it-read-about-it-and-now"
-date: "2019-05-06"
+title: 'Use Extension Themes in the Sitecore Experience Accelerator'
+slug: 'sxa-you-have-seen-it-read-about-it-and-now'
+date: '2019-05-06'
 categories:
-  - "sxa"
+  - 'sxa'
 tags:
-  - "extension-themes"
-  - "scaffolding"
-  - "sxa"
+  - 'extension-themes'
+  - 'scaffolding'
+  - 'sxa'
 image: /images/blog/extension-theme.png
 excerpt: One of the things people love about SXA is it's flexibility. But did you know that themes are very flexible as well?
 published: true
@@ -78,31 +78,37 @@ XA.component.header = (function ($) {
     $(window).scroll(function () {
       if ($(window).scrollTop() >= 1) {
         // Set container to fixed
-        $(".static-top-nav").addClass("fixed-header");
+        $('.static-top-nav').addClass('fixed-header');
         // Change grid settings
-        $(".fixed-header .header-container-inner .component.column-splitter .col-xs-3")
-          .removeClass("col-xs-3")
-          .addClass("col-xs-2");
-        $(".fixed-header .header-container-inner .component.column-splitter .col-xs-9")
-          .removeClass("col-xs-9")
-          .addClass("col-xs-10");
+        $('.fixed-header .header-container-inner .component.column-splitter .col-xs-3')
+          .removeClass('col-xs-3')
+          .addClass('col-xs-2');
+        $('.fixed-header .header-container-inner .component.column-splitter .col-xs-9')
+          .removeClass('col-xs-9')
+          .addClass('col-xs-10');
         // Hide mega-nav elements
-        $(".fixed-header .primary-nav-container .component.container.megadrop").removeClass("megadrop");
-        $(".fixed-header .primary-nav-container .component.navigation.navigation-title").removeClass("megadrop-nav");
-        $(".fixed-header .primary-nav-container .component.navigation.navigation-title").addClass(
-          "navigation-main navigation-main-horizontal"
+        $('.fixed-header .primary-nav-container .component.container.megadrop').removeClass(
+          'megadrop'
+        );
+        $(
+          '.fixed-header .primary-nav-container .component.navigation.navigation-title'
+        ).removeClass('megadrop-nav');
+        $('.fixed-header .primary-nav-container .component.navigation.navigation-title').addClass(
+          'navigation-main navigation-main-horizontal'
         );
       } else {
         // Reset all changes
-        $(".static-top-nav").removeClass("fixed-header");
-        $(".header-container-inner .component.column-splitter .col-xs-2").removeClass("col-xs-2").addClass("col-xs-3");
-        $(".header-container-inner .component.column-splitter .col-xs-10")
-          .removeClass("col-xs-10")
-          .addClass("col-xs-9");
-        $(".primary-nav-container .component.container").addClass("megadrop");
-        $(".primary-nav-container .component.navigation.navigation-title").addClass("megadrop-nav");
-        $(".primary-nav-container .component.navigation.navigation-title").removeClass(
-          "navigation-main navigation-main-horizontal"
+        $('.static-top-nav').removeClass('fixed-header');
+        $('.header-container-inner .component.column-splitter .col-xs-2')
+          .removeClass('col-xs-2')
+          .addClass('col-xs-3');
+        $('.header-container-inner .component.column-splitter .col-xs-10')
+          .removeClass('col-xs-10')
+          .addClass('col-xs-9');
+        $('.primary-nav-container .component.container').addClass('megadrop');
+        $('.primary-nav-container .component.navigation.navigation-title').addClass('megadrop-nav');
+        $('.primary-nav-container .component.navigation.navigation-title').removeClass(
+          'navigation-main navigation-main-horizontal'
         );
       }
     });
@@ -111,7 +117,7 @@ XA.component.header = (function ($) {
   return api;
 })(jQuery, document);
 
-XA.register("header", XA.component.header);
+XA.register('header', XA.component.header);
 ```
 
 As you have seen in the JavaScript it requires an element with the class "static-top-nav". To make this available to the user I will create a custom style that

@@ -1,6 +1,5 @@
-import { allPosts } from 'contentlayer/generated'
-
-import categories from '@/config/blog-categories.json'
+import { getAllPosts } from './blog'
+import categories from '@content/blog/categories.json'
 
 const { categoryList } = categories
 
@@ -14,16 +13,16 @@ export interface Category extends categoryListItem {
   count: number
 }
 
-export function getCategories(): Category[] {
-  const _posts = allPosts
-  let results: Category[] = []
+export async function getCategories(): Promise<Category[]> {
+  const _posts = await getAllPosts();
+  const results: Category[] = [];
 
   categoryList.map((category: categoryListItem) => {
     const cat: Category = {
       name: category.name,
       slug: category.slug,
       image: category.image,
-      count: _posts.filter((post) => post.categories.includes(category.slug))
+      count: _posts.filter((post) => post.frontmatter.categories.includes(category.slug))
         .length,
     }
     results.push(cat)

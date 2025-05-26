@@ -1,7 +1,7 @@
 'use client'
+import { JSX } from 'react'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 
-/* eslint-disable react/no-unknown-property */
 type VideoProps = {
   youTubeId: string
   isPlayList?: boolean

@@ -1,13 +1,13 @@
 ---
-title: "Creating a Item Editor"
-slug: "creating-a-item-editor"
-date: "2009-08-19"
+title: 'Creating a Item Editor'
+slug: 'creating-a-item-editor'
+date: '2009-08-19'
 categories:
-  - "sitecore"
+  - 'sitecore'
 tags:
-  - "item-editor"
-  - "sitecore"
-  - "user-interface"
+  - 'item-editor'
+  - 'sitecore'
+  - 'user-interface'
 excerpt: For a blog module that I am developing I wanted to create an custom item editor. As you might know those are the tabs in the Content Editor.
 published: true
 ---
@@ -31,28 +31,28 @@ to use the default save button of the content editor. I might be confusing for a
 
 Unfortunately, Sitecore provides no default solution for capturing that event. Thanks to Eugene Omelnitsky from [Sitecore Support](http://support.sitecore.net)
 (for pointing me in the right direction) I found a solution. You can adapt to the Save event using javascript. I then used
-[JQuery](http://www.jquery.com "JQuery") to do an ajax call to the server and execute my save method.
+[JQuery](http://www.jquery.com 'JQuery') to do an ajax call to the server and execute my save method.
 
 This is the Javascript function which captures the save event and triggers an ajax call to my page method.
 
 ```js
 function scGetFrameValue(value, request) {
-  if (request.parameters == "contenteditor:save" || request.parameters == "item:save") {
+  if (request.parameters == 'contenteditor:save' || request.parameters == 'item:save') {
     $.ajax({
-      type: "POST",
-      url: "EntryEditor.aspx/SaveItem",
+      type: 'POST',
+      url: 'EntryEditor.aspx/SaveItem',
       data:
         "{ e: '" +
-        $("#EditorIntroduction").val() +
+        $('#EditorIntroduction').val() +
         "', title: '" +
-        $("#tbTitle").val() +
+        $('#tbTitle').val() +
         "', content: '" +
-        $("#EditorContent").val() +
+        $('#EditorContent').val() +
         "' }",
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
       success: function (msg) {
-        alert("succes!");
+        alert('succes!');
       },
     });
   }

@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import {
   enrichTweet,
   QuotedTweet,
@@ -12,7 +13,6 @@ import {
 } from 'react-tweet'
 import type { Tweet } from 'react-tweet/api'
 
-import cn from '@/lib/cn'
 
 type Props = {
   tweet: Tweet

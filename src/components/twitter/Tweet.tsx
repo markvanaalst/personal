@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { TweetNotFound, type TweetProps, TweetSkeleton } from 'react-tweet'
 import { getTweet } from 'react-tweet/api'
+import { CustomTweet } from './customTweet'
 
-import { CustomTweet } from './CustomTweet'
 
 const TweetContent = async ({ id, components, onError }: TweetProps) => {
   const tweet = id
@@ -28,7 +28,6 @@ export const Tweet = ({
   ...props
 }: TweetProps) => (
   <Suspense fallback={fallback}>
-    {/* @ts-ignore: Async components are valid in the app directory */}
     <TweetContent {...props} />
   </Suspense>
 )
