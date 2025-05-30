@@ -17,10 +17,10 @@ export default function PostsList({
   className,
 }: PostsListProps) {
   return (
-    <div className={`w-full py-6 md:py-6 lg:py-12${className}`}>
+    <div className={`py-6 w-full md:py-6 lg:py-12${className}`}>
       <div className="container px-4 md:px-6">
-        <h3 className="text-5xl font-light mb-8">My writings</h3>
-        <div className='grid md:grid-cols-3 gap-8'>
+        <h3 className="mb-8 font-serif text-5xl font-caveat">My writings</h3>
+        <div className='grid gap-8 md:grid-cols-3'>
                 
         {posts.slice(skip, limit + skip).map((post, index) => (
           <BlogCard post={post} key={index} />
