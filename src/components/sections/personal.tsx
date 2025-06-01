@@ -17,15 +17,16 @@ export const Personal = () => {
                             </h1>
                             <p className="text-xl text-muted-foreground">Experienced web industry professional</p>
                         </div>
-                        <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                        <p className="max-w-[600px] text-muted-foreground md:text-xl font-light">
                             Helping businesses build relationships with their audiences by focusing on developer relations and experience.
                         </p>
                         <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                            <Button>
-                                View My Work
-                                <ArrowRight className="ml-2 h-4 w-4" />
+                            <Button asChild className='cursor-pointer'>
+                                <Link href="/projects" >View My Work
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
                             </Button>
-                            <Button variant="outline">Contact Me</Button>
+                            <Button variant="outline" className='cursor-pointer' asChild><Link href="/contact" >Contact Me</Link></Button>
                         </div>
                         <div className="flex gap-4">
                             <Link href="https://linkedin.com" className="text-muted-foreground hover:text-foreground">
@@ -41,9 +42,9 @@ export const Personal = () => {
                     <div className="flex items-center justify-center order-1 md:order-2">
                         <Image
                             src="/images/mva_profile.webp"
-                            width={400}
-                            height={400}
-                            alt="Alex Morgan"
+                            width={300}
+                            height={300}
+                            alt="Mark van Aalst"
                             className="aspect-square overflow-hidden rounded-full object-cover border-8 border-background shadow-xl"
                         />
                     </div>

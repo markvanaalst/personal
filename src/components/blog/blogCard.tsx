@@ -1,27 +1,29 @@
 import { Post } from '@/types/post';
-import { Card, CardContent, CardFooter, CardTitle } from '../ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '../ui/button';
 
 export interface BlogCardProps {
   post: Post;
 }
 
 export const BlogCard = ({ post }: BlogCardProps) => {
-    return (
-
-    <Card>
-      <CardTitle>
-        <h2 className="px-4">{post.frontmatter.title}</h2>
-      </CardTitle>
-      <CardContent className="px-4">{post.frontmatter.excerpt}</CardContent>
+  return (
+    <Card className="max-w-xs shadow-none">
+      <CardHeader className="px-5 inline flex-row items-center gap-3 font-semibold">
+        <div>{post.frontmatter.title}</div>
+      </CardHeader>
+      <CardContent className="text-[15px] text-muted-foreground px-5 h-full">
+        <p>{post.frontmatter.excerpt}</p>
+      </CardContent>
       <CardFooter>
-        <a
-          href={`/blog/${post.frontmatter.slug}`}
-          className="text-blue-600 dark:text-blue-400 mt-4 inline-block"
-        >
-          Read more
-        </a>
+        <Button className="outline" asChild>
+          <Link href={`/blog/${post.frontmatter.slug}`}>
+            Read more <ArrowRight />
+          </Link>
+        </Button>
       </CardFooter>
     </Card>
-    
   );
 };
