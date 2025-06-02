@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export default async function PostPage(props: { params: Promise<{ category: string, slug: string }> }) {
   const params = await props.params;
   const post = await getPostByCategoryAndSlug(params.category, params.slug);
-
+console.log('Post:', post);
   if (!post) {
     notFound();
   }

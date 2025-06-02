@@ -19,7 +19,7 @@ export const BlogCard = ({ post }: BlogCardProps) => {
       </CardContent>
       <CardFooter>
         <Button variant="outline" effect="hoverUnderline" icon={ArrowRight} iconPlacement="right" asChild>
-          <Link href={`/blog/${post.frontmatter.slug}`}>
+          <Link href={`/blog/${post.frontmatter.categories[0]}/${post.frontmatter.slug}`}>
             Read more
           </Link>
         </Button>

@@ -10,12 +10,16 @@ export interface PostsListProps {
   posts: Post[];
   itemsPerPage?: number;
   className?: string;
+  title?: string
+  hidePaging?: boolean;
 }
 
 export default function PostsList({
   posts,
   itemsPerPage = 6,
   className,
+  hidePaging = false,
+  title = 'My writings',
 }: PostsListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
@@ -44,20 +48,22 @@ export default function PostsList({
   return (
     <div className={`py-6 w-full md:py-6 lg:py-12 ${className || ''}`}>
       <div className="container px-4 md:px-6">
-        <h3 className="mb-8 font-serif text-5xl font-caveat">My writings</h3>
+        <h3 className="mb-8 font-serif text-5xl font-caveat">{title}</h3>
         <div className='grid gap-8 md:grid-cols-3'>
           {currentPosts.map((post, index) => (
             <BlogCard post={post} key={index} />
           ))}
         </div>
 
-        <PostListPaging
-          totalItems={posts.length}
-          itemsPerPage={itemsPerPage}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          queryParamName="page"
-        />
+        {!hidePaging && (
+          <PostListPaging
+            totalItems={posts.length}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            queryParamName="page"
+          />
+        )}
       </div>
     </div>
   );

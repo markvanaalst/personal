@@ -4,7 +4,6 @@ import PostsList from '@/components/blog/postsList';
 import { getCategories } from '@/lib/categories';
 
 export async function generateStaticParams() {
-
   const categories = await getCategories();
 
   return categories.map(category => ({
@@ -12,9 +11,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function PostPage(props: { params: Promise<{ category: string }> }) {
+export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
-  const posts = await getPostsByCategory(params.category);
+  const posts = await getPostsByCategory(params.slug);
 
   if (!posts || posts.length === 0) {
   // If no posts found for the category, return a 404 page
@@ -24,7 +23,7 @@ export default async function PostPage(props: { params: Promise<{ category: stri
   return (
     <main>
       <h1>Blog Posts by category</h1>
-      <PostsList posts={posts} />
+      <PostsList posts={posts} title={`My writings on ${params.slug}`} />
     </main>
   );
 }

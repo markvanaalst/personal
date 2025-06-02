@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <div>
       <Personal />
-      <PostsList itemsPerPage={3} posts={posts} />
+      <PostsList itemsPerPage={3} posts={posts} hidePaging />
     </div>
   );
 }
