@@ -18,9 +18,9 @@ export const BlogCard = ({ post }: BlogCardProps) => {
         <p>{post.frontmatter.excerpt}</p>
       </CardContent>
       <CardFooter>
-        <Button className="outline" asChild>
+        <Button variant="outline" effect="hoverUnderline" icon={ArrowRight} iconPlacement="right" asChild>
           <Link href={`/blog/${post.frontmatter.slug}`}>
-            Read more <ArrowRight />
+            Read more
           </Link>
         </Button>
       </CardFooter>

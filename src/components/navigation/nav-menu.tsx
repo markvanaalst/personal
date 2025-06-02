@@ -40,7 +40,7 @@ export const NavMenu = (props: NavigationMenuProps) => (
               <Link
                 href={item.url}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground"
-              >
+                legacyBehavior>
                 {item.name}
               </Link>
             </NavigationMenuLink>
