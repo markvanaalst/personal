@@ -29,7 +29,7 @@ export default function PostsList({
         setCurrentPage(page);
       }
     }
-  }, []);
+  }, [itemsPerPage, posts.length, searchParams]);
   
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;

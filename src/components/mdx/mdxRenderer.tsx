@@ -9,7 +9,7 @@ import YouTube from '../video/youtube';
 import { Tweet } from 'react-tweet';
 
 export const components = {
-a: ({ href, children }: { href: string; children: React.ReactNode }) => <Link href={href} legacyBehavior>{children}</Link>,
+a: ({ href, children }: { href: string; children: React.ReactNode }) => <Link href={href} >{children}</Link>,
   h2: ({ children }: { children: React.ReactNode }) => <h2>{children}</h2>,
   YouTube: ({ youTubeId }: { youTubeId: string }) => <YouTube youTubeId={youTubeId} />,
   Img: ({ ...props }) => {

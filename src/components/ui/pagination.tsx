@@ -62,7 +62,7 @@ function PaginationLink({
         className
       )}
       {...props}
-      legacyBehavior />
+       />
   );
 }
 

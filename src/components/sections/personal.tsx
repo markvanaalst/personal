@@ -38,14 +38,14 @@ export const Personal = () => {
               <Link
                 href="https://linkedin.com"
                 className="text-muted-foreground hover:text-foreground"
-                legacyBehavior>
+                >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
               <Link
                 href="https://github.com"
                 className="text-muted-foreground hover:text-foreground"
-                legacyBehavior>
+                >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>

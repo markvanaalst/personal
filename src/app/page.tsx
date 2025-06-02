@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <div>
       <Personal />
-      <PostsList limit={3} posts={posts} skip={0} />
+      <PostsList itemsPerPage={3} posts={posts} />
     </div>
   );
 }
