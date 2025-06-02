@@ -18,7 +18,7 @@ export const BlogCard = ({ post }: BlogCardProps) => {
         <p>{post.frontmatter.excerpt}</p>
       </CardContent>
       <CardFooter>
-        <Button variant="outline" effect="hoverUnderline" icon={ArrowRight} iconPlacement="right" asChild>
+        <Button variant="outline" effect="shineHover" icon={ArrowRight} iconPlacement="right" asChild>
           <Link href={`/blog/${post.frontmatter.categories[0]}/${post.frontmatter.slug}`}>
             Read more
           </Link>
