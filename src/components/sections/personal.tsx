@@ -23,7 +23,7 @@ export const Personal = () => {
               <Button
                 asChild
                 className="cursor-pointer"
-                effect={'expandIcon'}
+                effect={'shineHover'}
                 icon={ArrowRight}
                 iconPlacement="right"
                 variant="default"

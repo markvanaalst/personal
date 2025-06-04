@@ -49,7 +49,7 @@ export default function PostsList({
     <div className={`py-6 w-full md:py-6 lg:py-12 ${className || ''}`}>
       <div className="container px-4 md:px-6">
         <h3 className="mb-8 font-serif text-5xl font-caveat">{title}</h3>
-        <div className='grid gap-8 md:grid-cols-3'>
+        <div className='grid md:grid-cols-3'>
           {currentPosts.map((post, index) => (
             <BlogCard post={post} key={index} />
           ))}
