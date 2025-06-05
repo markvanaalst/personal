@@ -1,8 +1,12 @@
 import { Post } from '@/types/post';
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
+import { Badge } from '../ui/badge';
 
 export interface BlogCardProps {
   post: Post;
@@ -10,14 +14,30 @@ export interface BlogCardProps {
 
 export const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <Card className="max-w-xs shadow-none">
-      <CardHeader className="px-5 inline flex-row items-center gap-3 font-semibold">
-        <div>{post.frontmatter.title}</div>
+    <Card className={cn('border-none shadow-none p-0 bg-background')}>
+      <CardHeader className="inline flex-row items-center gap-3 p-0 font-semibold">
+        <div className="relative">  
+        <Image
+            src={post.frontmatter.image ?? '/images/blog/StockSnap_ZTXOFYBPSL-scaled.jpg'}
+            alt={post.frontmatter.title}
+            className="object-cover w-full h-64 rounded-lg dark:opacity-90"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: '100%', height: '200px' }} // optional
+        />
+        <Badge className="absolute flex top-4 right-4 opacity-80">
+          <Link href={`/blog/category/${post.frontmatter.categories[0]}`}>
+            {post.frontmatter.categories[0]}
+          </Link>
+        </Badge>
+</div>
+        <h3 className='mt-4'>{post.frontmatter.title}</h3>
       </CardHeader>
-      <CardContent className="text-[15px] text-muted-foreground px-5 h-full">
+      <CardContent className="text-[15px] text-muted-foreground p-0 h-full">
         <p>{post.frontmatter.excerpt}</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className='p-0'>
         <Button variant="outline" effect="shineHover" icon={ArrowRight} iconPlacement="right" asChild>
           <Link href={`/blog/${post.frontmatter.categories[0]}/${post.frontmatter.slug}`}>
             Read more

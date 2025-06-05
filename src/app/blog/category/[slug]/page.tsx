@@ -21,8 +21,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
   }
 
   return (
-    <main>
-      <h1>Blog Posts by category</h1>
+    <main className="min-h-[calc(100vh-20rem)] flex flex-col items-center py-8 px-6 max-w-7xl mx-auto">
       <PostsList posts={posts} title={`My writings on ${params.slug}`} />
     </main>
   );

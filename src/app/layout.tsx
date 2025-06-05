@@ -31,10 +31,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           disableTransitionOnChange
         >
           <Navbar />
-
-          <main className="min-h-[calc(100vh-20rem)] flex flex-col items-center py-8 px-6 max-w-7xl mx-auto">
-            {children}
-          </main>
+          
+          {children}
 
           <Footer />
         </ThemeProvider>
