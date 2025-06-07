@@ -1,10 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { notFound } from 'next/navigation';
-import { getPostByCategoryAndSlug } from '@/lib/blog';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
-import { getPageBySlug } from '@/lib/pages';
+import { getPageFileBySlug } from '@/lib/pages';
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'content', 'blog');
@@ -21,8 +19,8 @@ export default async function PostPage(props: {
   params: Promise<{ slug: string[] }>;
 }) {
   const params = await props.params;
-  const page = await getPageBySlug(params.slug);
-
+  const page = await getPageFileBySlug(params.slug);
+  console.log('Page:', params.slug);
   if (!page) {
     notFound();
   }
