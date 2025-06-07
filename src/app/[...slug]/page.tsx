@@ -26,15 +26,14 @@ export default async function PostPage(props: {
   }
 
   return (
-    <div className={cn('flex flex-col justify-center min-h-[70vh]')}>
-      <article className={cn('max-w-5xl mx-auto')}>
+    <div className={cn('flex flex-col py-16 h-[calc(100vh-160px)] max-w-5xl mx-auto')}>
+      <article className={cn('w-full mx-auto')}>
         <div
           className={cn(
-            'prose max-w-4xl border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
+            'prose w-full border-gray-500 dark:prose-invert prose-img:rounded-md prose-img:border-1 prose-img:shadow-xl prose-img:my-8 prose-table:-mx-20 prose-table:w-fit',
           )}
               >
-                  <h1>      {page.frontmatter.title}
-                  </h1>
+                  <h1>{page.frontmatter.title}</h1>
                   
                   {page.content}
         </div>
