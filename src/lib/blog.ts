@@ -8,6 +8,17 @@ import { parsePostDate } from './date';
 // Constants
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
+export async function getPostUrl(post: Post): Promise<string> {
+
+  if (post == undefined) return ''
+
+  if (post.frontmatter.categories.length > 0) {
+    return `/blog/${post.frontmatter.categories[0].replace(' ', '-')}/${post.frontmatter.slug}`
+  }
+  return `/blog/${post.frontmatter.slug}`
+}
+
+
 /**
  * Recursively finds all MDX files in the /content/blog directory and its subdirectories
  * @returns Promise containing an array of paths to MDX files relative to the content/blog folder
@@ -74,6 +85,30 @@ export async function getPostsByCategory(category: string): Promise<Post[] | nul
     return null;
   }
 }
+
+export async function getLatestPosts(
+  count: number = 10,
+  skipFirst?: boolean,
+): Promise<Post[]> {
+  // Get all posts, or return an empty array if there are no posts
+  const _posts = await getAllPosts();
+  
+  if (_posts.length === 0) {
+    return [];
+  } 
+
+  //  // Sort posts by date (newest first) and slice the array to get the latest posts 
+  // Sort posts by date (newest first)
+  const sortedPosts = _posts.sort((a, b) => {
+    const dateA = parsePostDate(a.frontmatter.date);
+    const dateB = parsePostDate(b.frontmatter.date);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  // Slice the array to get the latest posts
+  return sortedPosts.slice(skipFirst ? 1 : 0, skipFirst ? count + 1 : count);
+}
+
 
 
 /**
