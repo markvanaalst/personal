@@ -38,8 +38,8 @@ export const BlogCard = ({ post }: BlogCardProps) => {
         <p>{post.frontmatter.excerpt}</p>
       </CardContent>
       <CardFooter className='p-0'>
-        <Button variant="default" effect="shineHover" icon={ArrowRight} iconPlacement="right" asChild>
-          <Link href={`/blog/${post.frontmatter.categories[0]}/${post.frontmatter.slug}`}>
+        <Button variant="link" effect="hoverUnderline" icon={ArrowRight} iconPlacement="right" asChild className='p-0'>
+          <Link href={`/blog/${post.frontmatter.categories[0]}/${post.frontmatter.slug}`} className='p-0'>
             Read more
           </Link>
         </Button>

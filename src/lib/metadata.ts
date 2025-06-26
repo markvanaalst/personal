@@ -106,13 +106,13 @@ export const getMetadata = ({
       name: defaultMetadata.author.name,
     },
     keywords: mapKeywords(keywords),
-    viewport: {
-      initialScale: 1,
-      minimumScale: 1,
-      maximumScale: 5,
-      userScalable: true,
-      width: 'device-width',
-    },
+    // viewport: {
+    //   initialScale: 1,
+    //   minimumScale: 1,
+    //   maximumScale: 5,
+    //   userScalable: true,
+    //   width: 'device-width',
+    // },
     robots,
     openGraph: {
       ...openGraph,
