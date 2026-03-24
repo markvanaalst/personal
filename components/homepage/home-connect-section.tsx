@@ -23,7 +23,7 @@ export function HomeConnectSection({ setRef }: HomeConnectSectionProps) {
         </div>
 
         <div className="space-y-6 sm:space-y-8">
-          <div className="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
+          <div className="text-sm text-muted-foreground font-mono">MOST USED</div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {typedResumeData.contact.social.map((social: ResumeSocialItem) => {

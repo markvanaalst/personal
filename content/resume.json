@@ -5,8 +5,8 @@
   "url": "https://www.markvanaalst.com",
   "location": "Ede, Netherlands",
   "locationLink": "https://www.google.com/maps/place/Ede,+Netherlands",
-  "description": "Designing an AI-native documentation system that powers better developer and authoring experiences.",
-  "summary": "TDB",
+  "description": "Driving AI-first developer experience and documentation platforms",
+  "summary": "Personal website with articles, resume, and thoughts on AI, engineering, platforms and automation in general.",
   "avatarUrl": "/me.png",
   "skills": [
     { "name": "React", "icon": "ReactLight" },
