@@ -1,11 +1,11 @@
 ---
-title: "Extending the Item Buckets Search Operations"
-slug: "extending-the-item-buckets-search-operations"
-date: "2013-04-01"
+title: 'Extending the Item Buckets Search Operations'
+slug: 'extending-the-item-buckets-search-operations'
+date: '2013-04-01'
 categories:
-  - "sitecore"
+  - 'sitecore'
 tags:
-  - "item-buckets-sitecore"
+  - 'item-buckets-sitecore'
 
 excerpt: As you might know you can use Item Buckets in Sitecore 7 to execute operations on multiple items at the same time.
 published: true
@@ -26,8 +26,9 @@ We go to the Content Editor and navigate to the "/sitecore/system/Settings/Bucke
 which you can create the item. For this purpose we will create a item underneath "Information Architecture".
 
 <Img src="/images/blog/search-operations-2.png" />
-Notice the value in the "Type" field. This is a command that needs to be mapped with the class and assembly that contains the logic. The mapping is handled by
-configuration files within the App_Config\\Include folder. Create a new config file that contains the following xml
+Notice the value in the "Type" field. This is a command that needs to be mapped with the class and
+assembly that contains the logic. The mapping is handled by configuration files within the
+App_Config\\Include folder. Create a new config file that contains the following xml
 
 ```xml
 <configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">

@@ -1,14 +1,14 @@
 ---
-title: "Configure a authoring server as publishing instance"
-slug: "configure-a-authoring-server-as-publishing-instance"
-date: "2012-01-12"
+title: 'Configure a authoring server as publishing instance'
+slug: 'configure-a-authoring-server-as-publishing-instance'
+date: '2012-01-12'
 categories:
-  - "sitecore"
+  - 'sitecore'
 tags:
-  - "authoring-server"
-  - "infrastructure"
-  - "publishing"
-  - "servers"
+  - 'authoring-server'
+  - 'infrastructure'
+  - 'publishing'
+  - 'servers'
 excerpt: This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content authoring servers and publish it to the content delivery servers.
 published: true
 ---
@@ -20,7 +20,7 @@ In my example underneath we have an environment with multiple content management
 editor publishes one or more items from the CM to the CD servers this will all run on that CM server. This can cause a slower work environment for the content
 editors.
 
-[![This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content authoring servers and publish it to the content delivery servers.](/images/blog/m-without-pi.png "CM Environment without a pulishing instance")](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-without-pi.png" />
+[![This week I got a question from one of our partners about a publishing server. They have an environment in which the authors edit the content on several content authoring servers and publish it to the content delivery servers.](/images/blog/m-without-pi.png 'CM Environment without a pulishing instance')](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-without-pi.png" />
 
 In Sitecore 6.3 we introduced an option to configure a CM server as a publishing server. The only operations the publishing instance does are related to the
 publishing mechanism. So for performance reasons you can enable a CM server to be a (dedicated) publishing instance, and keep the CM servers solely for content
@@ -43,7 +43,7 @@ You can check for the instance name in the Sitecore log file. There will be a lo
 When you know the instance name of the publishing server you can look for the settings Publishing.PublishingInstance in the ScalabilitySettings.config file. In
 the value of the setting you enter the name of the configured publishing instance.
 
-[![In Sitecore 6.3 we introduced an option to configure a CM server as a publishing server. The only operations the publishing instance does are related to the publishing mechanism. So for performance reasons you can enable a CM server to be a (dedicated) publishing instance, and keep the CM servers solely for content editing. This will optimize the performance for the content authoring servers, so the content editor won’t have performance issues related to publishing.](/images/blog/m-with-pi.png "CM Environment with publishing instance")](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-with-pi.png" />
+[![In Sitecore 6.3 we introduced an option to configure a CM server as a publishing server. The only operations the publishing instance does are related to the publishing mechanism. So for performance reasons you can enable a CM server to be a (dedicated) publishing instance, and keep the CM servers solely for content editing. This will optimize the performance for the content authoring servers, so the content editor won’t have performance issues related to publishing.](/images/blog/m-with-pi.png 'CM Environment with publishing instance')](http://www.markvanaalst.com/wp-content/uploads/2012/01/m-with-pi.png" />
 
 And now you have an environment like illustrated above. In this example we have two dedicated content management server and one separate publishing instance
 which handles all publishing operations.  At this moment the content management servers send their local events to the event queue in the remote instance which

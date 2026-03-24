@@ -1,0 +1,34 @@
+{
+    "topNavbar": [
+        {
+            "label": "About",
+            "href": "/about"
+        },
+        {
+            "label": "Blog",
+            "href": "/blog"
+        },
+        {
+            "label": "Resume",
+            "href": "/resume"
+        }
+    ],
+    "footer": [
+        {
+            "title": "About",
+            "href": "/about"
+        },
+        {
+            "title": "Blog",
+            "href": "/blog"
+        },
+        {
+            "title": "Resume",
+            "href": "/resume"
+        },
+        {
+            "title": "Projects",
+            "href": "/projects"
+        }
+    ]
+}

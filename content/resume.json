@@ -1,0 +1,196 @@
+{
+  "firstName": "Mark",
+  "lastName": "van Aalst",
+  "initials": "MvA",
+  "url": "https://www.markvanaalst.com",
+  "location": "Ede, Netherlands",
+  "locationLink": "https://www.google.com/maps/place/Ede,+Netherlands",
+  "description": "Designing an AI-native documentation system that powers better developer and authoring experiences.",
+  "summary": "TDB",
+  "avatarUrl": "/me.png",
+  "skills": [
+    { "name": "React", "icon": "ReactLight" },
+    { "name": "Next.js", "icon": "NextjsIconDark" },
+    { "name": "Typescript", "icon": "Typescript" },
+    { "name": "Node.js", "icon": "Nodejs" },
+    { "name": "C#", "icon": "Csharp" }
+  ],
+  "skillCategories": [
+    {
+      "title": "Frontend",
+      "skills": [
+        { "name": "React", "level": 95 },
+        { "name": "TypeScript", "level": 90 },
+        { "name": "Next.js", "level": 88 },
+        { "name": "Tailwind CSS", "level": 92 },
+        { "name": "JavaScript", "level": 95 }
+      ]
+    },
+    {
+      "title": "Backend",
+      "skills": [
+        { "name": "Node.js", "level": 85 },
+        { "name": "Python", "level": 78 },
+        { "name": "C#", "level": 80 },
+        { "name": "GraphQL", "level": 75 },
+        { "name": "REST APIs", "level": 90 }
+      ]
+    },
+    {
+      "title": "Tools & Others",
+      "skills": [
+        { "name": "Git", "level": 88 },
+        { "name": "VS Code", "level": 90 },
+        { "name": "Vercel", "level": 70 },
+        { "name": "Azure", "level": 67 },
+        { "name": "CI/CD", "level": 78 }
+      ]
+    }
+  ],
+  "contact": {
+    "email": "markvanaalst@gmail.com",
+    "social": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/markvanaalst",
+        "icon": "github",
+        "navbar": true
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/markvanaalst",
+        "icon": "linkedin",
+        "navbar": true
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Sitecore",
+      "href": "https://www.sitecore.com",
+      "badges": [
+        "Architecture",
+        "AI",
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Microsoft"
+      ],
+      "location": "Zeist / Amsterdam / Remote",
+      "title": "Director, Developer and Documentation Platforms",
+      "logoUrl": "/sitecore.svg",
+      "start": "2012",
+      "end": "current",
+      "description": "Software vendor specializing in digital experience management software, with a focus on content management, digital marketing, and customer data platforms. Sitecore's products are used by organizations worldwide to create and manage personalized digital experiences across various channels.",
+      "roles": [
+        {
+          "title": "Director, Documentation and Developer Platforms",
+          "start": "March 2025",
+          "end": "current",
+          "description": "As Director, Developer and Documentation Platforms, I manage the complete documentation infrastructure and lead its ongoing evolution. I am currently driving a full rebuild of the platform to support AI-assisted documentation workflows, enabling faster authoring and greater consistency across all content."
+        },
+        {
+          "title": "Director, Developer Platforms",
+          "start": "March 2022",
+          "end": "March 2025",
+          "description": "Following multiple acquisitions and a rapidly expanding product portfolio beyond the core CMS, I took on a broader role focused on developer experience across all Sitecore products. I led the launch of a centralized developer portal to guide partners and customers to the right resources, while helping coordinate internal efforts to consolidate fragmented channels from acquired companies.\n\nBuilding on this foundation, I initiated and delivered a global, cross-product changelog that enabled product teams to publish release information in a consistent, unified way. I later launched a public product roadmap, integrated with internal systems to surface up-to-date roadmap information across the entire product suite."
+        },
+        {
+          "title": "Senior Developer Advocate",
+          "start": "August 2021",
+          "end": "March 2022",
+          "description": "Expanding focus from SXA to broader developer experience initiatives"
+        },
+        {
+          "title": "Senior Technical Evangelist",
+          "start": "August 2019",
+          "end": "July 2021",
+          "description": "Continuation of earlier activities with a focus on SXA. Created a 20-part online tutorial series, an example website implementation, and multiple articles on SXA. Location: Global."
+        },
+        {
+          "title": "Technical Evangelist",
+          "start": "March 2016",
+          "end": "July 2019",
+          "description": "Engaged the technical audience by educating, enabling, and exciting them about Sitecore products via conferences, webinars, videos, blog posts, and other content channels. Served as a bridge between the product organization and developers implementing Sitecore. Location: Global."
+        },
+        {
+          "title": "Presales / Solutions Architect",
+          "start": "August 2014",
+          "end": "February 2016",
+          "description": "Worked with sales and prospects to build strong technical understanding of Sitecore offerings and implementations. Location: Netherlands."
+        },
+        {
+          "title": "Solution Architect / Technical Consultant",
+          "start": "January 2012",
+          "end": "July 2014",
+          "description": "Worked with partners and customers on implementing and integrating Sitecore, and on technical and business decisions. Delivered training for developers and system administrators, supported sales, published blog posts, hosted webinars, and presented externally. Built proofs of concept and demonstrations, and created shared source components such as WeBlog, DMS Gutters, and custom fields. Responsibilities included defining Sitecore architecture, developing sales propositions, supporting local sales, and advising customers and partners. Location: Netherlands."
+        }
+      ]
+    },
+    {
+      "company": "Maxdoro",
+      "href": "https://www.maxdoro.nl",
+      "badges": [],
+      "location": "Amersfoort, Netherlands",
+      "title": "Senior Software Developer",
+      "logoUrl": "/maxdoro.png",
+      "start": "2010",
+      "end": "2011",
+      "description": "Maxdoro is a full-service web company working with local and international organizations, specializing in Sitecore and Umbraco CMS, online strategies, mobile applications, and augmented reality. ",
+      "roles": [{
+          "title": "Senior Developer",
+          "start": "October 2010",
+          "end": "December 2011",
+          "description": "Worked as senior developer responsible for overall development, mentoring developers, and advising on best practices and architecture. Responsibilities included writing technical design, developing and documenting software, managing planning, organizing requirement sessions, motivating developers, and helping sales with offers."
+        }]
+    },
+    {
+      "company": "Vicrea",
+      "href": "https://www.vicrea.nl",
+      "badges": [],
+      "location": "Amersfoort, Netherlands",
+      "title": "Software Engineer",
+      "logoUrl": "/vicrea.png",
+      "start": "2010",
+      "end": "2010",
+      "description": "IT company that specializes in software and services for geospatial data (Geo/GIS) and data integration, mainly for governments and infrastructure organizations.",
+      "roles": [{
+          "title": "Senior Developer",
+          "start": "April 2010",
+          "end": "December 2010",
+          "description": "Worked as senior developer responsible for overall development and advising on best practices and architecture. Responsibilities included writing technical design, developing and documenting software."
+        }]
+    },
+    {
+      "company": "Evident Interactive",
+      "href": "https://www.evident.nl",
+      "badges": [],
+      "location": "Utrecht, Netherlands",
+      "title": "Lead Developer",
+      "logoUrl": "/evident.jpg",
+      "start": "2006",
+      "end": "2010",
+      "description": "Evident Interactive is a digital agency specializing in web development, mobile applications, and digital strategy. They work with clients across various industries to create innovative digital solutions that drive business growth and enhance user experiences.",
+      "roles": [
+        {
+          "title": "Senior/Lead Developer",
+          "start": "October 2008",
+          "end": "April 2010",
+          "description": "Worked as senior/lead developer responsible for overall Sitecore development and advising on best practices and architecture. Responsibilities included writing technical design, developing and documenting software."
+        },
+        {
+          "title": "Medior Developer",
+          "start": "July 2007",
+          "end": "September 2008",
+          "description": "Worked as medior developer specializing in Sitecore CMS building large public and high-traffic (500k+ monthly visitors) portals within various sectors. Clients included Rabobank, Libelle, VTWonen, Nidos, TenneT, Hogeschool Utrecht, Dela, Donald Duck, Breakout!, VNU Exhibitions, Jaarbeurs Utrecht, GITP, DTZ Zadelhoff, Bobo, Margriet, Voedingscentrum, and HierBouwIk."
+        },
+        {
+          "title": "Junior Developer",
+          "start": "September 2006",
+          "end": "June 2007",
+          "description": "Started as junior developer in the Sanoma team building large public portals (Microsoft CMS) for brands like Libelle, Viva, VTWonen, and Disney Bookclub."
+        }
+      ]
+    }
+  ]
+}
