@@ -1,13 +1,22 @@
 import { ImageResponse } from 'next/og';
 import { getBlogPostBySlug } from '@/lib/blog';
+import { LogoWhite } from '@/components/shared/logo';
+import { Geist } from 'next/font/google';
 
 export const runtime = 'nodejs';
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
 export async function GET(
   _: Request,
   { params }: { params: Promise<{ slug: string[] }> },
 ) {
   const { slug } = await params;
+
+
   const slugString = Array.isArray(slug) ? slug.join('/') : slug;
   const post = await getBlogPostBySlug(slugString);
 
@@ -27,8 +36,8 @@ export async function GET(
           background:
             'linear-gradient(135deg, rgb(9, 9, 11) 0%, rgb(24, 24, 27) 50%, rgb(39, 39, 42) 100%)',
           color: 'white',
-          padding: '56px',
-          fontFamily: 'Arial, sans-serif',
+          padding: '32px',
+          fontFamily: `${geistSans.variable}`,
         }}
       >
         <div
@@ -39,7 +48,11 @@ export async function GET(
             letterSpacing: 1,
           }}
         >
-          Personal IT Website
+          <LogoWhite
+            width="338"
+            height="80"
+            style={{ position: 'absolute', top: 0, left: 0 }}
+          />
         </div>
 
         <div
@@ -63,7 +76,6 @@ export async function GET(
             opacity: 0.8,
           }}
         >
-          <span>{post.readTime}</span>
           <span>{post.excerpt}</span>
         </div>
       </div>
