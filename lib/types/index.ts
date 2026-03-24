@@ -11,7 +11,6 @@ export type {
     ResumeSkill,
     ResumeSkillLevel,
     ResumeSkillCategory,
-    ResumeNavbarItem,
     ResumeWorkItem,
     ResumeRole,
     ResumeData,

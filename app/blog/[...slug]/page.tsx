@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const { slug } = await params;
   const slugString = Array.isArray(slug) ? slug.join('/') : slug;
   const post = await getBlogPostBySlug(slugString);
+  const ogImageUrl = `/blog/og/${slugString}`;
 
   if (!post) {
     return {
@@ -30,6 +31,25 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: `${post.title} | Personal IT Website`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [ogImageUrl],
+    },
   };
 }
 

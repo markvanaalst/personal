@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { typedResumeData } from "@/lib/types";
+import { siteDescription, siteTitle, siteUrl } from "@/lib/site";
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
@@ -18,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${typedResumeData.firstName} ${typedResumeData.lastName} | ${typedResumeData.description}`,
-  description: typedResumeData.summary,
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
 };
 
 export default function RootLayout({
