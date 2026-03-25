@@ -34,7 +34,7 @@ export function HomeSideNav({ activeSection, sections, onNavigate }: HomeSideNav
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-center mt-8">
+      <div className="flex mt-8">
         <ThemeSwitcher variant="ghost" />
       </div>
     </nav>
