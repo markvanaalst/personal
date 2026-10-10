@@ -1,8 +1,10 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { blogCategories, getBlogPostsByCategory } from '@/lib/blog';
 import { BlogList } from '@/components/blog/blog-list';
 import { BlogCategoryList } from '@/components/blog/blog-category-list';
+import { pageMetadata } from '@/lib/metadata';
+import { JsonLd, breadcrumbSchema } from '@/lib/structured-data';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -22,14 +24,18 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   if (!category) {
     return {
-      title: 'Category Not Found | Personal IT Website',
+      title: 'Category Not Found',
+      robots: { index: false },
     };
   }
 
-  return {
-    title: `${category.name} | Personal IT Website`,
-    description: category.description,
-  };
+  return pageMetadata({
+    title: `${category.name} articles`,
+    description: category.description
+      ? `${category.description}: articles by Mark van Aalst.`
+      : `Articles by Mark van Aalst about ${category.name}.`,
+    path: `/blog/category/${category.slug}`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -44,6 +50,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <main className="max-w-6xl px-4 py-8 mx-auto flex justify-center items-stretch gap-6 lg:py-16 flex-col">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/blog' },
+          { name: category.name, path: `/blog/category/${category.slug}` },
+        ])}
+      />
 
 
       <div className="w-full flex-1 items-center justify-between">

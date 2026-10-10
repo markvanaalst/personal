@@ -8,6 +8,7 @@ export interface BlogPost {
   date: string; // ISO date string
   readTime: string;
   categories: string[];
+  tags: string[];
   published: boolean;
 }
 

@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { BlogPost, BlogCategory, BlogCategoryWithPostCount } from './types';
 import categoriesData from '@/content/blog/categories.json';
+import { toIsoDate } from '@/lib/site';
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
@@ -68,9 +69,10 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         title: data.title,
         content,
         excerpt: data.excerpt,
-        date: data.date,
+        date: toIsoDate(data.date),
         readTime: readingTime(content).text,
         categories: data.categories || [],
+        tags: data.tags || [],
         published: data.published !== false,
       } as BlogPost;
     });
@@ -105,9 +107,10 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       title: data.title,
       content,
       excerpt: data.excerpt,
-      date: data.date,
+      date: toIsoDate(data.date),
       readTime: readingTime(content).text,
       categories: data.categories || [],
+      tags: data.tags || [],
       published: data.published !== false,
     } as BlogPost;
   } catch (error) {
@@ -149,17 +152,10 @@ export async function getBlogPostBySlugWithMdx(
   }
 }
 
+/** Slugs of published posts only, so drafts are never statically generated or listed in the sitemap. */
 export async function getAllBlogSlugs(): Promise<string[]> {
-  try {
-    const files = getAllMdxFiles(BLOG_DIR);
-    return files.map((filePath) => {
-      const relativePath = path.relative(BLOG_DIR, filePath);
-      return relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
-    });
-  } catch (error) {
-    console.error('Error getting blog slugs:', error);
-    return [];
-  }
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => post.slug);
 }
 
 export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {

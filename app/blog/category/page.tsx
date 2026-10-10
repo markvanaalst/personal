@@ -1,11 +1,12 @@
-import { Metadata } from 'next';
 import { getBlogCategoriesWithPostCount } from '@/lib/blog';
 import { BlogCategoryCard } from '@/components/blog/blog-category-card';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Blog Categories | Personal IT Website',
-  description: 'Browse blog posts by category',
-};
+export const metadata = pageMetadata({
+  title: 'Blog Categories',
+  description: 'Browse Mark van Aalst\'s blog posts by category: Sitecore, SXA, Content Hub, ASP.NET and more.',
+  path: '/blog/category',
+});
 
 export default async function CategoriesPage() {
   const categoriesWithCount = await getBlogCategoriesWithPostCount();

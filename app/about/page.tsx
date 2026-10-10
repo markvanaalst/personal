@@ -1,9 +1,19 @@
 import { ProfileCard } from "@/components/profile/profile-card";
 import { SectionHeader } from "@/components/shared/section-header";
+import { pageMetadata } from "@/lib/metadata";
+import { JsonLd, profilePageSchema } from "@/lib/structured-data";
+
+export const metadata = pageMetadata({
+    title: "About",
+    description:
+        "Mark van Aalst has spent 20+ years in content management, 13+ at Sitecore, leading developer and documentation platforms. Now focused on applied AI and developer experience.",
+    path: "/about",
+});
 
 export default function Page() {
     return (
         <main className="max-w-6xl w-full px-4 py-8 mx-auto flex justify-center items-stretch gap-6 lg:py-16 flex-col lg:flex-row">
+            <JsonLd data={profilePageSchema("/about", "About Mark van Aalst")} />
             <ProfileCard />
             <div className="w-full lg:w-3/4 text-md px-8 py-6 relative">
 
