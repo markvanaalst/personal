@@ -1,23 +1,18 @@
 "use client"
 
 import { HomeConnectSection } from "@/components/homepage/home-connect-section"
-import { HomeFooter } from "@/components/homepage/home-footer"
 import { HomeIntroSection } from "@/components/homepage/home-intro-section"
 import { HomeSideNav } from "@/components/homepage/home-side-nav"
 import { HomeThoughtsSection } from "@/components/homepage/home-thoughts-section"
 import { HomeWorkSection } from "@/components/homepage/home-work-section"
+import { SiteFooter } from "@/components/layout/footer"
 import { useEffect, useRef, useState } from "react"
 
 const homepageSections = ["intro", "work", "writings", "connect"]
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(true)
-  const [activeSection, setActiveSection] = useState("")
+  const [activeSection, setActiveSection] = useState(homepageSections[0])
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark)
-  }, [isDark])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,7 +20,6 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in-up")
-            setActiveSection(entry.target.id)
           }
         })
       },
@@ -39,6 +33,28 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    // The active section is the last one whose top has scrolled above 45% of the viewport.
+    const updateActiveSection = () => {
+      let nextActive = homepageSections[0]
+      sectionsRef.current.forEach((section) => {
+        if (section && section.getBoundingClientRect().top < window.innerHeight * 0.45) {
+          nextActive = section.id
+        }
+      })
+      setActiveSection(nextActive)
+    }
+
+    updateActiveSection()
+    window.addEventListener("scroll", updateActiveSection, { passive: true })
+    window.addEventListener("resize", updateActiveSection)
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection)
+      window.removeEventListener("resize", updateActiveSection)
+    }
+  }, [])
+
   const setSectionRef = (index: number) => (element: HTMLElement | null) => {
     sectionsRef.current[index] = element
   }
@@ -47,23 +63,19 @@ export default function Home() {
     document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const toggleTheme = () => {
-    setIsDark((previousValue) => !previousValue)
-  }
-
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="relative min-h-screen bg-background text-foreground transition-colors duration-300">
       <HomeSideNav activeSection={activeSection} sections={homepageSections} onNavigate={navigateToSection} />
 
-      <main className="max-w-4xl ml-12 lg:ml-auto lg:mx-auto px-6 sm:px-8 lg:px-16">
+      <main className="mx-auto max-w-4xl pl-14 pr-6 sm:pr-12 lg:px-16">
         <HomeIntroSection setRef={setSectionRef(0)} />
         <HomeWorkSection setRef={setSectionRef(1)} />
         <HomeThoughtsSection setRef={setSectionRef(2)} />
         <HomeConnectSection setRef={setSectionRef(3)} />
-        <HomeFooter isDark={isDark} onToggleTheme={toggleTheme} />
+        <SiteFooter />
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 h-24 bg-linear-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
+      <div className="pointer-events-none fixed right-0 bottom-0 left-0 h-24 bg-linear-to-t from-background to-transparent"></div>
     </div>
   )
 }

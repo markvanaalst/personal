@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllBlogSlugs, getBlogPostBySlug, getBlogPostBySlugWithMdx } from '@/lib/blog';
 import { BlogPost } from '@/components/blog/blog-post';
+import { contentColumn } from '@/lib/site';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -65,10 +66,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { frontmatter, content, readTime } = post;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className={contentColumn}>
       <BlogPost
         title={frontmatter.title as string}
         date={frontmatter.date as string}
+        excerpt={frontmatter.excerpt as string | undefined}
         readTime={readTime}
         categories={(frontmatter.categories as string[]) || []}
         content={content}
