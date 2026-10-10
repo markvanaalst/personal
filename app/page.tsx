@@ -20,10 +20,13 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in-up")
+            observer.unobserve(entry.target)
           }
         })
       },
-      { threshold: 0.3, rootMargin: "0px 0px -20% 0px" },
+      // A ratio threshold can never be met by sections taller than the viewport (e.g. on mobile),
+      // so trigger as soon as the section's top enters the upper 80% of the viewport.
+      { threshold: 0, rootMargin: "0px 0px -20% 0px" },
     )
 
     sectionsRef.current.forEach((section) => {
