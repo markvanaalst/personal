@@ -62,3 +62,9 @@ Do not call your own Route Handlers from Server Components. Extract shared logic
 ### OG images
 
 Dynamic OG images are generated at `/blog/og/[...slug]` as a Next.js route.
+
+### SEO / AEO
+
+- Per-page metadata goes through `pageMetadata()` in `lib/metadata.ts` (Next.js merges `openGraph`/`twitter`/`alternates` shallowly, so pages must set the full set, including a canonical `path`). The site-wide default OG image is served from `/og`.
+- JSON-LD builders live in `lib/structured-data.tsx` (`Person` + `WebSite` in the root layout, `BlogPosting`/`BreadcrumbList` on posts, `ProfilePage` on about/resume).
+- `app/sitemap.ts`, `app/robots.ts`, `app/feed.xml` (RSS) and `app/llms.txt` are generated from the same content sources — new top-level pages should be added to the sitemap and `llms.txt`.

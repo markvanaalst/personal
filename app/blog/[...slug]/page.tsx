@@ -1,14 +1,19 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllBlogSlugs, getBlogPostBySlug, getBlogPostBySlugWithMdx } from '@/lib/blog';
+import { blogCategories, getAllBlogSlugs, getBlogPostBySlug, getBlogPostBySlugWithMdx } from '@/lib/blog';
 import { BlogPost } from '@/components/blog/blog-post';
-import { contentColumn } from '@/lib/site';
+import { pageMetadata } from '@/lib/metadata';
+import { authorName, contentColumn, siteUrl } from '@/lib/site';
+import { JsonLd, blogPostingSchema, breadcrumbSchema } from '@/lib/structured-data';
 
 interface BlogPostPageProps {
   params: Promise<{
     slug: string[];
   }>;
 }
+
+// Only published posts are pre-rendered; anything else (including drafts) 404s.
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs();
@@ -21,59 +26,67 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const { slug } = await params;
   const slugString = Array.isArray(slug) ? slug.join('/') : slug;
   const post = await getBlogPostBySlug(slugString);
-  const ogImageUrl = `/blog/og/${slugString}`;
 
-  if (!post) {
+  if (!post || !post.published) {
     return {
-      title: 'Post Not Found | Personal IT Website',
+      title: 'Post Not Found',
+      robots: { index: false },
     };
   }
 
-  return {
-    title: `${post.title} | Personal IT Website`,
+  const metadata = pageMetadata({
+    title: post.title,
     description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    image: { url: `/blog/og/${post.slug}`, width: 1200, height: 630, alt: post.title },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
       type: 'article',
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
+      publishedTime: post.date,
+      authors: [siteUrl],
+      section: post.categories[0],
+      tags: post.tags,
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.excerpt,
-      images: [ogImageUrl],
-    },
+  });
+
+  return {
+    ...metadata,
+    keywords: post.tags.length > 0 ? post.tags : undefined,
+    authors: [{ name: authorName, url: siteUrl }],
   };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const slugString = Array.isArray(slug) ? slug.join('/') : slug;
-  const post = await getBlogPostBySlugWithMdx(slugString);
+  const [post, mdxPost] = await Promise.all([
+    getBlogPostBySlug(slugString),
+    getBlogPostBySlugWithMdx(slugString),
+  ]);
 
-  if (!post) {
+  if (!post || !mdxPost || !post.published) {
     notFound();
   }
 
-  const { frontmatter, content, readTime } = post;
+  const category = blogCategories.find((c) => c.slug === post.categories[0]);
 
   return (
     <div className={contentColumn}>
+      <JsonLd data={blogPostingSchema(post)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/blog' },
+          ...(category ? [{ name: category.name, path: `/blog/category/${category.slug}` }] : []),
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
       <BlogPost
-        title={frontmatter.title as string}
-        date={frontmatter.date as string}
-        excerpt={frontmatter.excerpt as string | undefined}
-        readTime={readTime}
-        categories={(frontmatter.categories as string[]) || []}
-        content={content}
+        title={post.title}
+        date={post.date}
+        excerpt={post.excerpt}
+        readTime={post.readTime}
+        categories={post.categories}
+        content={mdxPost.content}
       />
     </div>
   );
