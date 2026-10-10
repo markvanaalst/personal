@@ -14,6 +14,8 @@ export const mdxOptions = {
             light: 'github-light',
             dark: 'github-dark',
           },
+          // Emit only CSS variables so globals.css picks the theme (inline colors would always win).
+          defaultColor: false,
         },
       ],
     ],

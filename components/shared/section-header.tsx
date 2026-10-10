@@ -9,7 +9,7 @@ export function SectionHeader({ title, description, className }: SectionHeaderPr
     <div className={`mb-12 ${className}`}>
       <div className="flex items-center gap-3 mb-4">
         <div className="h-px flex-1 bg-border" />
-        <h2 className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
           {title}
         </h2>
         <div className="h-px flex-1 bg-border" />

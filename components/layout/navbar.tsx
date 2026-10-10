@@ -2,15 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo } from "@/components/shared/logo";
 import { ThemeSwitcher } from "@/components/layout/theme-switcher";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import settings from '@/content/settings.json';
+import settings from "@/content/settings.json";
+import { contentColumn } from "@/lib/site";
+import { typedResumeData } from "@/lib/types/resume";
+import { cn } from "@/lib/utils";
 
 const navLinks = settings.topNavbar;
 
@@ -20,50 +16,40 @@ export function Navbar() {
   if (pathname === "/") return null;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Logo and Nav Links */}
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <Logo className="w-full h-10" aria-label="Home" />
+    <header className="sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-[10px]">
+      <div className={cn(contentColumn, "flex h-16 items-center justify-between gap-4 sm:gap-6")}>
+        <div className="flex items-center gap-5 sm:gap-8">
+          <Link
+            href="/"
+            className="shrink-0 text-[17px] font-medium tracking-[-0.01em] text-foreground"
+            aria-label="Home"
+          >
+            {typedResumeData.firstName}
+            <span className="hidden text-muted-foreground sm:inline"> {typedResumeData.lastName}</span>
           </Link>
-          <NavigationMenu className=" md:flex" viewport={false}>
-            <NavigationMenuList className="gap-1">
-              {navLinks.map((link) => (
-                <NavigationMenuItem key={link.href}>
-                  <NavigationMenuLink
-                    asChild
-                    className={
-                      link.href !== "/" && (pathname === link.href || pathname.startsWith(`${link.href}/`))
-                        ? "bg-muted text-muted-foreground"
-                        : pathname === "/" && link.href === "/"
-                          ? "bg-muted text-muted-foreground"
-                          : undefined
-                    }
-                  >
-                    <Link
-                      href={link.href}
-                      aria-current={
-                        link.href !== "/" && (pathname === link.href || pathname.startsWith(`${link.href}/`))
-                          ? "page"
-                          : pathname === "/" && link.href === "/"
-                            ? "page"
-                            : undefined
-                      }
-                      className="text-muted-foreground"
-                    >
-                      {link.label}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <nav className="flex gap-4 text-sm sm:gap-5">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "transition-colors hover:text-foreground",
+                    isActive ? "text-foreground" : "text-muted-foreground",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Theme Switcher */}
         <ThemeSwitcher />
-      </nav>
+      </div>
     </header>
   );
 }
