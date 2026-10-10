@@ -9,6 +9,8 @@ import {
   POSTS_PER_PAGE,
 } from '@/lib/pagination';
 import { BlogCategoryList } from '@/components/blog/blog-category-list';
+import { contentColumn } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Blog | Personal IT Website',
@@ -39,24 +41,17 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   );
 
   return (
-    <main className="max-w-6xl px-4 py-8 mx-auto flex justify-center items-stretch gap-6 lg:py-16 flex-col">
+    <main className={cn(contentColumn, 'flex flex-col gap-6 pt-16 lg:pt-24')}>
+      <BlogCategoryList />
 
-      <div className="hidden w-full lg:flex-1 items-center justify-between">
-        
-      </div>
+      <div className="w-full">
+        <BlogList posts={paginatedPosts} />
 
-      <div className="w-full flex flex-col lg:flex-row items-start gap-6">
-        <BlogCategoryList />
-
-        <div className="w-full lg:w-3/4 text-md relative">
-          <BlogList posts={paginatedPosts} />
-
-          <Pagination
-            currentPage={paginationInfo.currentPage}
-            totalPages={paginationInfo.totalPages}
-            baseUrl="/blog"
-          />
-        </div>
+        <Pagination
+          currentPage={paginationInfo.currentPage}
+          totalPages={paginationInfo.totalPages}
+          baseUrl="/blog"
+        />
       </div>
     </main>
   );
