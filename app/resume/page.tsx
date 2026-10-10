@@ -1,23 +1,29 @@
-import { ProfileCard } from "@/components/profile/profile-card";
+import { ResumeHeader } from "@/components/profile/resume-header";
 import { Skills } from "@/components/profile/skills";
 import WorkSection from "@/components/profile/work-section";
-import { SectionHeader } from "@/components/shared/section-header";
+
+function SectionTitle({ id, children }: { id: string; children: React.ReactNode }) {
+    return (
+        <h2 id={id} className="mb-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            {children}
+        </h2>
+    );
+}
 
 export default function Page() {
     return (
-        <main className="max-w-6xl px-4 py-8 mx-auto flex justify-center items-stretch gap-6 lg:py-16 flex-col lg:flex-row">
-            <ProfileCard />
-            <div className="w-full lg:w-3/4 text-md px-8 py-6 relative">
+        <main className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 lg:py-16">
+            <ResumeHeader />
 
-                <SectionHeader 
-                    title="Experience"
-                    description="A summary of my professional background and roles"
-                 />
-
+            <section aria-labelledby="experience" className="mt-12">
+                <SectionTitle id="experience">Experience</SectionTitle>
                 <WorkSection />
+            </section>
+
+            <section aria-labelledby="skills" className="mt-16">
+                <SectionTitle id="skills">Skills</SectionTitle>
                 <Skills />
-        
-            </div>
+            </section>
         </main>
     );
 }
