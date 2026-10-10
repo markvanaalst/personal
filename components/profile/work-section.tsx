@@ -1,117 +1,126 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-import { useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { IconMapPin } from "@tabler/icons-react";
+import { Badge } from "@/components/ui/badge";
+import { formatDuration, formatRange, isCurrent } from "@/lib/resume-dates";
 import { typedResumeData } from "@/lib/types";
-import { IconChevronRight } from "@tabler/icons-react";
+import type { ResumeRole, ResumeWorkItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-function LogoImage({ src, alt }: { src: string; alt: string }) {
-  const [imageError, setImageError] = useState(false);
-
-  if (!src || imageError) {
-    return (
-      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
-    );
+/** Splits a trailing "Location: X." note off a role description. */
+function splitLocation(description: string) {
+  const match = description.match(/\s*Location:\s*([^.]+)\.?\s*$/);
+  if (!match || match.index === undefined) {
+    return { text: description, location: undefined };
   }
 
+  return { text: description.slice(0, match.index), location: match[1] };
+}
+
+function RoleItem({ role, isActive }: { role: ResumeRole; isActive: boolean }) {
+  const { text, location } = splitLocation(role.description);
+
   return (
-    <img
-      src={src}
-      alt={alt}
-      className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
-      onError={() => setImageError(true)}
-    />
+    <li className="relative pl-7">
+      <span
+        aria-hidden
+        className={cn(
+          "absolute top-2 -left-[5px] size-2.5 rounded-full ring-4 ring-background",
+          isActive ? "bg-primary" : "bg-ring"
+        )}
+      />
+      <div className="flex flex-col gap-x-4 gap-y-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+        <h4 className="font-semibold text-foreground">{role.title}</h4>
+        <p className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
+          {formatRange(role.start, role.end)}
+          <span className="mx-1.5 opacity-50">·</span>
+          {formatDuration(role.start, role.end)}
+        </p>
+      </div>
+      {location ? (
+        <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+          <IconMapPin aria-hidden className="size-3.5" />
+          {location}
+        </p>
+      ) : null}
+      <p className="mt-2 max-w-prose text-[15px] leading-7 text-foreground/80 text-pretty">
+        {text}
+      </p>
+    </li>
+  );
+}
+
+function CompanyItem({ work }: { work: ResumeWorkItem }) {
+  const roles: ResumeRole[] =
+    work.roles?.length > 0
+      ? work.roles
+      : [{ title: work.title, start: work.start, end: work.end, description: work.description }];
+  const start = roles[roles.length - 1].start;
+  const end = roles[0].end;
+  const current = isCurrent(end);
+
+  return (
+    <li>
+      <article>
+        <header className="flex items-start gap-4">
+          <img
+            src={work.logoUrl}
+            alt=""
+            className="size-11 flex-none rounded-lg border bg-card object-contain p-1.5"
+          />
+          <div className="min-w-0 flex-1">
+            <h3 className="text-lg font-semibold leading-tight">
+              <a
+                href={work.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4 hover:text-link hover:underline"
+              >
+                {work.company}
+              </a>
+              {current ? (
+                <Badge variant="outline" className="ml-2 align-middle text-[11px]">
+                  Current
+                </Badge>
+              ) : null}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {work.location}
+              <span className="mx-1.5 opacity-50">·</span>
+              <span className="tabular-nums">
+                {formatRange(start, end)} ({formatDuration(start, end)})
+              </span>
+            </p>
+            {work.badges.length > 0 ? (
+              <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Focus areas">
+                {work.badges.map((badge) => (
+                  <li key={badge}>
+                    <Badge variant="secondary">{badge}</Badge>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        </header>
+
+        <ol className="mt-6 ml-5 space-y-8 border-l border-border pb-1">
+          {roles.map((role, index) => (
+            <RoleItem
+              key={`${work.company}-${role.title}-${role.start}`}
+              role={role}
+              isActive={current && index === 0}
+            />
+          ))}
+        </ol>
+      </article>
+    </li>
   );
 }
 
 export default function WorkSection() {
-  const currentCompany = typedResumeData.work.find(
-    (work) => work.end?.toLowerCase() === "current"
-  )?.company;
-
   return (
-    <Accordion
-      type="single"
-      collapsible
-      defaultValue={currentCompany}
-      className="w-full grid gap-6"
-    >
-      {typedResumeData.work.map((work) => {
-        const hasRoles = Array.isArray(work.roles) && work.roles.length > 0;
-        const primaryTitle = hasRoles ? work.roles[0]?.title : work.title;
-
-        return (
-          <AccordionItem
-            key={work.company}
-            value={work.company}
-            className="w-full border-b-0 pb-4 grid gap-2"
-          >
-            <AccordionTrigger className="hover:no-underline p-0 cursor-pointer transition-colors rounded-none group **:data-[slot=accordion-trigger-icon]:hidden">
-              <div className="flex items-center gap-x-3 justify-between w-full text-left">
-                <div className="flex items-center gap-x-3 flex-1 min-w-0">
-                  <LogoImage src={work.logoUrl} alt={work.company} />
-                  <div className="flex-1 min-w-0 gap-0.5 flex flex-col">
-                    <div className="font-semibold leading-none flex items-center gap-2">
-                      {work.company}
-                      <span className="relative inline-flex items-center w-3.5 h-3.5">
-                        <IconChevronRight
-                          className={cn(
-                            "absolute h-3.5 w-3.5 shrink-0 text-muted-foreground stroke-2 transition-all duration-300 ease-out",
-                            "translate-x-0 opacity-0",
-                            "group-hover:translate-x-1 group-hover:opacity-100",
-                            "group-data-[state=open]:rotate-270 group-data-[state=open]:translate-x-0"
-                          )}
-                        />
-                      </span>
-                    </div>
-                    {primaryTitle ? (
-                      <div className="font-sans text-sm text-muted-foreground">
-                        {primaryTitle}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
-                  <span>
-                    {work.start} - {work.end ?? "Present"}
-                  </span>
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-0 ml-13 w-11/12">
-              {hasRoles ? (
-                <div className="grid gap-3 text-xs sm:text-sm">
-                  {work.roles.map((role) => (
-                    <div key={`${work.company}-${role.title}-${role.start}`}>
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="font-medium text-foreground">
-                          {role.title}
-                        </div>
-                        <div className="text-xs tabular-nums text-muted-foreground">
-                          {role.start} - {role.end ?? "Present"}
-                        </div>
-                      </div>
-                      <div className="text-muted-foreground">
-                        {role.description}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-xs sm:text-sm text-muted-foreground">
-                  {work.description}
-                </div>
-              )}
-            </AccordionContent>
-          </AccordionItem>
-        );
-      })}
-    </Accordion>
+    <ol className="space-y-14">
+      {typedResumeData.work.map((work) => (
+        <CompanyItem key={work.company} work={work} />
+      ))}
+    </ol>
   );
 }
