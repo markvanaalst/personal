@@ -31,7 +31,6 @@ export function SiteFooter({ links, className }: SiteFooterProps) {
         <div className="text-sm text-muted-foreground">
           © 2026 {typedResumeData.firstName} {typedResumeData.lastName}. All rights reserved.
         </div>
-        <div className="text-xs text-muted-foreground">Built using VS Code and Copilot</div>
       </div>
 
       {links ? (
