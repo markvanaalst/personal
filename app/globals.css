@@ -177,3 +177,46 @@
     }
   }
 }
+
+/* Page transition when leaving the homepage (see app/template.tsx) — skipped when the user prefers reduced motion. */
+/* React starts a view transition on every navigation; keep the browser's default whole-page cross-fade off so only the boundaries below animate. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(.home-exit) {
+    animation: home-exit 300ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(.page-enter) {
+    animation: page-enter 550ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+  }
+
+  ::view-transition-new(.navbar-enter) {
+    animation: navbar-enter 450ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+  }
+
+  @keyframes home-exit {
+    to {
+      opacity: 0;
+      transform: translateY(-24px) scale(0.98);
+      filter: blur(4px);
+    }
+  }
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  @keyframes navbar-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+}

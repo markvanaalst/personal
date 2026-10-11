@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ViewTransition } from "react";
 import { ThemeSwitcher } from "@/components/layout/theme-switcher";
 import { Logo, LogoIcon } from "@/components/shared/logo";
 import settings from "@/content/settings.json";
 import { contentColumn } from "@/lib/site";
+import { fromHomeTransition } from "@/lib/transitions";
 import { typedResumeData } from "@/lib/types/resume";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +19,8 @@ export function Navbar() {
   if (pathname === "/") return null;
 
   return (
+    // The navbar is hidden on the homepage, so it mounts (and slides in) when navigating away from it.
+    <ViewTransition enter={{ [fromHomeTransition]: "navbar-enter", default: "none" }} default="none">
     <header className="sticky top-0 z-20 w-full border-b border-border bg-background/80 backdrop-blur-[10px]">
       <div className={cn(contentColumn, "flex h-16 items-center justify-between gap-4 sm:gap-6")}>
         <div className="flex items-center gap-5 sm:gap-8">
@@ -52,5 +56,6 @@ export function Navbar() {
         <ThemeSwitcher />
       </div>
     </header>
+    </ViewTransition>
   );
 }

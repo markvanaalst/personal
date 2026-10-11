@@ -1,6 +1,7 @@
 "use client"
 import { typedResumeData } from "@/lib/types"
 import { ReadMoreLink } from "../shared/read-more-link"
+import { fromHomeTransition } from "@/lib/transitions"
 
 interface HomeWorkSectionProps {
   setRef: (element: HTMLElement | null) => void
@@ -47,7 +48,7 @@ export function HomeWorkSection({ setRef }: HomeWorkSectionProps) {
       </div>
 
       <div className="mt-8 flex justify-center">
-        <ReadMoreLink text="View resume" link="/resume" />
+        <ReadMoreLink text="View resume" link="/resume" transitionTypes={[fromHomeTransition]} />
       </div>
     </section>
   )

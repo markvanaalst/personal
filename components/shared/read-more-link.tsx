@@ -6,12 +6,14 @@ type ReadMoreLinkProps = {
     text: string;
     link: string;
     className?: string;
+    transitionTypes?: string[];
 };
 
-export function ReadMoreLink({ text, link, className }: ReadMoreLinkProps) {
+export function ReadMoreLink({ text, link, className, transitionTypes }: ReadMoreLinkProps) {
     return (
         <Link
             href={link}
+            transitionTypes={transitionTypes}
             className={cn(
                 "group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4",
                 className,

@@ -3,6 +3,7 @@
 import { IconArrowRight } from "@tabler/icons-react"
 import Link from "next/link"
 import { ReadMoreLink } from "../shared/read-more-link"
+import { fromHomeTransition } from "@/lib/transitions"
 
 interface HomeThoughtsSectionProps {
   posts: HomePost[]
@@ -40,6 +41,7 @@ export function HomeThoughtsSection({ posts, setRef }: HomeThoughtsSectionProps)
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
+            transitionTypes={[fromHomeTransition]}
             className="group flex flex-col gap-4 rounded-[10px] border border-border p-8 text-foreground transition-[border-color,box-shadow] duration-400 hover:border-ring hover:shadow-[0_10px_30px_-12px_rgb(0_0_0/0.15)]"
           >
             <div className="flex justify-between font-mono text-xs text-muted-foreground uppercase">
@@ -62,7 +64,7 @@ export function HomeThoughtsSection({ posts, setRef }: HomeThoughtsSectionProps)
       </div>
 
       <div className="mt-12 flex justify-center">
-        <ReadMoreLink text="View all posts" link="/blog" />
+        <ReadMoreLink text="View all posts" link="/blog" transitionTypes={[fromHomeTransition]} />
       </div>
     </section>
   )
